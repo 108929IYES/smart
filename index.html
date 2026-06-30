@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>SMART - Ilayang Yuni Elementary School</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --royal:#283593;--royal-dark:#1a237e;--royal-light:#c5cae9;
+  --bg-light:#e8eaf6;--white:#ffffff;
+  --success-bg:#e8f5e9;--success-text:#2e7d32;
+  --warning-bg:#fff3e0;--warning-text:#e65100;
+  --muted-bg:#eceff1;--muted-text:#546e7a;
+  --gray:#6b7280;--gray-light:#f3f4f6;--border:#d1d5db;
+  --radius:14px;
+}
+body{font-family:'Poppins',sans-serif;background:var(--bg-light);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+.hidden{display:none!important;}
+
+/* ===== LOGIN ===== */
+#loginScreen{width:100%;max-width:400px;margin:24px auto;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.15);}
+.login-header{padding:36px 24px 28px;text-align:center;background:linear-gradient(180deg,var(--royal) 0%,var(--royal-dark) 100%);}
+.school-name{color:var(--royal-light);font-size:12px;margin:0;text-transform:uppercase;font-weight:700;letter-spacing:0.5px;}
+.school-tagline{color:var(--bg-light);font-size:11px;margin:2px 0 0;}
+.app-title{color:#fff;font-size:44px;font-weight:700;letter-spacing:4px;margin:18px 0 2px;text-shadow:0 2px 6px rgba(0,0,0,0.25);}
+.app-subtitle{color:var(--royal-light);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;line-height:1.5;}
+.login-body{background:#fff;border-radius:24px 24px 0 0;padding:28px 24px 32px;}
+.login-body h3{text-align:center;font-weight:600;color:var(--royal);font-size:14px;margin:0 0 18px;}
+.field{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--royal-light);font-size:13px;margin-bottom:12px;font-family:'Poppins',sans-serif;outline:none;}
+.field:focus{border-color:var(--royal);box-shadow:0 0 0 3px rgba(40,53,147,0.1);}
+.btn-primary{width:100%;background:var(--royal);color:#fff;border:none;padding:12px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 4px 10px rgba(40,53,147,0.35);cursor:pointer;font-family:'Poppins',sans-serif;}
+.btn-primary:active{opacity:0.9;}
+.btn-secondary{width:100%;background:transparent;color:var(--royal);border:1px solid var(--royal-light);padding:11px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;margin-top:10px;font-family:'Poppins',sans-serif;}
+.footer-credit{text-align:center;font-size:11px;color:#90a4ae;margin:18px 0 0;}
+.error-msg{color:#c62828;font-size:12px;text-align:center;margin:6px 0;}
+
+/* ===== MAIN APP ===== */
+#appScreen{width:100%;max-width:480px;margin:0 auto;min-height:100vh;background:#fff;box-shadow:0 0 24px rgba(0,0,0,0.08);}
+.app-header{background:linear-gradient(135deg,var(--royal) 0%,var(--royal-dark) 100%);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;color:#fff;}
+.app-header .title{font-size:14px;font-weight:600;letter-spacing:1px;}
+.app-header .sub{font-size:9px;opacity:0.85;}
+.menu-btn{background:rgba(255,255,255,0.18);border:none;color:#fff;font-size:20px;padding:6px 10px;border-radius:8px;cursor:pointer;}
+
+/* Search */
+.search-wrap{padding:28px 16px;}
+.search-card{background:var(--bg-light);border-radius:14px;padding:22px 18px;}
+.search-card h4{margin:0 0 14px;color:var(--royal);font-size:14px;text-align:center;}
+.search-hint{font-size:11px;color:#78909c;text-align:center;margin:10px 0 0;}
+#searchResultsList{margin-top:14px;}
+.result-list-item{background:var(--gray-light);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:10px;border:1px solid var(--border);}
+.result-list-item:hover{background:#e3f2fd;}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--bg-light);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--royal);flex-shrink:0;}
+
+/* Result card */
+.result-card{padding:16px;}
+.result-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.name-grade{flex:1;margin-left:10px;}
+.name-grade .nm{font-weight:600;font-size:15px;color:#212121;}
+.badge{font-size:11px;padding:3px 9px;border-radius:8px;}
+.badge-success{background:var(--success-bg);color:var(--success-text);}
+.badge-warning{background:var(--warning-bg);color:var(--warning-text);}
+.badge-muted{background:var(--muted-bg);color:var(--muted-text);}
+.section-label{font-size:11px;font-weight:600;color:#90a4ae;text-transform:uppercase;letter-spacing:0.5px;margin:14px 0 10px;border-top:1px solid #eceff1;padding-top:12px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;}
+.grid2 .lbl{color:#90a4ae;font-size:11px;margin:0 0 2px;}
+.grid2 .val{color:#212121;margin:0;font-weight:500;}
+.span2{grid-column:span 2;}
+.back-btn{display:block;width:100%;margin-top:18px;padding:10px;border-radius:10px;background:var(--gray-light);border:1px solid var(--border);color:var(--royal);font-size:13px;font-weight:600;cursor:pointer;text-align:center;font-family:'Poppins',sans-serif;}
+
+/* ===== OVERLAY (generic) ===== */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000;padding:14px;backdrop-filter:blur(2px);}
+.modal-box{background:#fff;border-radius:14px;width:100%;max-width:440px;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;animation:popIn 0.22s ease;}
+@keyframes popIn{from{opacity:0;transform:scale(0.93) translateY(18px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.modal-header{background:var(--royal);color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.modal-header .t{font-size:14px;font-weight:600;}
+.modal-header .x{cursor:pointer;font-size:18px;background:none;border:none;color:#fff;line-height:1;}
+.modal-body{padding:16px 18px;overflow-y:auto;}
+.empty-state{text-align:center;color:#90a4ae;font-size:13px;padding:24px 0;}
+
+/* Menu */
+.menu-list{padding:4px 0;}
+.menu-item{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid #eceff1;cursor:pointer;font-size:13.5px;color:#212121;}
+.menu-item:last-child{border-bottom:none;}
+.menu-item:hover{background:#f5f6ff;}
+.menu-item .micon{font-size:18px;width:24px;text-align:center;}
+
+/* Tables */
+table.gtab{width:100%;border-collapse:collapse;font-size:11.5px;}
+table.gtab th{text-align:center;padding:6px 4px;color:#607d8b;font-weight:600;border-bottom:1.5px solid #cfd8dc;font-size:11px;}
+table.gtab th:first-child{text-align:left;}
+table.gtab td{padding:6px 4px;border-bottom:1px solid #eceff1;}
+table.gtab td:first-child{text-align:left;}
+table.gtab td:not(:first-child){text-align:center;}
+table.gtab tr:last-child td{border-bottom:none;}
+.ga-row{display:flex;align-items:center;justify-content:space-between;border-top:1.5px solid #cfd8dc;padding-top:10px;margin-top:8px;}
+.ga-label{font-size:13px;font-weight:700;}
+.ga-val{font-size:18px;font-weight:700;color:var(--royal);}
+.honors-badge{display:inline-block;background:var(--success-bg);color:var(--success-text);font-size:10px;padding:2px 7px;border-radius:6px;margin-top:3px;}
+
+/* Cert options */
+.doc-opt{display:block;width:100%;text-align:left;background:var(--bg-light);border:1px solid var(--royal-light);border-radius:10px;padding:13px 16px;margin-bottom:8px;font-size:13px;color:var(--royal);cursor:pointer;font-family:'Poppins',sans-serif;font-weight:500;}
+.doc-opt:hover{background:#e3e8ff;}
+.doc-opt:last-child{margin-bottom:0;}
+
+/* ===== MAP MODAL ===== */
+.map-modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(5,10,40,0.88);z-index:2000;align-items:center;justify-content:center;padding:12px;backdrop-filter:blur(3px);}
+.map-modal-overlay.active{display:flex;}
+.map-modal-box{background:#0d1e6b;border-radius:16px;width:100%;max-width:480px;overflow:hidden;animation:popIn 0.25s ease;}
+.map-modal-header{background:linear-gradient(135deg,#0d1e6b,#1a3a8f);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+.map-modal-title{font-size:0.85rem;font-weight:700;color:white;}
+.map-modal-subtitle{font-size:0.7rem;color:rgba(255,255,255,0.6);margin-top:2px;}
+.map-close-btn{background:rgba(255,255,255,0.15);border:none;color:white;border-radius:8px;padding:6px 12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;}
+.map-wrap{position:relative;overflow:hidden;}
+.map-wrap img{width:100%;display:block;}
+.room-pin{position:absolute;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:white;pointer-events:none;opacity:0;transition:opacity 0.3s;}
+.room-pin.highlighted{background:#ef4444;border:2px solid white;opacity:1;box-shadow:0 0 0 3px rgba(239,68,68,0.4);animation:mpulse 1.5s infinite;}
+@keyframes mpulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.7);}70%{box-shadow:0 0 0 10px rgba(239,68,68,0);}100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}}
+.map-legend{padding:12px 16px;background:#0d1e6b;}
+.map-legend-item{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.1);border-radius:8px;padding:10px 14px;}
+.map-legend-dot{width:14px;height:14px;background:#ef4444;border-radius:50%;border:2px solid white;flex-shrink:0;animation:mpulse 1.5s infinite;}
+.map-legend-text{font-size:0.82rem;color:white;font-weight:600;}
+.map-legend-room{font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:2px;}
+
+/* ===== ROOM & ADVISER MODAL ===== */
+.info-modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(5,10,40,0.88);z-index:2000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px);}
+.info-modal-overlay.active{display:flex;}
+.info-modal-box{background:var(--white);border-radius:16px;width:100%;max-width:380px;overflow:hidden;animation:popIn 0.25s ease;}
+.info-modal-header{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+.info-modal-header.room-header{background:linear-gradient(135deg,#5b21b6,#7c3aed);}
+.info-modal-header.adviser-header{background:linear-gradient(135deg,#92400e,#d97706);}
+.info-modal-title{font-size:0.88rem;font-weight:700;color:white;}
+.info-close-btn{background:rgba(255,255,255,0.2);border:none;color:white;border-radius:8px;padding:6px 12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;}
+.info-modal-body{padding:20px;text-align:center;}
+.info-photo{width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-bottom:14px;background:var(--gray-light);display:block;}
+.info-photo-placeholder{width:100%;height:160px;background:var(--gray-light);border-radius:10px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.adviser-photo{width:100%;max-height:240px;object-fit:cover;object-position:top;border-radius:10px;margin-bottom:14px;display:block;border:3px solid #f59e0b;background:var(--gray-light);}
+.adviser-photo-placeholder{width:100%;height:160px;background:var(--gray-light);border-radius:10px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:3rem;border:3px solid #f59e0b;}
+.info-name{font-size:1rem;font-weight:700;color:#1f2937;margin-bottom:4px;}
+.info-sub{font-size:0.82rem;color:var(--gray);margin-bottom:2px;}
+.action-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;}
+.btn-action{padding:10px 6px;border-radius:10px;text-align:center;font-size:0.72rem;font-weight:700;border:none;cursor:pointer;font-family:'Poppins',sans-serif;transition:opacity 0.2s,transform 0.1s;color:white;line-height:1.3;}
+.btn-action:active{transform:scale(0.96);opacity:0.85;}
+.btn-action .btn-icon{font-size:1.1rem;display:block;margin-bottom:3px;}
+.btn-map{background:linear-gradient(135deg,#0d9488,#14b8a6);}
+.btn-room{background:linear-gradient(135deg,#7c3aed,#a855f7);}
+.btn-adviser{background:linear-gradient(135deg,#d97706,#f59e0b);}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div id="loginScreen">
+  <div class="login-header">
+    <p class="school-name">Ilayang Yuni Elementary School</p>
+    <p class="school-tagline">Sa Ilayang Yuni, Lahat RESPONSABLE</p>
+    <p class="app-title">SMART</p>
+    <p class="app-subtitle">Student Monitoring<br/>Access and Records Tracker</p>
+  </div>
+  <div class="login-body">
+    <h3>Sign In</h3>
+    <input id="loginUsername" class="field" type="text" placeholder="Username" autocomplete="off"/>
+    <input id="loginPassword" class="field" type="password" placeholder="Password"/>
+    <div id="loginError" class="error-msg hidden"></div>
+    <button class="btn-primary" onclick="doLogin()">Login</button>
+    <p class="footer-credit">Developed by ALI V. TELADA, July 2026</p>
+  </div>
+</div>
+
+<!-- ===== CHANGE PASSWORD ===== -->
+<div id="changePassOverlay" class="overlay hidden">
+  <div class="modal-box">
+    <div class="modal-header"><span class="t">🔒 Set New Password</span></div>
+    <div class="modal-body">
+      <p style="font-size:12px;color:#607d8b;margin-bottom:14px;">Para sa seguridad, palitan ang default password mo.</p>
+      <input id="newPass1" class="field" type="password" placeholder="New password"/>
+      <input id="newPass2" class="field" type="password" placeholder="Confirm new password"/>
+      <div id="changePassError" class="error-msg hidden"></div>
+      <button class="btn-primary" onclick="submitNewPassword()">Save Password</button>
+      <button class="btn-secondary" onclick="skipPasswordChange()">Skip for now</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="appScreen" class="hidden">
+  <div class="app-header">
+    <div>
+      <div class="title">SMART</div>
+      <div class="sub">Student Monitoring Access and Records Tracker</div>
+    </div>
+    <button class="menu-btn" onclick="openMenu()">&#9776;</button>
+  </div>
+
+  <!-- Search page -->
+  <div id="searchWrap" class="search-wrap hidden">
+    <div class="search-card">
+      <h4>Search Student Record</h4>
+      <input id="searchFirst" class="field" type="text" placeholder="First name"/>
+      <input id="searchLast" class="field" type="text" placeholder="Last name"/>
+      <button class="btn-primary" onclick="doSearch()">Search</button>
+      <p class="search-hint">Tip: partial names work too.</p>
+    </div>
+    <div id="searchResultsList"></div>
+  </div>
+
+  <!-- Result card -->
+  <div id="resultWrap" class="result-card hidden"></div>
+</div>
+
+<!-- ===== MENU OVERLAY ===== -->
+<div id="menuOverlay" class="overlay hidden" onclick="if(event.target===this)closeMenu()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="t">Menu</span>
+      <button class="x" onclick="closeMenu()">&times;</button>
+    </div>
+    <div class="menu-list" id="menuListContent"></div>
+  </div>
+</div>
+
+<!-- ===== GENERIC MODAL ===== -->
+<div id="genericOverlay" class="overlay hidden" onclick="if(event.target===this)closeGenericModal()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="t" id="genericModalTitle">Title</span>
+      <button class="x" onclick="closeGenericModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="genericModalBody"></div>
+  </div>
+</div>
+
+<!-- ===== MAP MODAL ===== -->
+<div class="map-modal-overlay" id="mapModalOverlay" onclick="if(event.target===this)closeMapModal()">
+  <div class="map-modal-box">
+    <div class="map-modal-header">
+      <div>
+        <div class="map-modal-title">🗺️ School Map</div>
+        <div class="map-modal-subtitle">Ilayang Yuni Elementary School</div>
+      </div>
+      <button class="map-close-btn" onclick="closeMapModal()">✕ Close</button>
+    </div>
+    <div class="map-wrap" id="mapWrap">
+      <!-- COPY THE BASE64 MAP IMAGE FROM SCAN_portal_1.html HERE -->
+      <!-- <img src="data:image/png;base64,/9j/4AAQ..." alt="School Map" /> -->
+      <div id="mapPlaceholder" style="width:100%;height:220px;background:#1a3a8f;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);font-size:13px;text-align:center;padding:20px;">
+        📍 Map image — copy base64 from SCAN_portal_1.html
+      </div>
+      <div class="room-pin" id="roomPin"></div>
+    </div>
+    <div class="map-legend">
+      <div class="map-legend-item">
+        <div class="map-legend-dot"></div>
+        <div>
+          <div class="map-legend-text" id="legendText"></div>
+          <div class="map-legend-room" id="legendRoom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ROOM MODAL ===== -->
+<div class="info-modal-overlay" id="roomModalOverlay" onclick="if(event.target===this)closeRoomModal()">
+  <div class="info-modal-box">
+    <div class="info-modal-header room-header">
+      <div class="info-modal-title">🚪 Classroom Photo</div>
+      <button class="info-close-btn" onclick="closeRoomModal()">✕ Close</button>
+    </div>
+    <div class="info-modal-body" id="roomModalBody"></div>
+  </div>
+</div>
+
+<!-- ===== ADVISER MODAL ===== -->
+<div class="info-modal-overlay" id="adviserModalOverlay" onclick="if(event.target===this)closeAdviserModal()">
+  <div class="info-modal-box">
+    <div class="info-modal-header adviser-header">
+      <div class="info-modal-title">👤 Class Adviser</div>
+      <button class="info-close-btn" onclick="closeAdviserModal()">✕ Close</button>
+    </div>
+    <div class="info-modal-body" id="adviserModalBody"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIG
+============================================================ */
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfeH5NAxXuKJhpgvue8mKA4c-7dmEnY1zvSkCN35B8ZMq7veEjQ-wpvpq6slpf9Bck/exec";
+const SCAN_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQKF4GRCiTnVK3dLhSc5cJYPWnHmE0wTusfn0uxfhnnkOCd_AeR0NHXGWOW6LZJMMjDm1-BF_1CWXYh/pub?gid=0&single=true&output=csv";
+const ROOM_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQz24qU-yFBFqNRV_CaRGKL92rLLp_M-mBnw9qkC1IMJR5DoF7MZ-RNkDbM3Ut60C56VzTVte04DFP7/pub?gid=0&single=true&output=csv";
+
+const ROOM_COORDS = {
+  1:[42.5,77.0],2:[40.5,71.5],3:[52.0,65.0],4:[57.0,55.0],5:[59.5,61.0],
+  6:[77.5,69.0],7:[84.5,57.5],8:[76.5,50.5],9:[84.0,44.5],10:[81.5,38.5],
+  11:[83.0,33.5],12:[82.5,28.5],13:[84.5,24.5],14:[80.5,24.5],15:[74.5,27.5],
+  16:[73.5,20.0],17:[83.5,9.0],18:[75.5,9.0],19:[65.5,9.0],20:[55.0,9.0],
+  21:[43.5,5.5],22:[42.5,10.5],23:[41.5,16.0],24:[40.5,21.5],25:[52.0,17.5],
+  26:[67.5,27.5],27:[59.5,27.5],28:[52.5,27.5],29:[44.5,27.5],30:[37.5,27.5],
+  31:[30.5,27.5],32:[46.0,36.0],33:[16.0,45.0],34:[15.5,50.5],35:[13.5,57.5],
+  36:[13.5,63.0],37:[5.5,73.5],38:[16.5,71.5],39:[29.5,56.0],40:[38.5,65.0]
+};
+
+/* ============================================================
+   STATE
+============================================================ */
+let currentUser = null;
+let currentStudent = null;
+let scanData = null;
+let roomPicData = null;
+
+/* ============================================================
+   HELPERS
+============================================================ */
+function callApi(params) {
+  const url = APPS_SCRIPT_URL + "?" + new URLSearchParams(params).toString();
+  return fetch(url).then(r => r.json());
+}
+function show(id){document.getElementById(id).classList.remove("hidden");}
+function hide(id){document.getElementById(id).classList.add("hidden");}
+function initials(f,l){return((f||"").charAt(0)+(l||"").charAt(0)).toUpperCase();}
+function normalizeGrade(g){
+  const s=String(g||"").toUpperCase();
+  if(s.includes("KINDER"))return"K";
+  const m=s.match(/\d+/);return m?m[0]:s;
+}
+function gradeLabel(grade,section){
+  const gl=normalizeGrade(grade);
+  const pre=gl==="K"?"Kinder":"Grade "+gl;
+  return pre+(section?" - "+section:"");
+}
+function statusClass(s){
+  const v=(s||"").toLowerCase();
+  if(v.includes("currently"))return"badge-success";
+  if(v.includes("dropped"))return"badge-warning";
+  return"badge-muted";
+}
+function formatDate(v){
+  if(!v)return"-";
+  const d=new Date(v);
+  if(isNaN(d.getTime()))return String(v);
+  return d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+}
+function normalize(s){return s.toLowerCase().trim().replace(/\s+/g," ");}
+function toProperCase(s){return s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}
+
+function parseCSVRow(row){
+  const result=[];let cur="";let inQ=false;
+  for(let i=0;i<row.length;i++){
+    if(row[i]==='"'){inQ=!inQ;}
+    else if(row[i]===','&&!inQ){result.push(cur);cur="";}
+    else{cur+=row[i];}
+  }
+  result.push(cur);return result;
+}
+function convertDriveUrl(url){
+  if(!url)return"";
+  const m=url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if(m)return"https://drive.google.com/thumbnail?id="+m[1]+"&sz=w400";
+  return url;
+}
+
+/* ============================================================
+   SCAN CSV (room / adviser / map)
+============================================================ */
+async function loadScanData(){
+  if(scanData)return scanData;
+  try{
+    const res=await fetch(SCAN_CSV_URL);
+    const text=await res.text();
+    const rows=text.trim().split("\n");
+    const headers=rows[0].split(",").map(h=>h.trim().toLowerCase().replace(/\r/g,""));
+    scanData=rows.slice(1).map(row=>{
+      const cols=parseCSVRow(row);
+      const obj={};
+      headers.forEach((h,i)=>obj[h]=(cols[i]||"").trim().replace(/\r/g,""));
+      return obj;
+    });
+  }catch(e){console.error("SCAN CSV error",e);scanData=[];}
+  return scanData;
+}
+
+async function loadRoomPicData(){
+  if(roomPicData)return roomPicData;
+  try{
+    const res=await fetch(ROOM_CSV_URL);
+    const text=await res.text();
+    const rows=text.trim().split("\n");
+    const headers=rows[0].split(",").map(h=>h.trim().toLowerCase().replace(/\r/g,""));
+    roomPicData={};
+    rows.slice(1).forEach(row=>{
+      const cols=parseCSVRow(row);
+      const obj={};
+      headers.forEach((h,i)=>obj[h]=(cols[i]||"").trim().replace(/\r/g,""));
+      if(obj.number)roomPicData[obj.number]=obj;
+    });
+  }catch(e){console.error("Room CSV error",e);roomPicData={};}
+  return roomPicData;
+}
+
+function findScanRow(rows){
+  if(!currentStudent||!rows)return null;
+  const p=currentStudent.personal;
+  return rows.find(r=>
+    normalize(r.first_name||"")=== normalize(p.firstName||"")&&
+    normalize(r.last_name||"")=== normalize(p.lastName||"")
+  )||null;
+}
+
+/* ============================================================
+   LOGIN
+============================================================ */
+function doLogin(){
+  const username=document.getElementById("loginUsername").value.trim();
+  const password=document.getElementById("loginPassword").value;
+  const errEl=document.getElementById("loginError");
+  errEl.classList.add("hidden");
+  if(!username||!password){
+    errEl.textContent="Pakipunan ang username at password.";
+    errEl.classList.remove("hidden");return;
+  }
+  callApi({action:"login",username,password}).then(res=>{
+    if(!res.success){
+      errEl.textContent=res.error||"Invalid username or password.";
+      errEl.classList.remove("hidden");return;
+    }
+    currentUser=res;
+    sessionStorage.setItem("smart_user",JSON.stringify(res));
+    if(res.needsPasswordChange){show("changePassOverlay");}
+    else{enterApp();}
+  }).catch(()=>{
+    errEl.textContent="Connection error. Subukan ulit.";
+    errEl.classList.remove("hidden");
+  });
+}
+
+function submitNewPassword(){
+  const p1=document.getElementById("newPass1").value;
+  const p2=document.getElementById("newPass2").value;
+  const errEl=document.getElementById("changePassError");
+  errEl.classList.add("hidden");
+  if(!p1||p1.length<6){errEl.textContent="Hindi bababa sa 6 characters.";errEl.classList.remove("hidden");return;}
+  if(p1!==p2){errEl.textContent="Hindi magkatugma ang passwords.";errEl.classList.remove("hidden");return;}
+  const accountType=currentUser.role==="teacher"?"teacher":"student";
+  const id=currentUser.role==="teacher"?currentUser.employeeId:currentUser.lrn;
+  callApi({action:"changePassword",accountType,id,newPassword:p1}).then(res=>{
+    if(res.success){hide("changePassOverlay");enterApp();}
+    else{errEl.textContent=res.error||"Hindi na-save.";errEl.classList.remove("hidden");}
+  });
+}
+function skipPasswordChange(){hide("changePassOverlay");enterApp();}
+
+function enterApp(){
+  hide("loginScreen");show("appScreen");
+  if(currentUser.role==="admin"||currentUser.role==="teacher"){show("searchWrap");}
+  else if(currentUser.role==="student"){loadStudentDetail(currentUser.lrn);}
+}
+
+/* ============================================================
+   SEARCH
+============================================================ */
+function doSearch(){
+  const firstName=document.getElementById("searchFirst").value.trim();
+  const lastName=document.getElementById("searchLast").value.trim();
+  const listEl=document.getElementById("searchResultsList");
+  listEl.innerHTML='<p class="empty-state">Naghahanap...</p>';
+  const params={action:"search",firstName,lastName,role:currentUser.role};
+  if(currentUser.role==="teacher")params.scope=currentUser.name;
+  callApi(params).then(res=>{
+    const results=res.results||[];
+    if(!results.length){listEl.innerHTML='<p class="empty-state">Walang nahanap na record.</p>';return;}
+    listEl.innerHTML=results.map(r=>`
+      <div class="result-list-item" onclick="loadStudentDetail('${r.lrn}')">
+        <div class="avatar">${initials(r.firstName,r.lastName)}</div>
+        <div>
+          <div style="font-weight:600;font-size:13px;">${r.lastName}, ${r.firstName} ${r.middleName||""}</div>
+          <div style="font-size:11px;color:#78909c;">${gradeLabel(r.grade,r.section)} &middot; ${r.status||""}</div>
+        </div>
+      </div>`).join("");
+  }).catch(()=>{listEl.innerHTML='<p class="empty-state">Error sa paghahanap. Subukan ulit.</p>';});
+}
+
+/* ============================================================
+   STUDENT DETAIL
+============================================================ */
+function loadStudentDetail(lrn){
+  callApi({action:"getStudentDetail",lrn}).then(res=>{
+    if(res.error){alert(res.error);return;}
+    currentStudent=res;
+    renderResultCard(res);
+    hide("searchWrap");show("resultWrap");
+  });
+}
+
+function renderResultCard(d){
+  const p=d.personal,c=d.classInfo,t=d.teacherInfo;
+  const gl=normalizeGrade(c.grade);
+  let classFields=`
+    <div><p class="lbl">Grade & Section</p><p class="val">${gradeLabel(c.grade,c.section)}</p></div>
+    <div><p class="lbl">School Year</p><p class="val">${c.schoolYear||"-"}</p></div>`;
+  if(gl!=="K")classFields+=`<div><p class="lbl">ARAL Program</p><p class="val">${c.aralProgram||"-"}</p></div>`;
+  classFields+=`<div><p class="lbl">SBFP</p><p class="val">${c.sbfp||"-"}</p></div>`;
+  classFields+=`<div class="span2"><p class="lbl">Status</p><span class="badge ${statusClass(c.status)}">${c.status||"-"}</span></div>`;
+
+  document.getElementById("resultWrap").innerHTML=`
+    <div class="result-top">
+      <div class="avatar" style="width:48px;height:48px;font-size:16px;">${initials(p.firstName,p.lastName)}</div>
+      <div class="name-grade"><div class="nm">${p.lastName}, ${p.firstName} ${p.middleName||""}</div></div>
+      <span class="badge ${statusClass(c.status)}">${c.status||"-"}</span>
+    </div>
+    <div class="section-label">Personal Information</div>
+    <div class="grid2">
+      <div class="span2"><p class="lbl">Full Name</p><p class="val">${p.firstName} ${p.middleName||""} ${p.lastName}</p></div>
+      <div><p class="lbl">Date of Birth</p><p class="val">${formatDate(p.dateOfBirth)}</p></div>
+      <div><p class="lbl">Sex</p><p class="val">${p.sex||"-"}</p></div>
+      <div><p class="lbl">LRN</p><p class="val">${p.lrn}</p></div>
+      <div><p class="lbl">4Ps</p><p class="val">${p.fourPs||"-"}</p></div>
+    </div>
+    <div class="section-label">Class Information</div>
+    <div class="grid2">${classFields}</div>
+    <div class="section-label">Teacher Information</div>
+    <div class="grid2">
+      <div class="span2"><p class="lbl">Name</p><p class="val">${t.name||"-"}</p></div>
+      <div><p class="lbl">Position</p><p class="val">${t.position||"-"}</p></div>
+      <div><p class="lbl">Contact</p><p class="val">${t.contactNumber||"-"}</p></div>
+    </div>
+    <button class="back-btn" onclick="backToSearch()">&larr; Search another</button>`;
+}
+
+function backToSearch(){hide("resultWrap");show("searchWrap");}
+
+/* ============================================================
+   MENU
+============================================================ */
+function openMenu(){
+  if(!currentStudent)return;
+  const gl=normalizeGrade(currentStudent.classInfo.grade);
+  const isStaff=currentUser.role==="admin"||currentUser.role==="teacher";
+  const items=[];
+  if(gl!=="K")items.push({icon:"📊",label:"View Grades",fn:"showGrades()"});
+  items.push({icon:"📅",label:"View Attendance",fn:"showAttendance()"});
+  items.push({icon:"📋",label:"View Assessment Record",fn:"showAssessment()"});
+  items.push({icon:"🚪",label:"View Room",fn:"showRoom()"});
+  items.push({icon:"🗺️",label:"View Map",fn:"showMap()"});
+  items.push({icon:"👤",label:"View Teacher",fn:"showTeacher()"});
+  if(isStaff)items.push({icon:"📄",label:"Print Certification",fn:"showCertOptions()"});
+  if(currentUser.role==="teacher")items.push({icon:"📝",label:"Print SF9",fn:"showSF9()"});
+  document.getElementById("menuListContent").innerHTML=items.map(it=>
+    `<div class="menu-item" onclick="${it.fn}"><span class="micon">${it.icon}</span><span>${it.label}</span></div>`
+  ).join("");
+  show("menuOverlay");
+}
+function closeMenu(){hide("menuOverlay");}
+
+function openGenericModal(title,bodyHtml){
+  document.getElementById("genericModalTitle").textContent=title;
+  document.getElementById("genericModalBody").innerHTML=bodyHtml;
+  closeMenu();
+  show("genericOverlay");
+}
+function closeGenericModal(){hide("genericOverlay");}
+
+/* ============================================================
+   VIEW GRADES
+============================================================ */
+function showGrades(){
+  const grades=currentStudent.grades||{};
+  const subjects=Object.keys(grades);
+  if(!subjects.length){openGenericModal("View Grades",'<p class="empty-state">Wala pang nailagay na grades.</p>');return;}
+  const terms=["Term 1","Term 2","Term 3"];
+  const visTerms=terms.filter(t=>subjects.some(s=>String(grades[s][t]||"").trim()!==""));
+  if(!visTerms.length){openGenericModal("View Grades",'<p class="empty-state">Wala pang nailagay na grades.</p>');return;}
+  const allComplete=visTerms.length===3;
+  let finalRatings=[];
+  const rows=subjects.map(s=>{
+    const tds=visTerms.map(t=>`<td>${grades[s][t]||""}</td>`).join("");
+    let finalTd="";
+    if(allComplete){
+      const vals=terms.map(t=>parseFloat(grades[s][t])).filter(v=>!isNaN(v));
+      if(vals.length===3){const avg=Math.round(vals.reduce((a,b)=>a+b,0)/3);finalRatings.push(avg);finalTd=`<td><b>${avg}</b></td>`;}
+      else{finalTd="<td>-</td>";}
+    }
+    return`<tr><td>${s}</td>${tds}${finalTd}</tr>`;
+  }).join("");
+  let headers=visTerms.map(t=>`<th>${t.replace("Term ","T")}</th>`).join("");
+  if(allComplete)headers+="<th>Final</th>";
+  let gaBlock="";
+  if(allComplete&&finalRatings.length===subjects.length){
+    const ga=Math.round(finalRatings.reduce((a,b)=>a+b,0)/finalRatings.length);
+    const fail=finalRatings.some(v=>v<75);
+    const rem=honorRemark(ga,fail);
+    gaBlock=`<div class="ga-row"><span class="ga-label">General Average</span><div style="text-align:right;"><span class="ga-val">${ga}</span>${rem?`<br><span class="honors-badge">${rem}</span>`:""}</div></div>`;
+  }
+  openGenericModal("View Grades",`<table class="gtab"><thead><tr><th>Subject</th>${headers}</tr></thead><tbody>${rows}</tbody></table>${gaBlock}`);
+}
+function honorRemark(avg,fail){
+  if(fail)return"";
+  if(avg>=98)return"With Highest Honors";
+  if(avg>=95)return"With High Honors";
+  if(avg>=90)return"With Honors";
+  return"";
+}
+
+/* ============================================================
+   VIEW ATTENDANCE
+============================================================ */
+function showAttendance(){
+  const att=currentStudent.attendance||{};
+  const months=Object.keys(att);
+  const vis=months.filter(m=>String(att[m].Present||"").trim()!==""||String(att[m].Absent||"").trim()!=="");
+  if(!vis.length){openGenericModal("View Attendance",'<p class="empty-state">Wala pang nailagay na attendance.</p>');return;}
+  let tp=0,ta=0;
+  const rows=vis.map(m=>{
+    const p=parseFloat(att[m].Present)||0;const a=parseFloat(att[m].Absent)||0;
+    tp+=p;ta+=a;
+    const pct=(p+a)>0?((p/(p+a))*100).toFixed(1)+"%":"-";
+    return`<tr><td>${m}</td><td>${p}</td><td>${a}</td><td>${pct}</td></tr>`;
+  }).join("");
+  const tpct=(tp+ta)>0?((tp/(tp+ta))*100).toFixed(1)+"%":"-";
+  const totRow=`<tr style="font-weight:700;border-top:2px solid #cfd8dc;"><td>Total</td><td>${tp}</td><td>${ta}</td><td>${tpct}</td></tr>`;
+  openGenericModal("View Attendance",`<table class="gtab"><thead><tr><th>Month</th><th>Present</th><th>Absent</th><th>%</th></tr></thead><tbody>${rows}${totRow}</tbody></table>`);
+}
+
+/* ============================================================
+   VIEW ASSESSMENT
+============================================================ */
+function showAssessment(){
+  const a=currentStudent.assessment||{};
+  const types=Object.keys(a);
+  const cols=["BOSY","MOSY","EOSY"];
+  const visCols=cols.filter(c=>types.some(t=>String(a[t][c]||"").trim()!==""));
+  if(!types.length||!visCols.length){openGenericModal("View Assessment Record",'<p class="empty-state">Wala pang nailagay na assessment.</p>');return;}
+  const headers=visCols.map(c=>`<th>${c}</th>`).join("");
+  const rows=types.map(t=>{
+    const tds=visCols.map(c=>`<td>${a[t][c]||""}</td>`).join("");
+    return`<tr><td>${t}</td>${tds}</tr>`;
+  }).join("");
+  openGenericModal("View Assessment Record",`<table class="gtab"><thead><tr><th>Assessment</th>${headers}</tr></thead><tbody>${rows}</tbody></table>`);
+}
+
+/* ============================================================
+   VIEW ROOM
+============================================================ */
+async function showRoom(){
+  closeMenu();
+  document.getElementById("roomModalBody").innerHTML='<div class="empty-state">Loading...</div>';
+  document.getElementById("roomModalOverlay").classList.add("active");
+  const rows=await loadScanData();
+  const row=findScanRow(rows);
+  const roomNum=row?row.room:(currentStudent.room||"");
+  const picData=await loadRoomPicData();
+  const roomInfo=picData[String(roomNum)]||{};
+  const picUrl=convertDriveUrl(roomInfo.picture||"");
+  let html="";
+  if(picUrl){html=`<img src="${picUrl}" class="info-photo" onerror="this.style.display='none'" />`;}
+  else{html=`<div class="info-photo-placeholder">🚪</div>`;}
+  html+=`<div class="info-name">Room ${roomNum||"—"}</div>`;
+  if(currentStudent.classInfo)html+=`<div class="info-sub">${gradeLabel(currentStudent.classInfo.grade,currentStudent.classInfo.section)}</div>`;
+  document.getElementById("roomModalBody").innerHTML=html;
+}
+function closeRoomModal(){document.getElementById("roomModalOverlay").classList.remove("active");}
+function handleRoomOverlayClick(e){if(e.target===document.getElementById("roomModalOverlay"))closeRoomModal();}
+
+/* ============================================================
+   VIEW MAP
+============================================================ */
+async function showMap(){
+  closeMenu();
+  const rows=await loadScanData();
+  const row=findScanRow(rows);
+  const roomNum=parseInt(row?row.room:(currentStudent.room||0));
+  const studentName=currentStudent.personal?`${currentStudent.personal.firstName} ${currentStudent.personal.lastName}`:"";
+  // Show map
+  document.getElementById("mapModalOverlay").classList.add("active");
+  const pin=document.getElementById("roomPin");
+  pin.classList.remove("highlighted");
+  if(roomNum&&ROOM_COORDS[roomNum]){
+    const coords=ROOM_COORDS[roomNum];
+    pin.style.left=coords[0]+"%";
+    pin.style.top=coords[1]+"%";
+    pin.textContent=roomNum;
+    setTimeout(()=>pin.classList.add("highlighted"),100);
+  }
+  document.getElementById("legendText").textContent=studentName;
+  document.getElementById("legendRoom").textContent=roomNum?"Room "+roomNum:"";
+}
+function closeMapModal(){
+  document.getElementById("mapModalOverlay").classList.remove("active");
+  document.getElementById("roomPin").classList.remove("highlighted");
+}
+
+/* ============================================================
+   VIEW TEACHER
+============================================================ */
+async function showTeacher(){
+  closeMenu();
+  document.getElementById("adviserModalBody").innerHTML='<div class="empty-state">Loading...</div>';
+  document.getElementById("adviserModalOverlay").classList.add("active");
+  const rows=await loadScanData();
+  const row=findScanRow(rows);
+  const t=currentStudent.teacherInfo||{};
+  // try to get adviser picture from SCAN row
+  const picUrl=row?convertDriveUrl(row.adviser_picture||row.teacher_picture||""):"";
+  let html="";
+  if(picUrl){html=`<img src="${picUrl}" class="adviser-photo" onerror="this.style.display='none'" />`;}
+  else{html=`<div class="adviser-photo-placeholder">👤</div>`;}
+  html+=`<div class="info-name">${t.name||"-"}</div>`;
+  html+=`<div class="info-sub">${t.position||""}</div>`;
+  html+=`<div class="info-sub">${t.contactNumber||""}</div>`;
+  document.getElementById("adviserModalBody").innerHTML=html;
+}
+function closeAdviserModal(){document.getElementById("adviserModalOverlay").classList.remove("active");}
+function handleAdviserOverlayClick(e){if(e.target===document.getElementById("adviserModalOverlay"))closeAdviserModal();}
+
+/* ============================================================
+   PRINT CERTIFICATION
+============================================================ */
+function showCertOptions(){
+  openGenericModal("Print Document Request",`
+    <button class="doc-opt" onclick="printCert('dswd')">📄 DSWD Enrollment Certificate</button>
+    <button class="doc-opt" onclick="printCert('enrollment')">📄 School Enrollment Certificate</button>
+    <button class="doc-opt" onclick="printCert('goodmoral')">📄 Certificate of Good Moral</button>`);
+}
+function printCert(type){
+  alert("Print: "+type+"\n(Certificate template rendering — ilalagay pa.)");
+}
+function showSF9(){
+  openGenericModal("Print SF9",'<p class="empty-state" style="padding:30px 0;">Not yet available.</p>');
+}
+
+/* ============================================================
+   SESSION RESTORE
+============================================================ */
+window.addEventListener("load",()=>{
+  const saved=sessionStorage.getItem("smart_user");
+  if(saved){currentUser=JSON.parse(saved);enterApp();}
+});
+</script>
+</body>
+</html>
