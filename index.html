@@ -1135,9 +1135,21 @@ function showSF9(){
 function showReports(){
   closeMenu();
   openGenericModal("📊 Generate Reports",'<p class="empty-state">Loading reports...</p>');
-  const params={action:"getReports"};
-  if(currentUser.role==="teacher"){params.teacherFirst=currentUser.firstName;params.teacherLast=currentUser.lastName;}
-  callApi(params).then(res=>{
+
+  if(currentUser.role==="teacher"){
+    callApi({action:"getClassSummary",teacherFirst:currentUser.firstName,teacherLast:currentUser.lastName}).then(res=>{
+      if(res.error||!res.sections){
+        document.getElementById("genericModalBody").innerHTML=`<p class="empty-state">${res.error||"Walang data."}</p>`;
+        return;
+      }
+      renderClassSummary(res.sections);
+    }).catch(()=>{
+      document.getElementById("genericModalBody").innerHTML='<p class="empty-state">Connection error.</p>';
+    });
+    return;
+  }
+
+  callApi({action:"getReports"}).then(res=>{
     if(res.error||!res.reports){
       document.getElementById("genericModalBody").innerHTML=`<p class="empty-state">${res.error||"Walang data."}</p>`;
       return;
@@ -1181,6 +1193,52 @@ function renderMatrixReportTable(title, report){
   }
   html += `</tbody></table></div>`;
   return html;
+}
+
+function renderClassSummaryTable(section){
+  let html = `<div class="rtab-title">${section.title}</div><div class="rtab-wrap"><table class="rtab"><thead><tr><th style="width:44%;"></th><th>Male</th><th>Female</th><th>Total</th></tr></thead><tbody>`;
+  section.rows.forEach(r=>{
+    if(r.header){
+      html += `<tr><td colspan="4" style="text-align:left;font-weight:700;background:#eef0ff;">${r.label}</td></tr>`;
+    }else{
+      const label = r.indent ? `&nbsp;&nbsp;• ${r.label}` : r.label;
+      html += `<tr><td style="text-align:left;${r.indent?'':'font-weight:600;'}">${label}</td><td>${r.male}</td><td>${r.female}</td><td>${r.total}</td></tr>`;
+    }
+  });
+  html += `</tbody></table></div>`;
+  return html;
+}
+
+function renderClassSummary(sections){
+  const lists=[
+    ["4ps","Yes","List of 4Ps Beneficiaries"],
+    ["aral_program","Yes","List of ARAL Beneficiaries"],
+    ["sbfp","Yes","List of SBFP Beneficiaries"],
+    ["nutritional_status","Wasted,Severely Wasted","List of Wasted and Severely Wasted"],
+    ["phil-iri","Frustration","List of Frustration Learners (PHIL-IRI)"],
+    ["crla","Low Emerging,High Emerging","List of Low Emerging and High Emerging (CRLA)"],
+    ["rma","Not Proficient,Low Proficient","List of Not Proficient and Low Proficient (RMA)"],
+    ["dropout","dropped","List of Drop-out Learners"]
+  ];
+
+  let html=`<div class="no-print" style="text-align:right;margin-bottom:14px;">
+    <button onclick="printReports()" style="background:var(--royal);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;">🖨️ Print</button>
+  </div>`;
+
+  if(!sections.length){
+    html += '<p class="empty-state">Walang nakitang estudyante sa iyong klase.</p>';
+  }else{
+    sections.forEach(s=>{ html += renderClassSummaryTable(s); });
+  }
+
+  html += `<div class="no-print" style="margin:22px 0 4px;">
+    <div style="font-weight:700;font-size:13px;color:var(--royal);padding:6px 0;border-bottom:2px solid var(--royal);margin-bottom:10px;">📋 I-print na Listahan (Excel)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      ${lists.map(l=>`<button type="button" class="report-list-btn" onclick="printStudentList('${l[0]}','${l[1]}','${l[2]}')">${l[2]}</button>`).join("")}
+    </div>
+  </div>`;
+
+  document.getElementById("genericModalBody").innerHTML=html;
 }
 
 function renderReports(data){
