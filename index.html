@@ -109,6 +109,14 @@ table.gtab tr:last-child td{border-bottom:none;}
 .ga-val{font-size:18px;font-weight:700;color:var(--royal);}
 .honors-badge{display:inline-block;background:var(--success-bg);color:var(--success-text);font-size:10px;padding:2px 7px;border-radius:6px;margin-top:3px;}
 
+/* Reports - by Area/Indicator tables */
+.rtab-title{font-weight:700;font-size:13px;text-align:center;color:#000;margin:20px 0 8px;text-transform:uppercase;}
+table.rtab{width:100%;border-collapse:collapse;font-size:10.5px;margin-bottom:6px;table-layout:fixed;}
+table.rtab th,table.rtab td{border:1px solid #000;padding:5px 3px;text-align:center;word-break:break-word;}
+table.rtab th{background:#f0f1f8;font-weight:700;color:#000;}
+table.rtab tr.rtab-total{font-weight:700;background:#fafafa;}
+.rtab-wrap{overflow-x:auto;margin-bottom:22px;}
+
 /* Cert options */
 .doc-opt{display:block;width:100%;text-align:left;background:var(--bg-light);border:1px solid var(--royal-light);border-radius:10px;padding:13px 16px;margin-bottom:8px;font-size:13px;color:var(--royal);cursor:pointer;font-family:'Poppins',sans-serif;font-weight:500;}
 .doc-opt:hover{background:#e3e8ff;}
@@ -1138,8 +1146,42 @@ function showReports(){
   });
 }
 
+function renderSimpleReportTable(title, report){
+  let html = `<div class="rtab-title">${title}</div><div class="rtab-wrap"><table class="rtab"><thead><tr><th style="width:22%;">Grade Level</th><th>Male</th><th>Female</th><th>Total</th></tr></thead><tbody>`;
+  report.rows.forEach(row=>{
+    html += `<tr><td>${row.label}</td><td>${row.male}</td><td>${row.female}</td><td>${row.total}</td></tr>`;
+  });
+  html += `<tr class="rtab-total"><td>Total</td><td>${report.totalRow.male}</td><td>${report.totalRow.female}</td><td>${report.totalRow.total}</td></tr>`;
+  html += `</tbody></table></div>`;
+  return html;
+}
+
+function renderMatrixReportTable(title, report){
+  const cats = report.categories;
+  let html = `<div class="rtab-title">${title}</div><div class="rtab-wrap"><table class="rtab"><thead>`;
+  html += `<tr><th rowspan="2" style="width:12%;">Grade Level</th>${cats.map(c=>`<th colspan="3">${c}</th>`).join("")}</tr>`;
+  html += `<tr>${cats.map(()=>`<th>Male</th><th>Female</th><th>Total</th>`).join("")}</tr></thead><tbody>`;
+  report.rows.forEach(row=>{
+    html += `<tr><td>${row.label}</td>`;
+    cats.forEach(c=>{
+      const cc = row.categories[c];
+      html += `<td>${cc.male}</td><td>${cc.female}</td><td>${cc.total}</td>`;
+    });
+    html += `</tr>`;
+  });
+  if (report.totalRow) {
+    html += `<tr class="rtab-total"><td>Total</td>`;
+    cats.forEach(c=>{
+      const cc = report.totalRow[c];
+      html += `<td>${cc.male}</td><td>${cc.female}</td><td>${cc.total}</td>`;
+    });
+    html += `</tr>`;
+  }
+  html += `</tbody></table></div>`;
+  return html;
+}
+
 function renderReports(data){
-  const grades=Object.keys(data).sort();
   const lists=[
     ["4ps","Yes","List of 4Ps Beneficiaries"],
     ["aral_program","Yes","List of ARAL Beneficiaries"],
@@ -1150,46 +1192,29 @@ function renderReports(data){
     ["rma","Not Proficient,Low Proficient","List of Not Proficient and Low Proficient (RMA)"],
     ["dropout","dropped","List of Drop-out Learners"]
   ];
-  let html=`<div style="margin-bottom:18px;">
+
+  let html=`<div class="no-print" style="text-align:right;margin-bottom:14px;">
+    <button onclick="printReports()" style="background:var(--royal);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;">🖨️ Print</button>
+  </div>`;
+
+  html += renderSimpleReportTable("ENROLLMENT", data.enrollment);
+  html += renderSimpleReportTable("DROPPED OUT", data.dropped);
+  html += renderSimpleReportTable("4PS BENEFICIARIES", data.fourPs);
+  html += renderSimpleReportTable("ARAL PROGRAM BENEFICIARIES", data.aral);
+  html += renderSimpleReportTable("SBFP BENEFICIARIES", data.sbfp);
+  html += renderMatrixReportTable("RMA RESULT", data.rma);
+  html += renderMatrixReportTable("CRLA RESULT", data.crla);
+  html += renderMatrixReportTable("PHIL-IRI RESULT", data.philiri);
+  html += renderMatrixReportTable("NUTRITIONAL STATUS REPORT", data.nutritional);
+  html += renderMatrixReportTable("ECCD RESULT", data.eccd);
+
+  html += `<div class="no-print" style="margin:22px 0 4px;">
     <div style="font-weight:700;font-size:13px;color:var(--royal);padding:6px 0;border-bottom:2px solid var(--royal);margin-bottom:10px;">📋 I-print na Listahan (Excel)</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
       ${lists.map(l=>`<button type="button" class="report-list-btn" onclick="printStudentList('${l[0]}','${l[1]}','${l[2]}')">${l[2]}</button>`).join("")}
     </div>
   </div>`;
-  html+=`<div style="text-align:right;margin-bottom:10px;">
-    <button onclick="printReports()" style="background:var(--royal);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;">🖨️ Print</button>
-  </div>`;
 
-  grades.forEach(grade=>{
-    const d=data[grade];
-    html+=`<div style="margin-bottom:16px;">
-      <div style="font-weight:700;font-size:13px;color:var(--royal);padding:6px 0;border-bottom:2px solid var(--royal);margin-bottom:8px;">${grade}</div>
-      <table class="gtab">
-        <thead><tr><th>Indicator</th><th>Count</th></tr></thead>
-        <tbody>`;
-    if(d.total!==undefined)html+=`<tr><td>Total Enrolled</td><td>${d.total}</td></tr>`;
-    if(d.fourPs!==undefined)html+=`<tr><td>4Ps Beneficiary</td><td>${d.fourPs}</td></tr>`;
-    if(d.aral!==undefined)html+=`<tr><td>ARAL Program</td><td>${d.aral}</td></tr>`;
-    if(d.sbfp!==undefined)html+=`<tr><td>SBFP Beneficiary</td><td>${d.sbfp}</td></tr>`;
-    if(d.nutritional){
-      Object.entries(d.nutritional).forEach(([k,v])=>{
-        html+=`<tr><td>&nbsp;&nbsp;• ${k}</td><td>${v}</td></tr>`;
-      });
-    }
-    if(d.assessment){
-      Object.entries(d.assessment).forEach(([k,v])=>{
-        if(typeof v==="object"){
-          html+=`<tr><td>${k}</td><td></td></tr>`;
-          Object.entries(v).forEach(([sk,sv])=>{
-            html+=`<tr><td>&nbsp;&nbsp;• ${sk}</td><td>${sv}</td></tr>`;
-          });
-        }else{
-          html+=`<tr><td>${k}</td><td>${v}</td></tr>`;
-        }
-      });
-    }
-    html+=`</tbody></table></div>`;
-  });
   document.getElementById("genericModalBody").innerHTML=html;
 }
 
@@ -1199,13 +1224,16 @@ function printReports(){
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"/>
 <title>SMART Reports</title>
 <style>
-body{font-family:'Poppins',sans-serif;padding:20mm;}
+body{font-family:'Poppins',sans-serif;padding:14mm;}
 h2{color:#283593;margin-bottom:16px;}
-table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:11pt;}
-th{background:#283593;color:white;padding:6px 8px;text-align:left;}
-td{padding:5px 8px;border-bottom:1px solid #ddd;}
-.no-print{display:none;}
-@media print{@page{size:A4;margin:15mm;}}
+.rtab-title{font-weight:700;font-size:12pt;text-align:center;color:#000;margin:16px 0 8px;text-transform:uppercase;}
+table.rtab{width:100%;border-collapse:collapse;margin-bottom:6px;font-size:9.5pt;}
+table.rtab th,table.rtab td{border:1px solid #000;padding:4px 5px;text-align:center;}
+table.rtab th{background:#eee;font-weight:700;}
+table.rtab tr.rtab-total{font-weight:700;}
+.rtab-wrap{margin-bottom:18px;page-break-inside:avoid;}
+.no-print{display:none!important;}
+@media print{@page{size:A4 landscape;margin:12mm;}}
 </style></head><body>
 <h2>SMART — Summary Reports</h2>
 <p style="font-size:10pt;margin-bottom:16px;">Ilayang Yuni Elementary School &nbsp;|&nbsp; Generated: ${new Date().toLocaleDateString("en-PH",{year:"numeric",month:"long",day:"numeric"})}</p>
