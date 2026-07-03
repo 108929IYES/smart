@@ -1253,7 +1253,7 @@ function generateExcelList(nameList,title){
   });
   const rows=sorted.map(s=>({
     "Name":`${s.lastName||""}, ${s.firstName||""} ${s.middleName||""}`.trim(),
-    "LRN":s.lrn||"",
+    "LRN":String(s.lrn||""),
     "Grade":gradeLabel(s.grade,""),
     "Section":s.section||"",
     "Gender":s.gender||"",
@@ -1261,6 +1261,16 @@ function generateExcelList(nameList,title){
   }));
   const ws=XLSX.utils.json_to_sheet(rows);
   ws["!cols"]=[{wch:32},{wch:16},{wch:10},{wch:14},{wch:10},{wch:18}];
+  // Force LRN column (B) to be treated as TEXT so it doesn't get converted
+  // to scientific notation (e.g. 1.36578E+11) by Excel.
+  const range=XLSX.utils.decode_range(ws["!ref"]);
+  for(let r=1;r<=range.e.r;r++){
+    const cellRef=XLSX.utils.encode_cell({r:r,c:1});
+    if(ws[cellRef]){
+      ws[cellRef].t="s";
+      ws[cellRef].z="@";
+    }
+  }
   const wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,ws,"List");
   const filename=title.replace(/[^a-z0-9]+/gi,"_")+".xlsx";
