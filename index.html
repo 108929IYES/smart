@@ -1196,16 +1196,34 @@ function renderMatrixReportTable(title, report){
 }
 
 function renderClassSummaryTable(section){
-  let html = `<div class="rtab-title">${section.title}</div><div class="rtab-wrap"><table class="rtab"><thead><tr><th style="width:44%;"></th><th>Male</th><th>Female</th><th>Total</th></tr></thead><tbody>`;
-  section.rows.forEach(r=>{
-    if(r.header){
-      html += `<tr><td colspan="4" style="text-align:left;font-weight:700;background:#eef0ff;">${r.label}</td></tr>`;
-    }else{
-      const label = r.indent ? `&nbsp;&nbsp;• ${r.label}` : r.label;
-      html += `<tr><td style="text-align:left;${r.indent?'':'font-weight:600;'}">${label}</td><td>${r.male}</td><td>${r.female}</td><td>${r.total}</td></tr>`;
-    }
+  let html = `<div class="rtab-title">${section.title}</div>`;
+
+  // Simple indicators (hindi period-based): Enrolment, Dropped Out, 4Ps, ARAL, SBFP
+  html += `<div class="rtab-wrap"><table class="rtab"><thead><tr><th style="width:44%;"></th><th>Male</th><th>Female</th><th>Total</th></tr></thead><tbody>`;
+  section.simpleRows.forEach(r=>{
+    html += `<tr><td style="text-align:left;font-weight:600;">${r.label}</td><td>${r.male}</td><td>${r.female}</td><td>${r.total}</td></tr>`;
   });
   html += `</tbody></table></div>`;
+
+  // Assessment (period-based): RMA/CRLA/PHIL-IRI/ECCD + Nutritional Status, BOSY/MOSY/EOSY x M/F/T
+  if(section.assessmentRows && section.assessmentRows.length){
+    html += `<div class="rtab-wrap"><table class="rtab"><thead>
+      <tr><th rowspan="2" style="width:34%;"></th><th colspan="3">BOSY</th><th colspan="3">MOSY</th><th colspan="3">EOSY</th></tr>
+      <tr><th>M</th><th>F</th><th>T</th><th>M</th><th>F</th><th>T</th><th>M</th><th>F</th><th>T</th></tr>
+    </thead><tbody>`;
+    section.assessmentRows.forEach(r=>{
+      if(r.header){
+        html += `<tr><td colspan="10" style="text-align:left;font-weight:700;background:#eef0ff;">${r.label}</td></tr>`;
+      }else{
+        html += `<tr><td style="text-align:left;">&nbsp;&nbsp;• ${r.label}</td>
+          <td>${r.bosy.male}</td><td>${r.bosy.female}</td><td>${r.bosy.total}</td>
+          <td>${r.mosy.male}</td><td>${r.mosy.female}</td><td>${r.mosy.total}</td>
+          <td>${r.eosy.male}</td><td>${r.eosy.female}</td><td>${r.eosy.total}</td></tr>`;
+      }
+    });
+    html += `</tbody></table></div>`;
+  }
+
   return html;
 }
 
@@ -1262,11 +1280,15 @@ function renderReports(data){
   html += (data.fourPs ? renderSimpleReportTable("4PS BENEFICIARIES", data.fourPs) : "");
   html += (data.aral ? renderSimpleReportTable("ARAL PROGRAM BENEFICIARIES", data.aral) : "");
   html += (data.sbfp ? renderSimpleReportTable("SBFP BENEFICIARIES", data.sbfp) : "");
-  html += (data.rma ? renderMatrixReportTable("RMA RESULT", data.rma) : "");
-  html += (data.crla ? renderMatrixReportTable("CRLA RESULT", data.crla) : "");
-  html += (data.philiri ? renderMatrixReportTable("PHIL-IRI RESULT", data.philiri) : "");
-  html += (data.nutritional ? renderMatrixReportTable("NUTRITIONAL STATUS REPORT", data.nutritional) : "");
-  html += (data.eccd ? renderMatrixReportTable("ECCD RESULT", data.eccd) : "");
+
+  const periods=[["bosy","BOSY"],["mosy","MOSY"],["eosy","EOSY"]];
+  const assessmentTypes=[["rma","RMA RESULT"],["crla","CRLA RESULT"],["philiri","PHIL-IRI RESULT"],["nutritional","NUTRITIONAL STATUS REPORT"],["eccd","ECCD RESULT"]];
+  assessmentTypes.forEach(([key,label])=>{
+    periods.forEach(([pKey,pLabel])=>{
+      const d=data[key+"_"+pKey];
+      html += (d ? renderMatrixReportTable(`${label} (${pLabel})`, d) : "");
+    });
+  });
 
   html += `<div class="no-print" style="margin:22px 0 4px;">
     <div style="font-weight:700;font-size:13px;color:var(--royal);padding:6px 0;border-bottom:2px solid var(--royal);margin-bottom:10px;">📋 I-print na Listahan (Excel)</div>
@@ -1306,9 +1328,26 @@ ${content}
 /* ============================================================
    PRINTABLE STUDENT LISTS (Excel export)
 ============================================================ */
+const PERIOD_BASED_REPORT_TYPES=["nutritional_status","phil-iri","crla","rma"];
+
 function printStudentList(reportType,filterValue,label){
-  openGenericModal("📋 "+label,'<p class="empty-state">Kinukuha ang listahan...</p>');
+  if(PERIOD_BASED_REPORT_TYPES.indexOf(reportType)!==-1){
+    openGenericModal("📋 "+label,`
+      <p style="text-align:center;font-size:12.5px;color:#546e7a;margin-bottom:14px;">Alin sa periods ang gusto mong kunin?</p>
+      <button type="button" class="doc-opt" onclick="printStudentListWithPeriod('${reportType}','${filterValue}','${label}','BOSY')">BOSY — Beginning of School Year</button>
+      <button type="button" class="doc-opt" onclick="printStudentListWithPeriod('${reportType}','${filterValue}','${label}','MOSY')">MOSY — Middle of School Year</button>
+      <button type="button" class="doc-opt" onclick="printStudentListWithPeriod('${reportType}','${filterValue}','${label}','EOSY')">EOSY — End of School Year</button>
+    `);
+    return;
+  }
+  printStudentListWithPeriod(reportType,filterValue,label,null);
+}
+
+function printStudentListWithPeriod(reportType,filterValue,label,period){
+  const fullLabel = period ? `${label} (${period})` : label;
+  openGenericModal("📋 "+fullLabel,'<p class="empty-state">Kinukuha ang listahan...</p>');
   const params={action:"getReport",reportType:reportType,gradeLevel:"ALL",filterValue:filterValue};
+  if(period) params.period=period;
   if(currentUser.role==="teacher"){params.teacherFirst=currentUser.firstName;params.teacherLast=currentUser.lastName;}
   callApi(params).then(res=>{
     const body=document.getElementById("genericModalBody");
@@ -1322,7 +1361,7 @@ function printStudentList(reportType,filterValue,label){
       body.innerHTML='<p class="empty-state">Walang natagpuang estudyante para dito.</p>';
       return;
     }
-    generateExcelList(list,label);
+    generateExcelList(list,fullLabel);
     body.innerHTML=`<p class="empty-state">✅ Na-download na ang Excel file<br/>(${list.length} estudyante).</p>`;
   }).catch(()=>{
     const body=document.getElementById("genericModalBody");
