@@ -514,7 +514,7 @@ function doSearch(){
   const listEl=document.getElementById("searchResultsList");
   listEl.innerHTML='<p class="empty-state">Naghahanap...</p>';
   const params={action:"search",firstName,lastName,role:currentUser.role};
-  if(currentUser.role==="teacher")params.scope=currentUser.name;
+  if(currentUser.role==="teacher"){params.teacherFirst=currentUser.firstName;params.teacherLast=currentUser.lastName;}
   callApi(params).then(res=>{
     const results=res.results||[];
     if(!results.length){listEl.innerHTML='<p class="empty-state">Walang nahanap na record.</p>';return;}
@@ -594,7 +594,7 @@ function openMenu(){
     if(isStaff)items.push({icon:"📄",label:"Print Certification",fn:"showCertOptions()"});
     if(currentUser.role==="teacher")items.push({icon:"📝",label:"Print SF9",fn:"showSF9()"});
   }
-  if(currentUser&&currentUser.role==="admin")items.push({icon:"📊",label:"Generate Reports",fn:"showReports()"});
+  if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher"))items.push({icon:"📊",label:"Generate Reports",fn:"showReports()"});
   items.push({icon:"🚪",label:"Logout",fn:"doLogout()",danger:true});
   document.getElementById("menuListContent").innerHTML=items.map(it=>
     `<div class="menu-item${it.danger?" menu-item-danger":""}" onclick="${it.fn}"><span class="micon">${it.icon}</span><span>${it.label}</span></div>`
@@ -1135,7 +1135,9 @@ function showSF9(){
 function showReports(){
   closeMenu();
   openGenericModal("📊 Generate Reports",'<p class="empty-state">Loading reports...</p>');
-  callApi({action:"getReports"}).then(res=>{
+  const params={action:"getReports"};
+  if(currentUser.role==="teacher"){params.teacherFirst=currentUser.firstName;params.teacherLast=currentUser.lastName;}
+  callApi(params).then(res=>{
     if(res.error||!res.reports){
       document.getElementById("genericModalBody").innerHTML=`<p class="empty-state">${res.error||"Walang data."}</p>`;
       return;
@@ -1197,16 +1199,16 @@ function renderReports(data){
     <button onclick="printReports()" style="background:var(--royal);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;">🖨️ Print</button>
   </div>`;
 
-  html += renderSimpleReportTable("ENROLLMENT", data.enrollment);
-  html += renderSimpleReportTable("DROPPED OUT", data.dropped);
-  html += renderSimpleReportTable("4PS BENEFICIARIES", data.fourPs);
-  html += renderSimpleReportTable("ARAL PROGRAM BENEFICIARIES", data.aral);
-  html += renderSimpleReportTable("SBFP BENEFICIARIES", data.sbfp);
-  html += renderMatrixReportTable("RMA RESULT", data.rma);
-  html += renderMatrixReportTable("CRLA RESULT", data.crla);
-  html += renderMatrixReportTable("PHIL-IRI RESULT", data.philiri);
-  html += renderMatrixReportTable("NUTRITIONAL STATUS REPORT", data.nutritional);
-  html += renderMatrixReportTable("ECCD RESULT", data.eccd);
+  html += (data.enrollment ? renderSimpleReportTable("ENROLLMENT", data.enrollment) : "");
+  html += (data.dropped ? renderSimpleReportTable("DROPPED OUT", data.dropped) : "");
+  html += (data.fourPs ? renderSimpleReportTable("4PS BENEFICIARIES", data.fourPs) : "");
+  html += (data.aral ? renderSimpleReportTable("ARAL PROGRAM BENEFICIARIES", data.aral) : "");
+  html += (data.sbfp ? renderSimpleReportTable("SBFP BENEFICIARIES", data.sbfp) : "");
+  html += (data.rma ? renderMatrixReportTable("RMA RESULT", data.rma) : "");
+  html += (data.crla ? renderMatrixReportTable("CRLA RESULT", data.crla) : "");
+  html += (data.philiri ? renderMatrixReportTable("PHIL-IRI RESULT", data.philiri) : "");
+  html += (data.nutritional ? renderMatrixReportTable("NUTRITIONAL STATUS REPORT", data.nutritional) : "");
+  html += (data.eccd ? renderMatrixReportTable("ECCD RESULT", data.eccd) : "");
 
   html += `<div class="no-print" style="margin:22px 0 4px;">
     <div style="font-weight:700;font-size:13px;color:var(--royal);padding:6px 0;border-bottom:2px solid var(--royal);margin-bottom:10px;">📋 I-print na Listahan (Excel)</div>
@@ -1248,7 +1250,9 @@ ${content}
 ============================================================ */
 function printStudentList(reportType,filterValue,label){
   openGenericModal("📋 "+label,'<p class="empty-state">Kinukuha ang listahan...</p>');
-  callApi({action:"getReport",reportType:reportType,gradeLevel:"ALL",filterValue:filterValue}).then(res=>{
+  const params={action:"getReport",reportType:reportType,gradeLevel:"ALL",filterValue:filterValue};
+  if(currentUser.role==="teacher"){params.teacherFirst=currentUser.firstName;params.teacherLast=currentUser.lastName;}
+  callApi(params).then(res=>{
     const body=document.getElementById("genericModalBody");
     if(!body)return; // user closed the modal already
     if(res.error){
