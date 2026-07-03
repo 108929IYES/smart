@@ -563,6 +563,7 @@ function renderResultCard(d){
       <div><p class="lbl">Sex</p><p class="val">${p.sex||"-"}</p></div>
       <div><p class="lbl">LRN</p><p class="val">${p.lrn}</p></div>
       <div><p class="lbl">4Ps</p><p class="val">${p.fourPs||"-"}</p></div>
+      <div><p class="lbl">Dewormed</p><p class="val">${p.dewormed||"-"}</p></div>
     </div>
     <div class="section-label">Class Information</div>
     <div class="grid2">${classFields}</div>
@@ -1232,6 +1233,7 @@ function renderClassSummary(sections){
     ["4ps","Yes","List of 4Ps Beneficiaries"],
     ["aral_program","Yes","List of ARAL Beneficiaries"],
     ["sbfp","Yes","List of SBFP Beneficiaries"],
+    ["dewormed","Yes","List of Dewormed Pupils"],
     ["nutritional_status","Wasted,Severely Wasted","List of Wasted and Severely Wasted"],
     ["phil-iri","Frustration","List of Frustration Learners (PHIL-IRI)"],
     ["crla","Low Emerging,High Emerging","List of Low Emerging and High Emerging (CRLA)"],
@@ -1264,6 +1266,7 @@ function renderReports(data){
     ["4ps","Yes","List of 4Ps Beneficiaries"],
     ["aral_program","Yes","List of ARAL Beneficiaries"],
     ["sbfp","Yes","List of SBFP Beneficiaries"],
+    ["dewormed","Yes","List of Dewormed Pupils"],
     ["nutritional_status","Wasted,Severely Wasted","List of Wasted and Severely Wasted"],
     ["phil-iri","Frustration","List of Frustration Learners (PHIL-IRI)"],
     ["crla","Low Emerging,High Emerging","List of Low Emerging and High Emerging (CRLA)"],
@@ -1280,6 +1283,7 @@ function renderReports(data){
   html += (data.fourPs ? renderSimpleReportTable("4PS BENEFICIARIES", data.fourPs) : "");
   html += (data.aral ? renderSimpleReportTable("ARAL PROGRAM BENEFICIARIES", data.aral) : "");
   html += (data.sbfp ? renderSimpleReportTable("SBFP BENEFICIARIES", data.sbfp) : "");
+  html += (data.dewormed ? renderSimpleReportTable("DEWORMED", data.dewormed) : "");
 
   const periods=[["bosy","BOSY"],["mosy","MOSY"],["eosy","EOSY"]];
   const assessmentTypes=[["rma","RMA RESULT"],["crla","CRLA RESULT"],["philiri","PHIL-IRI RESULT"],["nutritional","NUTRITIONAL STATUS REPORT"],["eccd","ECCD RESULT"]];
@@ -1315,11 +1319,17 @@ table.rtab th{background:#eee;font-weight:700;}
 table.rtab tr.rtab-total{font-weight:700;}
 .rtab-wrap{margin-bottom:18px;page-break-inside:avoid;}
 .no-print{display:none!important;}
+.sig-section{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px;font-size:10pt;}
+.sig-line{border-top:1px solid #000;padding-top:4px;text-align:center;}
 @media print{@page{size:A4 landscape;margin:12mm;}}
 </style></head><body>
 <h2>SMART — Summary Reports</h2>
 <p style="font-size:10pt;margin-bottom:16px;">Ilayang Yuni Elementary School &nbsp;|&nbsp; Generated: ${new Date().toLocaleDateString("en-PH",{year:"numeric",month:"long",day:"numeric"})}</p>
 ${content}
+<div class="sig-section">
+  <div class="sig-line">Signature over printed Name / Position of School Head</div>
+  <div class="sig-line">Signature over printed Name / Position of Teacher</div>
+</div>
 <script>window.onload=()=>window.print();<\/script>
 </body></html>`);
   win.document.close();
