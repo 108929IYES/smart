@@ -161,7 +161,11 @@ table.gtab tr:last-child td{border-bottom:none;}
 .btn-map{background:linear-gradient(135deg,#0d9488,#14b8a6);}
 .btn-room{background:linear-gradient(135deg,#7c3aed,#a855f7);}
 .btn-adviser{background:linear-gradient(135deg,#d97706,#f59e0b);}
+.report-list-btn{background:#eef0ff;color:var(--royal);border:1px solid var(--royal-light);padding:10px 12px;border-radius:8px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;text-align:left;line-height:1.3;}
+.report-list-btn:hover{background:var(--royal);color:#fff;}
+.report-list-btn:active{transform:scale(0.98);}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -1136,7 +1140,23 @@ function showReports(){
 
 function renderReports(data){
   const grades=Object.keys(data).sort();
-  let html=`<div style="text-align:right;margin-bottom:10px;">
+  const lists=[
+    ["4ps","Yes","List of 4Ps Beneficiaries"],
+    ["aral_program","Yes","List of ARAL Beneficiaries"],
+    ["sbfp","Yes","List of SBFP Beneficiaries"],
+    ["nutritional_status","Wasted,Severely Wasted","List of Wasted and Severely Wasted"],
+    ["phil-iri","Frustration","List of Frustration Learners (PHIL-IRI)"],
+    ["crla","Low Emerging,High Emerging","List of Low Emerging and High Emerging (CRLA)"],
+    ["rma","Not Proficient,Low Proficient","List of Not Proficient and Low Proficient (RMA)"],
+    ["dropout","dropped","List of Drop-out Learners"]
+  ];
+  let html=`<div style="margin-bottom:18px;">
+    <div style="font-weight:700;font-size:13px;color:var(--royal);padding:6px 0;border-bottom:2px solid var(--royal);margin-bottom:10px;">📋 I-print na Listahan (Excel)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      ${lists.map(l=>`<button type="button" class="report-list-btn" onclick="printStudentList('${l[0]}','${l[1]}','${l[2]}')">${l[2]}</button>`).join("")}
+    </div>
+  </div>`;
+  html+=`<div style="text-align:right;margin-bottom:10px;">
     <button onclick="printReports()" style="background:var(--royal);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;">🖨️ Print</button>
   </div>`;
 
@@ -1193,6 +1213,58 @@ ${content}
 <script>window.onload=()=>window.print();<\/script>
 </body></html>`);
   win.document.close();
+}
+
+/* ============================================================
+   PRINTABLE STUDENT LISTS (Excel export)
+============================================================ */
+function printStudentList(reportType,filterValue,label){
+  openGenericModal("📋 "+label,'<p class="empty-state">Kinukuha ang listahan...</p>');
+  callApi({action:"getReport",reportType:reportType,gradeLevel:"ALL",filterValue:filterValue}).then(res=>{
+    const body=document.getElementById("genericModalBody");
+    if(!body)return; // user closed the modal already
+    if(res.error){
+      body.innerHTML=`<p class="empty-state">${res.error}</p>`;
+      return;
+    }
+    const list=res.nameList||[];
+    if(list.length===0){
+      body.innerHTML='<p class="empty-state">Walang natagpuang estudyante para dito.</p>';
+      return;
+    }
+    generateExcelList(list,label);
+    body.innerHTML=`<p class="empty-state">✅ Na-download na ang Excel file<br/>(${list.length} estudyante).</p>`;
+  }).catch(()=>{
+    const body=document.getElementById("genericModalBody");
+    if(body)body.innerHTML='<p class="empty-state">Connection error.</p>';
+  });
+}
+
+function generateExcelList(nameList,title){
+  const gradeOrder={"K":0,"1":1,"2":2,"3":3,"4":4,"5":5,"6":6};
+  const sorted=[...nameList].sort((a,b)=>{
+    const ga=gradeOrder[normalizeGrade(a.grade)];
+    const gb=gradeOrder[normalizeGrade(b.grade)];
+    const gaN=ga===undefined?99:ga, gbN=gb===undefined?99:gb;
+    if(gaN!==gbN)return gaN-gbN;
+    const sa=String(a.section||""),sb=String(b.section||"");
+    if(sa!==sb)return sa.localeCompare(sb);
+    return String(a.lastName||"").localeCompare(String(b.lastName||""));
+  });
+  const rows=sorted.map(s=>({
+    "Name":`${s.lastName||""}, ${s.firstName||""} ${s.middleName||""}`.trim(),
+    "LRN":s.lrn||"",
+    "Grade":gradeLabel(s.grade,""),
+    "Section":s.section||"",
+    "Gender":s.gender||"",
+    "Birthdate":s.dateOfBirth?formatDate(s.dateOfBirth):""
+  }));
+  const ws=XLSX.utils.json_to_sheet(rows);
+  ws["!cols"]=[{wch:32},{wch:16},{wch:10},{wch:14},{wch:10},{wch:18}];
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,"List");
+  const filename=title.replace(/[^a-z0-9]+/gi,"_")+".xlsx";
+  XLSX.writeFile(wb,filename);
 }
 
 /* ============================================================
