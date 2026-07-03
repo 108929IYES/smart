@@ -1160,7 +1160,7 @@ function renderMatrixReportTable(title, report){
   const cats = report.categories;
   let html = `<div class="rtab-title">${title}</div><div class="rtab-wrap"><table class="rtab"><thead>`;
   html += `<tr><th rowspan="2" style="width:12%;">Grade Level</th>${cats.map(c=>`<th colspan="3">${c}</th>`).join("")}</tr>`;
-  html += `<tr>${cats.map(()=>`<th>Male</th><th>Female</th><th>Total</th>`).join("")}</tr></thead><tbody>`;
+  html += `<tr>${cats.map(()=>`<th>M</th><th>F</th><th>T</th>`).join("")}</tr></thead><tbody>`;
   report.rows.forEach(row=>{
     html += `<tr><td>${row.label}</td>`;
     cats.forEach(c=>{
