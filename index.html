@@ -86,9 +86,6 @@ body{font-family:'Poppins',sans-serif;background:var(--bg-light);min-height:100v
 .modal-header .x{cursor:pointer;font-size:18px;background:none;border:none;color:#fff;line-height:1;}
 .modal-body{padding:16px 18px;overflow-y:auto;}
 .empty-state{text-align:center;color:#90a4ae;font-size:13px;padding:24px 0;}
-.search-spinner-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 0;}
-.search-spinner{width:34px;height:34px;border:4px solid var(--bg-light);border-top-color:var(--royal);border-radius:50%;animation:searchSpin 0.8s linear infinite;}
-@keyframes searchSpin{to{transform:rotate(360deg);}}
 
 /* Menu */
 .menu-list{padding:4px 0;}
@@ -515,19 +512,12 @@ function doSearch(){
   const firstName=document.getElementById("searchFirst").value.trim();
   const lastName=document.getElementById("searchLast").value.trim();
   const listEl=document.getElementById("searchResultsList");
-  listEl.innerHTML='<div class="search-spinner-wrap"><div class="search-spinner"></div><p class="empty-state" style="margin-top:10px;">Naghahanap...</p></div>';
+  listEl.innerHTML='<p class="empty-state">Naghahanap...</p>';
   const params={action:"search",firstName,lastName,role:currentUser.role};
   if(currentUser.role==="teacher"){params.teacherFirst=currentUser.firstName;params.teacherLast=currentUser.lastName;}
   callApi(params).then(res=>{
     const results=res.results||[];
     if(!results.length){listEl.innerHTML='<p class="empty-state">Walang nahanap na record.</p>';return;}
-    // Para sa teacher at school head (admin) account: deretso na sa impormasyon
-    // ng estudyante, hindi na ipapakita ang listahan ng resulta.
-    if(currentUser.role==="teacher"||currentUser.role==="admin"){
-      listEl.innerHTML='<div class="search-spinner-wrap"><div class="search-spinner"></div><p class="empty-state" style="margin-top:10px;">Kinukuha ang impormasyon...</p></div>';
-      loadStudentDetail(results[0].lrn);
-      return;
-    }
     listEl.innerHTML=results.map(r=>`
       <div class="result-list-item" onclick="loadStudentDetail('${r.lrn}')">
         <div class="avatar">${initials(r.firstName,r.lastName)}</div>
@@ -976,9 +966,8 @@ body{font-family:Arial,'Poppins',sans-serif;background:#fff;display:flex;justify
     <div class="dswd-field" style="left:42%;top:55.8%;font-size:2.9mm;font-weight:bold;width:26%;text-align:center;">${p.lrn}</div>
     <div class="dswd-mask" style="left:3%;top:72.2%;width:87%;height:4.2%;"></div>
     <div class="dswd-field" style="left:5%;top:73.3%;font-size:3.4mm;white-space:nowrap;">Given on this ${dayOrd} day of ${monthYear}.</div>
-    <div class="dswd-field" style="left:31%;top:77.6%;font-size:3.3mm;font-weight:bold;text-align:center;width:52.2%;">ALI V. TELADA</div>
-    <div class="dswd-field" style="left:31%;top:79.8%;font-size:2.9mm;font-weight:bold;text-align:center;width:52.2%;">Principal I</div>
-    <div class="dswd-field" style="left:58%;top:82.3%;font-size:3.4mm;white-space:nowrap;">SH</div>
+    <div class="dswd-field" style="left:35.1%;top:77.6%;font-size:3.3mm;font-weight:bold;text-align:center;width:52.2%;">ALI V. TELADA</div>
+    <div class="dswd-field" style="left:35.1%;top:79.8%;font-size:2.9mm;font-weight:bold;text-align:center;width:52.2%;">Principal I</div>
     <div class="dswd-mask" style="left:42%;top:84.2%;width:38%;height:2.4%;"></div>
   </div>
 </div>
@@ -1330,8 +1319,8 @@ table.rtab th{background:#eee;font-weight:700;}
 table.rtab tr.rtab-total{font-weight:700;}
 .rtab-wrap{margin-bottom:18px;page-break-inside:avoid;}
 .no-print{display:none!important;}
-.sig-section{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:30px;font-size:9pt;}
-.sig-line{border-top:1px solid #000;padding-top:4px;text-align:center;white-space:normal;word-break:break-word;line-height:1.3;}
+.sig-section{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px;font-size:10pt;}
+.sig-line{border-top:1px solid #000;padding-top:4px;text-align:center;}
 @media print{@page{size:A4 landscape;margin:12mm;}}
 </style></head><body>
 <h2>SMART — Summary Reports</h2>
