@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SMART QR Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--royal:#283593;--royal-dark:#1a237e;--royal-light:#c5cae9;--bg-light:#e8eaf6;--border:#d1d5db;}
+body{font-family:'Poppins',sans-serif;background:var(--bg-light);color:#212121;min-height:100vh;}
+.hidden{display:none!important;}
+header{background:linear-gradient(135deg,var(--royal) 0%,var(--royal-dark) 100%);color:#fff;padding:14px 18px;}
+header .t{font-size:18px;font-weight:700;letter-spacing:1px;}
+header .s{font-size:11px;opacity:.85;}
+main{max-width:1000px;margin:0 auto;padding:18px 16px 40px;}
+.card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:16px;}
+.card h3{color:var(--royal);font-size:15px;margin-bottom:10px;}
+.field{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--royal-light);font-size:13px;margin-bottom:10px;font-family:inherit;}
+.btn{background:var(--royal);color:#fff;border:none;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
+.btn.sec{background:#fff;color:var(--royal);border:1px solid var(--royal-light);}
+.btn:disabled{opacity:.5;cursor:default;}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;}
+.row>div{flex:1;min-width:180px;}
+.lbl{font-size:11px;color:#607d8b;margin-bottom:4px;}
+.err{color:#c62828;font-size:12px;margin:6px 0;}
+.note{font-size:12px;color:#607d8b;line-height:1.6;}
+.note code{background:var(--bg-light);padding:1px 5px;border-radius:4px;}
+.count{font-size:13px;font-weight:600;color:var(--royal);margin:6px 0 12px;}
+.login{max-width:380px;margin:30px auto;}
+/* Sticker sheet */
+.sheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+.sticker{background:#fff;border:1px dashed #b0bec5;border-radius:8px;padding:8px 6px;text-align:center;break-inside:avoid;}
+.sticker img{width:100%;max-width:130px;image-rendering:pixelated;display:block;margin:0 auto;}
+.sticker .n{font-size:10.5px;font-weight:700;line-height:1.25;margin-top:4px;}
+.sticker .g{font-size:9.5px;color:#455a64;}
+.sticker .l{font-size:9px;color:#78909c;}
+@media print{
+  header,.no-print{display:none!important;}
+  body{background:#fff;}
+  main{max-width:none;padding:0;}
+  .card{box-shadow:none;padding:0;margin:0;}
+  .sheet{grid-template-columns:repeat(4,1fr);gap:4mm;}
+  .sticker{border:1px dashed #999;padding:2mm;}
+  .sticker img{width:30mm;max-width:none;}
+  @page{size:A4;margin:10mm;}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="t">SMART · QR Generator</div>
+  <div class="s">Ilayang Yuni Elementary School · Admin lang</div>
+</header>
+<main>
+  <!-- Login -->
+  <div id="loginCard" class="card login">
+    <h3>🔒 Admin Login</h3>
+    <input id="u" class="field" placeholder="Admin username" autocomplete="off"/>
+    <input id="p" class="field" type="password" placeholder="Admin password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <div id="loginErr" class="err hidden"></div>
+    <button class="btn" style="width:100%" onclick="doLogin()">Login</button>
+  </div>
+
+  <div id="app" class="hidden">
+    <div class="card no-print">
+      <h3>1. Piliin ang mga learner</h3>
+      <div class="row">
+        <div><div class="lbl">Grade at Section</div><select id="filter" class="field" onchange="render()"></select></div>
+        <div><div class="lbl">Hanapin (pangalan o LRN)</div><input id="q" class="field" placeholder="Hal. Dela Cruz" oninput="render()"/></div>
+      </div>
+      <div class="count" id="count"></div>
+      <h3 style="margin-top:6px;">2. I-download o i-print</h3>
+      <div class="row" style="align-items:flex-end;">
+        <div style="flex:2;min-width:240px;"><div class="lbl">Folder kung saan mo ie-extract ang ZIP sa computer (para sa Publisher Mail Merge)</div>
+          <input id="folder" class="field" value="C:\SMART_QR\"/></div>
+      </div>
+      <div class="row" style="gap:8px;">
+        <button class="btn" id="zipBtn" onclick="downloadZip()">⬇ ZIP ng QR images + Excel</button>
+        <button class="btn sec" onclick="window.print()">🖨 I-print bilang stickers</button>
+        <button class="btn sec" onclick="logout()">Logout</button>
+      </div>
+      <p class="note" style="margin-top:12px;">
+        <b>Para sa Publisher (Mail Merge):</b> i-extract ang ZIP sa folder sa itaas (hal. <code>C:\SMART_QR\</code>).
+        Sa Publisher: <b>Mailings &gt; Select Recipients &gt; Use an Existing List</b>, piliin ang <code>SMART_QR_list.xlsx</code>.
+        Sa ID template, <b>Insert Merge Field &gt; qr_image_path</b> bilang <b>picture field</b>, tapos ilagay sa likod ng ID.
+        Gawing <b>hindi bababa sa 2.5cm</b> ang QR at may puting puwang sa paligid. Mag-test print muna ng 2 o 3 ID at subukan sa scanner.
+      </p>
+    </div>
+    <div class="card"><div id="sheet" class="sheet"></div></div>
+  </div>
+</main>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_Izf-d4Vy5ggW7y_LynlWNKpufbv35uWUSvzOaHsUp-vfH7P7Be6GPPbB7VTBLn5U/exec";
+let token="",all=[],shown=[];
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function api(params){return fetch(APPS_SCRIPT_URL,{method:"POST",body:JSON.stringify(Object.assign({token},params))}).then(r=>r.json());}
+function gradeLabel(g){const s=String(g||"").toUpperCase();if(s.includes("KINDER")||s==="K")return"Kinder";const m=s.match(/\d+/);return"Grade "+(m?m[0]:s);}
+function fullName(r){return `${r.lastName||""}, ${r.firstName||""} ${r.middleName||""}`.replace(/\s+/g," ").trim();}
+
+function doLogin(){
+  const e=document.getElementById("loginErr");e.classList.add("hidden");
+  api({action:"login",username:document.getElementById("u").value.trim(),password:document.getElementById("p").value}).then(res=>{
+    if(!res.success||res.role!=="admin"){e.textContent=res.success?"Admin account lang ang puwede dito.":(res.error||"Mali ang username o password.");e.classList.remove("hidden");return;}
+    token=res.token;
+    return api({action:"getQRList"}).then(r=>{
+      if(r.error){e.textContent=r.error;e.classList.remove("hidden");return;}
+      all=(r.list||[]).sort((a,b)=>gradeLabel(a.grade).localeCompare(gradeLabel(b.grade),undefined,{numeric:true})||String(a.section).localeCompare(String(b.section))||fullName(a).localeCompare(fullName(b)));
+      const groups=[...new Set(all.map(x=>gradeLabel(x.grade)+" - "+(x.section||"")))];
+      document.getElementById("filter").innerHTML=`<option value="">Lahat (${all.length})</option>`+groups.map(g=>`<option>${esc(g)}</option>`).join("");
+      document.getElementById("loginCard").classList.add("hidden");
+      document.getElementById("app").classList.remove("hidden");
+      render();
+    });
+  }).catch(()=>{e.textContent="Connection error. Subukan ulit.";e.classList.remove("hidden");});
+}
+function logout(){if(token)api({action:"logout"}).catch(()=>{});location.reload();}
+
+function makeQR(text){const q=qrcode(0,"M");q.addData(text);q.make();return q;}
+// Malinaw na PNG para sa PVC printing (may puting puwang sa paligid)
+function qrCanvas(text,size){
+  const q=makeQR(text),n=q.getModuleCount(),margin=4,cell=Math.floor(size/(n+margin*2));
+  const c=document.createElement("canvas");c.width=c.height=cell*(n+margin*2);
+  const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.fillStyle="#000";
+  for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(q.isDark(r,k))x.fillRect((k+margin)*cell,(r+margin)*cell,cell,cell);
+  return c;
+}
+
+function render(){
+  const f=document.getElementById("filter").value,q=document.getElementById("q").value.trim().toLowerCase();
+  shown=all.filter(r=>(!f||gradeLabel(r.grade)+" - "+(r.section||"")===f)&&(!q||fullName(r).toLowerCase().includes(q)||String(r.lrn).includes(q)));
+  document.getElementById("count").textContent=shown.length+" learner(s)";
+  document.getElementById("sheet").innerHTML=shown.map(r=>`<div class="sticker">
+    <img src="${qrCanvas(r.code,240).toDataURL()}" alt="QR ${esc(r.lrn)}"/>
+    <div class="n">${esc(fullName(r))}</div>
+    <div class="g">${esc(gradeLabel(r.grade))} - ${esc(r.section||"")}</div>
+    <div class="l">LRN ${esc(r.lrn)}</div></div>`).join("");
+}
+
+async function downloadZip(){
+  if(!shown.length)return;
+  const btn=document.getElementById("zipBtn");btn.disabled=true;btn.textContent="Ginagawa...";
+  try{
+    let folder=document.getElementById("folder").value.trim()||"C:\\SMART_QR\\";
+    if(!/[\\\/]$/.test(folder))folder+="\\";
+    const zip=new JSZip();
+    const rows=[];
+    for(const r of shown){
+      const blob=await new Promise(res=>qrCanvas(r.code,600).toBlob(res,"image/png"));
+      const file=r.lrn+".png";
+      zip.file(file,blob);
+      rows.push({lrn:String(r.lrn),last_name:r.lastName||"",first_name:r.firstName||"",middle_name:r.middleName||"",
+        grade:gradeLabel(r.grade),section:r.section||"",qr_file:file,qr_image_path:folder+file});
+    }
+    const ws=XLSX.utils.json_to_sheet(rows);
+    // LRN bilang text para hindi maging 1.09E+11
+    const range=XLSX.utils.decode_range(ws["!ref"]);
+    for(let i=1;i<=range.e.r;i++){const ref=XLSX.utils.encode_cell({r:i,c:0});if(ws[ref])ws[ref].t="s";}
+    const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"QR");
+    zip.file("SMART_QR_list.xlsx",XLSX.write(wb,{bookType:"xlsx",type:"array"}));
+    const out=await zip.generateAsync({type:"blob"});
+    const a=document.createElement("a");a.href=URL.createObjectURL(out);
+    const f=document.getElementById("filter").value;
+    a.download="SMART_QR_"+(f?f.replace(/[^A-Za-z0-9]+/g,"_"):"Lahat")+".zip";
+    document.body.appendChild(a);a.click();a.remove();
+  }finally{btn.disabled=false;btn.textContent="⬇ ZIP ng QR images + Excel";}
+}
+</script>
+</body>
+</html>
