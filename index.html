@@ -276,6 +276,33 @@ table.vtab{width:100%;border-collapse:collapse;font-size:12px;}
 table.vtab th{background:var(--bg-light);color:var(--royal);text-align:left;padding:7px 6px;font-weight:600;}
 table.vtab td{padding:7px 6px;border-bottom:1px solid #eceff1;vertical-align:top;}
 .vtab-wrap{overflow-x:auto;}
+/* Generate Attendance (SF2-style) at Teachers Attendance */
+body.wide #genericOverlay .modal-box.att-wide,#genericOverlay .modal-box.att-wide{max-width:min(1400px,100%);}
+.att-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px;}
+.att-ctl label{font-size:11px;font-weight:600;color:#607d8b;display:block;margin-bottom:3px;}
+.att-ctl select{padding:8px 10px;border-radius:8px;border:1px solid var(--royal-light);font:600 13px 'Poppins',sans-serif;color:var(--royal);background:#fff;}
+.att-btns{display:flex;gap:8px;margin-left:auto;}
+.att-btns button{background:var(--royal);color:#fff;border:none;padding:9px 14px;border-radius:8px;font:600 12px 'Poppins',sans-serif;cursor:pointer;}
+.att-btns button.sec{background:#fff;color:var(--royal);border:1px solid var(--royal-light);}
+.att-legend{font-size:11.5px;color:#546e7a;margin:0 0 8px;line-height:1.5;}
+.att-legend b.q{background:#fff59d;padding:0 5px;border-radius:3px;color:#5d4037;}
+table.atab{border-collapse:collapse;font-size:11.5px;min-width:100%;}
+table.atab th,table.atab td{border:1px solid #cfd8dc;padding:3px 4px;text-align:center;white-space:nowrap;}
+table.atab th{background:var(--bg-light);color:var(--royal);font-weight:700;}
+table.atab td.nm,table.atab th.nm{text-align:left;position:sticky;left:0;background:#fff;z-index:1;min-width:170px;}
+table.atab th.nm{background:var(--bg-light);}
+table.atab th.d{cursor:pointer;min-width:26px;}
+table.atab td.c{cursor:pointer;min-width:26px;height:24px;font-weight:800;color:#c62828;}
+table.atab .q{background:#fff59d;}
+table.atab .hol{background:#e0e0e0;color:#616161;}
+table.atab td.hol{cursor:default;}
+table.atab th.hol{font-size:9px;writing-mode:vertical-rl;transform:rotate(180deg);}
+table.atab tr.sub td{background:#e8eaf6;font-weight:700;color:var(--royal);text-align:left;}
+table.atab tr.tot td{background:#f5f5f5;font-weight:700;color:#37474f;}
+table.atab td.rm{text-align:left;color:#6d4c41;font-size:10.5px;}
+table.atab td.drop{color:#9e9e9e;}
+table.atab td.tm{font-size:10.5px;line-height:1.15;color:#263238;font-weight:600;cursor:default;}
+table.atab td.tm.x{color:#c62828;font-weight:800;}
 body.wide table.vtab{font-size:14px;}
 body.wide .vl-presets button,body.wide .vl-custom button,body.wide .vl-custom input{font-size:15px;}
 
@@ -393,6 +420,41 @@ body.kiosk-land .kv-cols{grid-template-columns:5fr 6fr;}
 .kv-cancel{background:#eceff1;color:#455a64;}
 .kv-submit{background:var(--success-text);color:#fff;}
 .kv-submit:disabled{opacity:.6;}
+/* Request Form */
+.kr-name{display:grid;grid-template-columns:5fr 1.3fr 5fr;gap:8px;}
+.kr-name .kv-hint{text-align:center;}
+.kr-mi{text-align:center;text-transform:uppercase;}
+.kr-sub{margin-top:8px;padding:8px;background:#e8eaf6;border-radius:12px;border:2px solid transparent;}
+.kr-sub.kv-bad{border-color:#e53935;}
+.kr-sublbl{font-size:11.5px;font-weight:700;color:var(--royal-dark);margin-bottom:6px;}
+.kr-subchips{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;}
+.kr-subchips .kv-chip{min-height:34px;}
+#krOther,#srOther{margin-top:8px;}
+.kt-track{display:inline-block;margin-top:10px;background:var(--royal-dark);color:#fff;border-radius:14px;padding:6px 24px 8px;}
+.kt-track small{display:block;font-size:11px;opacity:.85;}
+.kt-track b{font-size:34px;letter-spacing:3px;}
+.kt-tnote{font-size:12.5px;color:#5c6bc0;margin-top:6px;}
+/* Request Form sa SMART ng bata */
+.sr-form .kv-lbl:first-child{margin-top:0;}
+.sr-form .kv-in{width:100%;}
+.sr-done{text-align:center;padding:10px 0;}
+.sr-done .kt-track{margin:10px 0 6px;}
+/* Request Log (admin) */
+table.reqtab th,table.reqtab td{text-align:left;border:none;border-bottom:1px solid #eceff1;font-size:12px;}
+table.reqtab th{border-bottom:none;}
+table.reqtab small{color:#78909c;}
+.rl-tr{font-weight:700;color:var(--royal);white-space:nowrap;}
+.rl-none{color:#c62828;font-weight:600;}
+.rl-src{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;background:#e8eaf6;color:#283593;}
+.rl-src.s{background:#e8f5e9;color:#2e7d32;}
+.rl-print{margin-top:4px;background:var(--royal);color:#fff;border:none;border-radius:6px;padding:4px 10px;font:600 11px 'Poppins',sans-serif;cursor:pointer;white-space:nowrap;}
+.rl-match+.rl-match{margin-top:6px;padding-top:6px;border-top:1px dashed #cfd8dc;}
+.rl-rem{display:flex;gap:4px;align-items:center;min-width:190px;}
+.rl-rem input{flex:1;min-width:0;padding:6px 8px;border:1px solid var(--royal-light);border-radius:6px;font:12px 'Poppins',sans-serif;}
+.rl-rem input.saved{border-color:#43a047;background:#f1f8e9;}
+.rl-rem input.err{border-color:#e53935;}
+.rl-rem button{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;border-radius:6px;padding:5px 8px;font-weight:700;cursor:pointer;}
+@media print{.rl-print,.rl-rem button{display:none;}}
 /* Salamat (puti ang background, blue ang letra) */
 #kioskScreen.kthanks{background:#fff;color:var(--royal-dark);}
 #kioskScreen.kthanks .k-bar{background:var(--bg-light);border-bottom-color:var(--royal-light);}
@@ -443,6 +505,23 @@ body.kiosk-land .kv-cols{grid-template-columns:5fr 6fr;}
 .ki-sub{font-size:12px;color:#607d8b;margin-bottom:16px;}
 
 /* Camera */
+/* Attendance: blue screen pagkatapos mag-scan (3 segundo) */
+#kAtt{--u:min(1vh,.625vw);position:fixed;inset:0;z-index:3800;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--royal) 0%,var(--royal-dark) 100%);color:#fff;text-align:center;padding:16px;font-family:'Poppins',sans-serif;}
+#kAtt.hidden{display:none!important;}
+.ka-ph{position:relative;width:calc(var(--u)*38.75);height:calc(var(--u)*38.75);flex-shrink:0;animation:popIn .25s ease;}
+.ka-ph img,.ka-ini{width:100%;height:100%;border-radius:50%;border:calc(var(--u)*1) solid #fff;box-shadow:0 8px 24px rgba(0,0,0,.35);background:#e3e7f5;object-fit:cover;display:block;}
+.ka-ini{display:flex;align-items:center;justify-content:center;color:var(--royal);font-weight:800;font-size:calc(var(--u)*13);letter-spacing:1px;}
+.ka-ok{position:absolute;right:calc(var(--u)*1.25);bottom:calc(var(--u)*1.75);width:calc(var(--u)*9.25);height:calc(var(--u)*9.25);border-radius:50%;background:#2e7d32;border:calc(var(--u)*.6) solid #fff;display:flex;align-items:center;justify-content:center;}
+.ka-ok svg{width:calc(var(--u)*4.75);height:calc(var(--u)*4.75);}
+.ka-g{font-size:calc(var(--u)*3.25);font-weight:600;margin-top:calc(var(--u)*1.75);opacity:.9;}
+.ka-n{font-size:calc(var(--u)*6.75);font-weight:800;line-height:1.1;max-width:94vw;}
+.ka-s{font-size:calc(var(--u)*3.5);margin-top:calc(var(--u)*1);color:var(--royal-light);font-weight:600;}
+.ka-card{margin-top:calc(var(--u)*2.25);background:#fff;color:var(--royal-dark);border-radius:calc(var(--u)*2.25);padding:calc(var(--u)*2) calc(var(--u)*5);box-shadow:0 6px 18px rgba(0,0,0,.25);max-width:94vw;}
+.ka-c1{font-size:calc(var(--u)*3.5);font-weight:800;line-height:1.2;}
+.ka-c2{font-size:calc(var(--u)*2.75);margin-top:calc(var(--u)*.5);color:#3949ab;font-weight:600;}
+.ka-f{margin-top:calc(var(--u)*1.75);font-size:calc(var(--u)*2.125);opacity:.75;}
+.k-backatt{background:none;border:none;color:var(--royal);font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;cursor:pointer;padding:6px 0 0;text-decoration:underline;}
+.k-backatt.hidden{display:none!important;}
 #kioskCamera{position:fixed;inset:0;z-index:3500;background:rgba(5,10,40,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;color:#fff;text-align:center;}
 #kioskCamera.hidden{display:none!important;}
 .kc-frame{position:relative;width:100%;max-width:340px;aspect-ratio:1/1;border-radius:16px;overflow:hidden;background:#000;margin:14px 0;}
@@ -546,8 +625,8 @@ body.kiosk-land .kv-cols{grid-template-columns:5fr 6fr;}
     <img data-school-logo class="k-logo" alt="Ilayang Yuni Elementary School Seal"/>
     <div class="k-school">Ilayang Yuni Elementary School</div>
     <div class="k-tag">Sa Ilayang Yuni, Lahat RESPONSABLE</div>
-    <div class="k-title">SMART</div>
-    <div class="k-meaning">Student Monitoring Access and Records Tracker</div>
+    <div class="k-title">PORTAL</div>
+    <div class="k-meaning">Pupils' Online Records, Transactions and Attendance Log</div>
   </div>
 
   <!-- Scan -->
@@ -560,9 +639,10 @@ body.kiosk-land .kv-cols{grid-template-columns:5fr 6fr;}
         <div class="k-laser"></div>
       </div>
       <div class="k-cardtext">
-        <div class="k-welcome">Welcome to Ilayang Yuni ES Portal</div>
-        <div class="k-cta">Itapat ang inyong ID sa scanner upang magsimula</div>
+        <div class="k-welcome" id="kWelcomeText">Magandang umaga!</div>
+        <div class="k-cta" id="kCtaText">Itapat ang ID sa scanner para sa attendance ngayong araw.</div>
         <div class="k-msg" id="kMsg"></div>
+        <button type="button" id="kBackAtt" class="k-backatt hidden" onclick="kioskSetMode('att')">← Bumalik sa Attendance</button>
         <div class="k-noid" style="color:#90a4ae;">Walang ID? Lumapit sa guro o sa office.</div>
       </div>
     </div>
@@ -595,7 +675,7 @@ body.kiosk-land .kv-cols{grid-template-columns:5fr 6fr;}
   <!-- Visitor Log -->
   <div id="kVisitorPane" class="kv-pane hidden">
     <div class="kv-card">
-      <div class="kv-title">🙋 Visitor Log</div>
+      <div class="kv-title">🙋 Visitors' Log</div>
       <div class="kv-subt">Maligayang pagdating sa Ilayang Yuni Elementary School!</div>
       <div class="kv-cols">
         <div>
@@ -622,14 +702,54 @@ body.kiosk-land .kv-cols{grid-template-columns:5fr 6fr;}
     </div>
   </div>
 
-  <!-- Salamat (pagkatapos ng visitor log) -->
+  <!-- Request Form -->
+  <div id="kRequestPane" class="kv-pane hidden">
+    <div class="kv-card">
+      <div class="kv-title">📨 Request Form</div>
+      <div class="kv-subt">Para sa mga magulang at bisita ng Ilayang Yuni Elementary School</div>
+      <div class="kv-cols">
+        <div>
+          <label class="kv-lbl" for="krRequester">Pangalan ng nagre-request</label>
+          <input id="krRequester" class="field kv-in" type="text" maxlength="80" autocomplete="off" placeholder="Hal. Liza Dela Cruz"/>
+          <label class="kv-lbl" for="krContact">Contact number <i>(optional)</i></label>
+          <input id="krContact" class="field kv-in" type="tel" inputmode="tel" maxlength="20" autocomplete="off" placeholder="Hal. 0917 123 4567"/>
+          <div id="krLearnerWrap">
+            <div class="kv-lbl">Kumpletong pangalan ng bata</div>
+            <div class="kr-name">
+              <div><input id="krFirst" class="field kv-in" type="text" maxlength="60" autocomplete="off" aria-label="Pangalan ng bata"/><div class="kv-hint">Pangalan</div></div>
+              <div><input id="krMi" class="field kv-in kr-mi" type="text" maxlength="2" autocomplete="off" aria-label="Middle initial ng bata"/><div class="kv-hint">M.I.</div></div>
+              <div><input id="krLast" class="field kv-in" type="text" maxlength="60" autocomplete="off" aria-label="Apelyido ng bata"/><div class="kv-hint">Apelyido</div></div>
+            </div>
+          </div>
+          <label class="kv-lbl" for="krPurpose">Purpose</label>
+          <input id="krPurpose" class="field kv-in" type="text" maxlength="150" autocomplete="off" placeholder="Hal. Para sa 4Ps, scholarship o paglipat"/>
+        </div>
+        <div>
+          <div class="kv-lbl">Ano ang request?</div>
+          <div class="kv-chips" id="krTypes"></div>
+          <div class="kr-sub hidden" id="krCerts"><div class="kr-sublbl">Anong Certification?</div><div class="kr-subchips" id="krCertChips"></div></div>
+          <input id="krOther" class="field kv-in hidden" type="text" maxlength="150" autocomplete="off" placeholder="Isulat po kung ano ang request"/>
+        </div>
+      </div>
+      <div id="krErr" class="kv-err hidden"></div>
+      <div class="kv-priv">🔒 Ang impormasyong ito ay para lamang sa pagproseso ng request, ayon sa Data Privacy Act of 2012 (RA 10173).</div>
+      <div class="kv-actions">
+        <button type="button" class="kv-cancel" onclick="kioskShowScan()">Kanselahin</button>
+        <button type="button" class="kv-submit" id="krSubmit" onclick="kioskSubmitRequest()">✓ Ipasa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Salamat (pagkatapos ng visitor log o request) -->
   <div id="kThanksPane" class="kt-pane hidden">
     <div class="kt-inner">
       <img data-school-logo class="kt-logo" alt="Ilayang Yuni Elementary School Seal"/>
       <div class="kt-school">Ilayang Yuni Elementary School</div>
       <div style="font-size:44px;line-height:1.1;margin-top:4px;">🙏</div>
       <div class="kt-title" id="ktTitle">Salamat po!</div>
-      <div class="kt-sub">Naitala na po ang inyong pagbisita.</div>
+      <div class="kt-sub" id="ktSub">Naitala na po ang inyong pagbisita.</div>
+      <div id="ktTrack" class="kt-track hidden"><small>Tracking number</small><b id="ktTrackNo"></b></div>
+      <div id="ktTrackNote" class="kt-tnote hidden">Isulat po o kunan ng picture ang number na ito para sa follow up.</div>
       <table class="kt-table"><tbody id="ktRows"></tbody></table>
       <div class="kt-tag">Sa Ilayang Yuni, Lahat RESPONSABLE!</div>
       <div class="kt-count" id="ktCount"></div>
@@ -639,7 +759,9 @@ body.kiosk-land .kv-cols{grid-template-columns:5fr 6fr;}
   <!-- Menu (☰): para malinis ang screen, dito ang lahat ng iba pang button -->
   <div id="kMenu" class="k-menu hidden" onclick="if(event.target===this)kioskCloseMenu()">
     <div class="k-menu-panel">
-      <button class="k-mi" onclick="kioskMenuGo('visitor')"><span class="mi-i">🙋</span><span><div class="mi-t">Bisita</div><div class="mi-s">Visitor Log</div></span></button>
+      <button class="k-mi" onclick="kioskMenuGo('portal')"><span class="mi-i">🎓</span><span><div class="mi-t">SMART</div><div class="mi-s">Student Portal</div></span></button>
+      <button class="k-mi" onclick="kioskMenuGo('visitor')"><span class="mi-i">🙋</span><span><div class="mi-t">Visitors' Log</div><div class="mi-s">Para sa mga bisita ng paaralan</div></span></button>
+      <button class="k-mi" onclick="kioskMenuGo('request')"><span class="mi-i">📨</span><span><div class="mi-t">Request Form</div><div class="mi-s">SF10, SF9, Certification at iba pa</div></span></button>
       <button class="k-mi" onclick="kioskMenuGo('website')"><span class="mi-i">🌐</span><span><div class="mi-t">School Website</div><div class="mi-s">Ilayang Yuni Elementary School</div></span></button>
       <button class="k-mi" onclick="kioskMenuGo('prism')"><span class="mi-i">🗂️</span><span><div class="mi-t">PRISM</div><div class="mi-s">Permanent Record Information System and Management</div></span></button>
       <button class="k-mi" onclick="kioskMenuGo('scan')"><span class="mi-i">🧭</span><span><div class="mi-t">SCAN</div><div class="mi-s">Student Class Assignment Navigation</div></span></button>
@@ -659,6 +781,16 @@ body.kiosk-land .kv-cols{grid-template-columns:5fr 6fr;}
   <div class="kw-name" id="kWelcomeName"></div>
 </div>
 
+<div id="kAtt" class="hidden kiosk-only" onclick="kattHide()">
+  <div class="ka-ph"><img id="kaImg" class="hidden" alt=""/><div id="kaIni" class="ka-ini"></div>
+    <div class="ka-ok"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+  <div class="ka-g" id="kaGreet"></div>
+  <div class="ka-n" id="kaName"></div>
+  <div class="ka-s" id="kaSub"></div>
+  <div class="ka-card"><div class="ka-c1" id="kaMsg"></div><div class="ka-c2" id="kaTime"></div></div>
+  <div class="ka-f">Babalik sa simula para sa susunod...</div>
+</div>
+
 <button id="kioskDoneBtn" class="hidden kiosk-only" onclick="kioskEndSession()">✓ Tapos na</button>
 
 <div id="kioskIdle" class="hidden kiosk-only">
@@ -672,7 +804,7 @@ body.kiosk-land .kv-cols{grid-template-columns:5fr 6fr;}
 
 <div id="kioskWeb" class="hidden kiosk-only">
   <div class="kw-bar">
-    <button class="kw-back" onclick="kioskCloseWeb()">⬅ Bumalik sa SMART</button>
+    <button class="kw-back" onclick="kioskCloseWeb()">⬅ Bumalik sa PORTAL</button>
     <div class="kw-title" id="kWebTitle"></div>
   </div>
   <iframe id="kWebFrame" title="Website" sandbox="allow-scripts allow-same-origin allow-forms allow-modals" referrerpolicy="no-referrer"></iframe>
@@ -994,8 +1126,8 @@ function enterApp(){
 ============================================================ */
 function renderStaffTools(){
   const el=document.getElementById("staffTools");
-  const tools=[["📊 Generate Reports","showReports()"]];
-  if(currentUser.role==="admin")tools.push(["🧾 Visitors Log","showVisitorLog()"]);
+  const tools=[["📊 Generate Reports","showReports()"],["📅 Generate Attendance","showAttendanceReport()"]];
+  if(currentUser.role==="admin")tools.push(["🧑‍🏫 Teachers Attendance","showTeacherAttendance()"],["🧾 Visitors Log","showVisitorLog()"],["📨 Request Log","showRequestLog()"]);
   el.innerHTML=tools.map(t=>`<button type="button" class="staff-tool" onclick="${t[1]}">${t[0]}</button>`).join("");
   show("staffTools");
 }
@@ -1055,6 +1187,7 @@ function renderSideActions(){
   b.push(["c-acad","📅","Attendance","showAttendance()"],["c-acad","📋","Assessment","showAssessment()"]);
   if(currentUser.role==="admin"||currentUser.role==="teacher")b.push(["c-staff","📄","Print Certification","showCertOptions()"]);
   if(currentUser.role==="teacher")b.push(["c-staff","📝","Print SF9","showSF9()"]);
+  if(currentUser.role==="student")b.push(["c-staff","📨","Request Form","showStudentRequest()"]);
   el.innerHTML=b.map(x=>`<button type="button" class="side-btn ${x[0]}" onclick="${x[3]}"><span class="si">${x[1]}</span>${x[2]}</button>`).join("");
   show("sideActions");
 }
@@ -1116,9 +1249,10 @@ function openMenu(){
     items.push({icon:"👤",label:"View Teacher",fn:"showTeacher()"});
     if(isStaff)items.push({icon:"📄",label:"Print Certification",fn:"showCertOptions()"});
     if(currentUser.role==="teacher")items.push({icon:"📝",label:"Print SF9",fn:"showSF9()"});
+    if(currentUser.role==="student")items.push({icon:"📨",label:"Request Form",fn:"showStudentRequest()"});
   }
-  if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher"))items.push({icon:"📊",label:"Generate Reports",fn:"showReports()"});
-  if(currentUser&&currentUser.role==="admin")items.push({icon:"🧾",label:"Visitors Log",fn:"showVisitorLog()"});
+  if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher")){items.push({icon:"📊",label:"Generate Reports",fn:"showReports()"});items.push({icon:"📅",label:"Generate Attendance",fn:"showAttendanceReport()"});}
+  if(currentUser&&currentUser.role==="admin"){items.push({icon:"🧑‍🏫",label:"Teachers Attendance",fn:"showTeacherAttendance()"});items.push({icon:"🧾",label:"Visitors Log",fn:"showVisitorLog()"});items.push({icon:"📨",label:"Request Log",fn:"showRequestLog()"});}
   items.push({icon:"🚪",label:KIOSK_MODE?"Tapos na":"Logout",fn:"doLogout()",danger:true});
   document.getElementById("menuListContent").innerHTML=items.map(it=>
     `<div class="menu-item${it.danger?" menu-item-danger":""}" onclick="${it.fn}"><span class="micon">${it.icon}</span><span>${it.label}</span></div>`
@@ -1175,6 +1309,7 @@ function studentInfoBar(){
 }
 
 function openGenericModal(title,bodyHtml,showStudentBar=false){
+  document.querySelector("#genericOverlay .modal-box").classList.remove("att-wide");
   document.getElementById("genericModalTitle").textContent=title;
   const bar = showStudentBar ? studentInfoBar() : "";
   document.getElementById("genericModalBody").innerHTML=bar+bodyHtml;
@@ -1474,11 +1609,13 @@ function getCurrentDate(){
   return {day:d.getDate(),month:months[d.getMonth()],year:d.getFullYear(),ordDay:getOrdinal(d.getDate())};
 }
 
-function printCert(type){
-  closeGenericModal();
-  const p=currentStudent.personal;
-  const c=currentStudent.classInfo;
-  const t=currentStudent.teacherInfo;
+// stu at preWin: galing sa Request Log (ibang bata, at bukas na ang tab bago pa makuha ang record)
+function printCert(type,stu,preWin){
+  if(!stu)closeGenericModal();
+  const S=stu||currentStudent;
+  const p=S.personal;
+  const c=S.classInfo;
+  const t=S.teacherInfo;
   const dt=getCurrentDate();
   const fullName=`${p.firstName} ${p.middleName?p.middleName+" ":""}${p.lastName}`.trim().toUpperCase();
   const gradeNum=c.grade.toString().replace(/[^0-9kK]/gi,"").toUpperCase()||c.grade;
@@ -1682,9 +1819,54 @@ body{font-family:'Times New Roman',serif;background:#fff;display:flex;justify-co
 </div>
 </body></html>`;
   }
-  const win=window.open("","_blank");
+  const win=preWin||window.open("","_blank");
+  win.document.open();
   win.document.write(winHTML);
   win.document.close();
+}
+
+function showStudentRequest(){
+  openGenericModal("📨 Request Form",`<div class="sr-form" id="srForm">
+    <label class="kv-lbl" for="srRequester">Pangalan ng nagre-request</label>
+    <input id="srRequester" class="field kv-in" type="text" maxlength="80" autocomplete="off" placeholder="Hal. pangalan ng magulang o guardian"/>
+    <label class="kv-lbl" for="srContact">Contact number <i>(optional)</i></label>
+    <input id="srContact" class="field kv-in" type="tel" inputmode="tel" maxlength="20" autocomplete="off" placeholder="Hal. 0917 123 4567"/>
+    <label class="kv-lbl" for="srPurpose">Purpose</label>
+    <input id="srPurpose" class="field kv-in" type="text" maxlength="150" autocomplete="off" placeholder="Hal. Para sa 4Ps, scholarship o paglipat"/>
+    <div class="kv-lbl">Ano ang request?</div>
+    <div class="kv-chips" id="srTypes"></div>
+    <div class="kr-sub hidden" id="srCerts"><div class="kr-sublbl">Anong Certification?</div><div class="kr-subchips" id="srCertChips"></div></div>
+    <input id="srOther" class="field kv-in hidden" type="text" maxlength="150" autocomplete="off" placeholder="Isulat po kung ano ang request"/>
+    <div id="srErr" class="kv-err hidden"></div>
+    <div class="kv-priv">🔒 Ang impormasyong ito ay para lamang sa pagproseso ng request, ayon sa Data Privacy Act of 2012 (RA 10173).</div>
+    <div class="kv-actions"><button type="button" class="kv-cancel" onclick="closeGenericModal()">Kanselahin</button><button type="button" class="kv-submit" id="srSubmit" onclick="submitStudentRequest()">✓ Ipasa</button></div>
+  </div>`,true);
+  const st=rqState.sr;st.type="";st.cert="";st.sending=false;
+  rqBind("sr",RQ_STUDENT_TYPES);
+}
+function submitStudentRequest(){
+  const st=rqState.sr;if(st.sending)return;
+  const c=rqCollect("sr");
+  if(c.missing.length){rqShowErr("sr","Pakilagay po ang "+c.missing.join(", ")+".");return;}
+  st.sending=true;
+  const btn=document.getElementById("srSubmit");btn.disabled=true;btn.textContent="Ipinapasa...";
+  callApi(Object.assign({action:"studentRequest"},c.data)).then(res=>{
+    if(!res.success){rqShowErr("sr",res.message||res.error||"Hindi naipasa. Subukan ulit.");return;}
+    if(KIOSK_MODE)kioskLastActivity=Date.now();
+    document.getElementById("genericModalBody").innerHTML=`<div class="sr-done">
+      <div style="font-size:40px;">🙏</div>
+      <div style="font-size:20px;font-weight:800;color:var(--royal-dark);">Natanggap na po ang inyong request.</div>
+      <div class="kt-track"><small>Tracking number</small><b>${escHtml(res.tracking)}</b></div>
+      <div class="kt-tnote">Isulat po o kunan ng picture ang number na ito para sa follow up.</div>
+      <table class="kt-table" style="margin-top:12px;"><tbody>
+        <tr><td>Petsa</td><td>${escHtml(ymdLabel(res.date,true)+" · "+res.time)}</td></tr>
+        <tr><td>Request</td><td>${escHtml(rqLabel(res.type,res.detail))}</td></tr>
+        <tr><td>Para kay</td><td>${escHtml(res.learner)}</td></tr>
+        <tr><td>Purpose</td><td>${escHtml(res.purpose)}</td></tr>
+      </tbody></table>
+      <div class="kv-actions"><button type="button" class="kv-submit" onclick="closeGenericModal()">OK</button></div></div>`;
+  }).catch(e=>{if(e&&e.message==="auth")return;rqShowErr("sr","Walang internet o may problema sa koneksyon. Subukan ulit.");})
+    .finally(()=>{st.sending=false;const b=document.getElementById("srSubmit");if(b){b.disabled=false;b.textContent="✓ Ipasa";}});
 }
 
 function showSF9(){
@@ -1987,6 +2169,384 @@ ${visitorTableHtml(d.rows)}
 }
 
 /* ============================================================
+   REQUEST LOG (admin): mga request galing sa kiosk at sa SMART ng bata
+============================================================ */
+let requestLogData=null;
+function showRequestLog(){
+  closeMenu();
+  const t=phToday();
+  openGenericModal("📨 Request Log",`
+    <div class="vl-presets no-print">
+      <button type="button" data-k="today" onclick="loadRequestLogPreset('today')">Ngayong araw</button>
+      <button type="button" data-k="week" onclick="loadRequestLogPreset('week')">Ngayong linggo</button>
+      <button type="button" data-k="month" onclick="loadRequestLogPreset('month')">Ngayong buwan</button>
+    </div>
+    <div class="vl-custom no-print">Mula <input type="date" id="rlFrom" value="${t}"/> hanggang <input type="date" id="rlTo" value="${t}"/>
+      <button type="button" onclick="loadRequestLog(document.getElementById('rlFrom').value,document.getElementById('rlTo').value,'')">Ipakita</button></div>
+    <div id="rlResult"></div>`);
+  document.querySelector("#genericOverlay .modal-box").classList.add("att-wide");
+  loadRequestLogPreset("month");
+}
+function loadRequestLogPreset(kind){
+  const r=visitorRange(kind);
+  document.getElementById("rlFrom").value=r[0];document.getElementById("rlTo").value=r[1];
+  loadRequestLog(r[0],r[1],kind);
+}
+function loadRequestLog(from,to,kind){
+  document.querySelectorAll(".vl-presets button").forEach(b=>b.classList.toggle("on",b.dataset.k===kind));
+  const out=document.getElementById("rlResult");
+  if(!from||!to){out.innerHTML='<p class="empty-state">Pumili ng petsa.</p>';return;}
+  out.innerHTML='<p class="empty-state">Naglo-load...</p>';
+  callApi({action:"getRequestLog",from,to}).then(res=>{
+    if(!document.getElementById("rlResult"))return;
+    if(res.error){out.innerHTML=`<p class="empty-state">${escHtml(res.error)}</p>`;return;}
+    requestLogData=res;
+    const range=res.from===res.to?ymdLabel(res.from,true):ymdLabel(res.from)+" hanggang "+ymdLabel(res.to);
+    if(!res.rows.length){out.innerHTML=`<div class="vl-head"><span>${escHtml(range)}</span></div><p class="empty-state">Walang request sa petsang ito.</p>`;return;}
+    out.innerHTML=`<div class="vl-head"><span>${escHtml(range)} · ${res.rows.length} request</span><button type="button" class="no-print" onclick="printRequestLog()">🖨️ Print</button></div>
+      <div class="vtab-wrap">${requestTableHtml(res.rows,true)}</div>`;
+    out.querySelectorAll(".rl-rem input").forEach(inp=>{
+      inp.addEventListener("change",()=>saveRequestRemarks(inp));
+      inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();inp.blur();}});
+      inp.addEventListener("input",()=>inp.classList.remove("saved","err"));
+    });
+  }).catch(e=>{if(e&&e.message==="auth")return;out.innerHTML='<p class="empty-state">Connection error. Subukan ulit.</p>';});
+}
+function requestRecordHtml(r,live){
+  if(!r.first&&!r.last)return "";
+  if(!r.matches.length)return '<span class="rl-none">Wala sa SMART</span>';
+  const kind=r.type==="Certification"?RQ_CERT_PRINT[r.detail]:"";
+  return (r.matches.length>1?`<small>${r.matches.length} ang kapangalan:</small>`:"")+r.matches.map(m=>`<div class="rl-match">${escHtml(gradeLabel(m.grade,m.section))}<br><small>LRN ${escHtml(m.lrn)}</small>${
+    live&&kind?`<br><button type="button" class="rl-print" onclick="printRequestCert('${escHtml(m.lrn)}','${kind}')">🖨️ Print</button>`:""}</div>`).join("");
+}
+function requestTableHtml(rows,live){
+  return `<table class="vtab reqtab"><thead><tr><th>Tracking</th><th>Petsa at Oras</th><th>Request</th><th>Pangalan ng bata</th><th>Record sa SMART</th><th>Nagre-request</th><th>Contact</th><th>Purpose</th><th>Galing</th><th>Remarks</th></tr></thead><tbody>${
+    rows.map(r=>`<tr><td class="rl-tr">${escHtml(r.tracking)}</td><td>${escHtml(ymdLabel(r.date))}<br><small>${escHtml(r.time)}</small></td><td>${escHtml(rqLabel(r.type,r.detail))}</td>
+      <td>${escHtml(r.learner||"-")}</td><td>${requestRecordHtml(r,live)}</td><td>${escHtml(r.requester)}</td><td>${escHtml(r.contact||"-")}</td><td>${escHtml(r.purpose)}</td>
+      <td><span class="rl-src${r.source==="SMART"?" s":""}">${escHtml(r.source)}</span></td>
+      <td>${live?`<div class="rl-rem"><input type="text" maxlength="200" data-tr="${escHtml(r.tracking)}" value="${escHtml(r.remarks)}" placeholder="Remarks"/><button type="button" title="Nagawa na" onclick="markRequestDone(this)">✓</button></div>`:escHtml(r.remarks)}</td></tr>`).join("")
+  }</tbody></table>`;
+}
+function markRequestDone(btn){
+  const inp=btn.parentNode.querySelector("input");
+  inp.value="Nagawa na - "+ymdLabel(phToday());
+  saveRequestRemarks(inp);
+}
+function saveRequestRemarks(inp){
+  const tr=inp.dataset.tr,val=inp.value.trim();
+  inp.classList.remove("saved","err");
+  callApi({action:"setRequestRemarks",tracking:tr,remarks:val}).then(res=>{
+    if(!res.success){inp.classList.add("err");return;}
+    inp.classList.add("saved");
+    const row=requestLogData&&requestLogData.rows.find(x=>x.tracking===tr);if(row)row.remarks=res.remarks;
+  }).catch(e=>{if(e&&e.message==="auth")return;inp.classList.add("err");});
+}
+// Bukas agad ang bagong tab (para hindi ma-block), tapos kukunin ang record ng bata at ipi-print ang certificate
+function printRequestCert(lrn,kind){
+  const win=window.open("","_blank");
+  if(!win){alert("Payagan ang pop-up para makapag-print.");return;}
+  win.document.write('<p style="font-family:sans-serif;padding:20px;">Inihahanda ang certificate...</p>');
+  callApi({action:"getStudentDetail",lrn}).then(res=>{
+    if(res.error||!res.personal){win.document.body.innerHTML=`<p style="font-family:sans-serif;padding:20px;">${escHtml(res.error||"Walang record.")}</p>`;return;}
+    printCert(kind,res,win);
+  }).catch(()=>{win.document.body.innerHTML='<p style="font-family:sans-serif;padding:20px;">Connection error. Subukan ulit.</p>';});
+}
+function printRequestLog(){
+  const d=requestLogData;if(!d||!d.rows.length)return;
+  const range=d.from===d.to?ymdLabel(d.from,true):ymdLabel(d.from)+" hanggang "+ymdLabel(d.to);
+  const win=window.open("","_blank");
+  if(!win){alert("Payagan ang pop-up para makapag-print.");return;}
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>Request Log</title>
+<style>
+body{font-family:'Poppins',Arial,sans-serif;margin:0;color:#000;}
+.hd{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:6px;}
+.hd img{width:64px;height:64px;object-fit:contain;}
+.hd .s{font-size:13pt;font-weight:700;text-transform:uppercase;}
+.hd .a{font-size:9pt;font-style:italic;}
+h2{text-align:center;font-size:14pt;margin:10px 0 2px;letter-spacing:1px;}
+.r{text-align:center;font-size:10pt;margin-bottom:12px;}
+table{width:100%;border-collapse:collapse;font-size:8.5pt;}
+th,td{border:1px solid #000;padding:4px 5px;text-align:left;vertical-align:top;}
+th{background:#eee;}
+small{color:#444;}
+.rl-none{font-weight:600;}
+.rl-src{font-size:8pt;}
+.sig{margin-top:40px;width:260px;border-top:1px solid #000;padding-top:4px;text-align:center;font-size:10pt;margin-left:auto;}
+@page{size:A4 landscape;margin:10mm;}
+</style></head><body>
+<div class="hd"><img src="${SCHOOL_LOGO}"/><div><div class="s">Ilayang Yuni Elementary School</div><div class="a">Sa Ilayang Yuni, Lahat RESPONSABLE</div></div></div>
+<h2>REQUEST LOG</h2>
+<div class="r">${escHtml(range)} &nbsp;·&nbsp; ${d.rows.length} request</div>
+${requestTableHtml(d.rows,false)}
+<div class="sig">Prepared by</div>
+<script>window.onload=()=>window.print();<\/script>
+</body></html>`);
+  win.document.close();
+}
+
+/* ============================================================
+   GENERATE ATTENDANCE (galing sa scan sa kiosk, SF2-style)
+   x = absent. Ang "?" na araw ay kulang sa 50% ang nag-scan: ang teacher ang magpapasya (Klase / HOLIDAY).
+   Ang binago ng teacher ay naka-save sa browser na ito. Kokopyahin ng teacher ang mga x sa EASY SF2.
+============================================================ */
+let attRep=null;
+// Hunyo ng kasalukuyang school year hanggang ngayong buwan
+function attMonths(){
+  const t=phToday(),y=Number(t.slice(0,4)),m=Number(t.slice(5,7));
+  let yy=m>=6?y:y-1,mm=6;const out=[];
+  while(yy<y||(yy===y&&mm<=m)){out.push(yy+"-"+String(mm).padStart(2,"0"));mm++;if(mm>12){mm=1;yy++;}}
+  return out.reverse();
+}
+function attMonthLabel(ym){return PH_MONTHS[Number(ym.slice(5,7))-1]+" "+ym.slice(0,4);}
+function attWiden(){document.querySelector("#genericOverlay .modal-box").classList.add("att-wide");}
+function showAttendanceReport(){
+  closeMenu();
+  const months=attMonths();
+  openGenericModal("📅 Generate Attendance",`
+    <div class="att-ctl no-print">
+      <div id="attSecWrap" class="hidden"><label>Section</label><select id="attSec" onchange="loadAttendanceReport()"></select></div>
+      <div><label>Buwan</label><select id="attMonth" onchange="loadAttendanceReport()">${months.map(m=>`<option value="${m}">${attMonthLabel(m)}</option>`).join("")}</select></div>
+      <div class="att-btns"><button type="button" onclick="printAttendanceReport()">🖨️ Print</button><button type="button" class="sec" onclick="downloadAttendanceExcel()">⬇ Excel</button></div>
+    </div>
+    <p class="att-legend no-print"><b>x</b> = absent (hindi nag-scan) · <b class="q">?</b> = kulang sa 50% ng klase ang nag-scan.
+      I-click ang <b>petsa</b> para palitan: Klase → HOLIDAY → ?. I-click ang <b>cell</b> para maglagay o mag-alis ng x.</p>
+    <div id="attResult"><p class="empty-state">Naglo-load...</p></div>`);
+  attWiden();
+  loadAttendanceReport();
+}
+function loadAttendanceReport(){
+  const out=document.getElementById("attResult");if(!out)return;
+  const sec=document.getElementById("attSec"),month=document.getElementById("attMonth").value;
+  out.innerHTML='<p class="empty-state">Naglo-load...</p>';
+  callApi({action:"getAttendanceReport",tab:sec&&sec.value?sec.value:"",month}).then(res=>{
+    if(!document.getElementById("attResult"))return;
+    if(res.error){out.innerHTML=`<p class="empty-state">${escHtml(res.error)}</p>`;return;}
+    attRep={res,key:"smart_att_edit_"+res.section.tab+"_"+res.month,edits:{days:{},cells:{}}};
+    try{const e=JSON.parse(localStorage.getItem(attRep.key)||"null");if(e&&e.days&&e.cells)attRep.edits=e;}catch(e){}
+    const sel=document.getElementById("attSec");
+    if(res.sections.length>1){
+      sel.innerHTML=res.sections.map(s=>`<option value="${escHtml(s.tab)}">${escHtml(gradeLabel(s.grade,s.section))}</option>`).join("");
+      sel.value=res.section.tab;show("attSecWrap");
+    }
+    renderAttendanceReport();
+  }).catch(e=>{if(e&&e.message==="auth")return;out.innerHTML='<p class="empty-state">Connection error. Subukan ulit.</p>';});
+}
+function attSaveEdits(){try{localStorage.setItem(attRep.key,JSON.stringify(attRep.edits));}catch(e){}}
+function attDayState(d){return attRep.edits.days[d.d]||(d.ok?"class":"q");}
+// Huling araw na nag-scan ang dropped/transferred (walang x pagkatapos noon)
+function attLastScan(l){const k=Object.keys(attRep.res.present[l.lrn]||{}).sort();return k.length?k[k.length-1]:"";}
+function attCell(l,d){
+  const st=attDayState(d);
+  if(st==="holiday")return "H";
+  const k=l.lrn+"|"+d.d;
+  if(k in attRep.edits.cells)return attRep.edits.cells[k];
+  if(st!=="class")return "";
+  if((attRep.res.present[l.lrn]||{})[d.d])return "";
+  if(l.dropped){const last=attLastScan(l);if(!last||d.d>last)return "";}
+  return "x";
+}
+function attToggleCell(lrn,ymd){
+  const l=attRep.res.learners.find(x=>x.lrn===lrn),d=attRep.res.days.find(x=>x.d===ymd);
+  if(!l||!d||attDayState(d)==="holiday")return;
+  attRep.edits.cells[lrn+"|"+ymd]=attCell(l,d)==="x"?"":"x";
+  attSaveEdits();renderAttendanceReport();
+}
+function attToggleDay(ymd){
+  const d=attRep.res.days.find(x=>x.d===ymd);if(!d)return;
+  const next={class:"holiday",holiday:"q",q:"class"}[attDayState(d)];
+  attRep.edits.days[ymd]=next;
+  // Bagong pasya sa araw: alisin ang mano-manong x sa araw na iyon
+  Object.keys(attRep.edits.cells).forEach(k=>{if(k.endsWith("|"+ymd))delete attRep.edits.cells[k];});
+  attSaveEdits();renderAttendanceReport();
+}
+function attRows(){
+  const r=attRep.res;
+  const rows=r.learners.map(l=>{const cells=r.days.map(d=>attCell(l,d));return{l,cells,absent:cells.filter(c=>c==="x").length,remark:l.dropped?l.status:""};});
+  return{male:rows.filter(x=>x.l.sex==="male"),female:rows.filter(x=>x.l.sex!=="male")};
+}
+function attDayTotals(rows){
+  const r=attRep.res;
+  return r.days.map((d,i)=>attDayState(d)!=="class"?"":rows.filter(x=>!x.l.dropped&&x.cells[i]==="").length);
+}
+function attTableHtml(forPrint){
+  const r=attRep.res,g=attRows(),days=r.days;
+  const st=days.map(attDayState);
+  const head=`<tr><th class="nm" rowspan="2">Pangalan (Apelyido, Pangalan)</th>${days.map((d,i)=>`<th class="d ${st[i]==="q"?"q":st[i]==="holiday"?"hol":""}"${forPrint?"":` onclick="attToggleDay('${d.d}')" title="I-click: Klase / HOLIDAY / ?"`}>${d.n}</th>`).join("")}<th rowspan="2">Absent</th><th rowspan="2">Remarks</th></tr>
+    <tr>${days.map((d,i)=>`<th class="${st[i]==="q"?"q":st[i]==="holiday"?"hol":""}">${st[i]==="holiday"?"HOLIDAY":st[i]==="q"?"?":d.w}</th>`).join("")}</tr>`;
+  let n=0;
+  const body=(list,label)=>`<tr class="sub"><td class="nm" colspan="${days.length+3}">${label} (${list.length})</td></tr>`+list.map(x=>{n++;return `<tr><td class="nm${x.l.dropped?" drop":""}">${n}. ${escHtml(x.l.name)}</td>${x.cells.map((c,i)=>`<td class="c ${st[i]==="q"?"q":st[i]==="holiday"?"hol":""}"${forPrint||st[i]==="holiday"?"":` onclick="attToggleCell('${x.l.lrn}','${days[i].d}')"`}>${c==="x"?"x":""}</td>`).join("")}<td>${x.absent}</td><td class="rm">${escHtml(x.remark)}</td></tr>`;}).join("");
+  const tot=(list,label)=>`<tr class="tot"><td class="nm">${label}</td>${attDayTotals(list).map((v,i)=>`<td class="${st[i]==="q"?"q":st[i]==="holiday"?"hol":""}">${v}</td>`).join("")}<td></td><td></td></tr>`;
+  return `<table class="atab"><thead>${head}</thead><tbody>${body(g.male,"LALAKI")}${tot(g.male,"Pumasok (lalaki)")}${body(g.female,"BABAE")}${tot(g.female,"Pumasok (babae)")}${tot(g.male.concat(g.female),"Pumasok (lahat)")}</tbody></table>`;
+}
+function attSummary(){
+  const r=attRep.res,st=r.days.map(attDayState);
+  return{klase:st.filter(x=>x==="class").length,q:st.filter(x=>x==="q").length,hol:st.filter(x=>x==="holiday").length};
+}
+function renderAttendanceReport(){
+  const out=document.getElementById("attResult");if(!out||!attRep)return;
+  const r=attRep.res,s=attSummary();
+  if(!r.days.length){out.innerHTML='<p class="empty-state">Wala pang araw ng klase sa buwang ito.</p>';return;}
+  out.innerHTML=`<div class="vl-head"><span>${escHtml(gradeLabel(r.section.grade,r.section.section))} · ${attMonthLabel(r.month)} · ${s.klase} araw ng klase${s.q?` · <span style="color:#8d6e00">${s.q} araw na "?"</span>`:""}${s.hol?` · ${s.hol} holiday`:""}</span></div>
+    <div class="vtab-wrap">${attTableHtml(false)}</div>`;
+}
+function attTitle(){const r=attRep.res;return gradeLabel(r.section.grade,r.section.section)+" · "+attMonthLabel(r.month);}
+function printAttendanceReport(){
+  if(!attRep||!attRep.res.days.length)return;
+  const r=attRep.res;
+  const win=window.open("","_blank");
+  if(!win){alert("Payagan ang pop-up para makapag-print.");return;}
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>Attendance ${escHtml(attTitle())}</title>
+<style>
+body{font-family:'Poppins',Arial,sans-serif;margin:0;color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.hd{display:flex;align-items:center;justify-content:center;gap:12px;}
+.hd img{width:54px;height:54px;object-fit:contain;}
+.hd .s{font-size:12pt;font-weight:700;text-transform:uppercase;}
+.hd .a{font-size:8.5pt;font-style:italic;}
+h2{text-align:center;font-size:12.5pt;margin:6px 0 0;letter-spacing:1px;}
+.r{text-align:center;font-size:9.5pt;margin:2px 0 8px;}
+table{border-collapse:collapse;font-size:7.5pt;width:100%;}
+th,td{border:1px solid #000;padding:1px 2px;text-align:center;white-space:nowrap;}
+th{background:#eee;}
+.nm{text-align:left;}
+.q{background:#fff59d;}
+.hol{background:#ddd;}
+th.hol{font-size:6pt;}
+tr.sub td{background:#e8eaf6;font-weight:700;text-align:left;}
+tr.tot td{background:#f5f5f5;font-weight:700;}
+td.c{font-weight:700;}
+td.rm{text-align:left;font-size:7pt;}
+.note{font-size:8pt;margin-top:6px;}
+.sig{margin-top:28px;width:240px;border-top:1px solid #000;padding-top:3px;text-align:center;font-size:9pt;margin-left:auto;}
+@page{size:A4 landscape;margin:8mm;}
+</style></head><body>
+<div class="hd"><img src="${SCHOOL_LOGO}"/><div><div class="s">Ilayang Yuni Elementary School</div><div class="a">Sa Ilayang Yuni, Lahat RESPONSABLE</div></div></div>
+<h2>SMART ATTENDANCE (gabay sa SF2)</h2>
+<div class="r">${escHtml(attTitle())}${r.section.teacher?" · Adviser: "+escHtml(r.section.teacher):""}</div>
+${attTableHtml(true)}
+<div class="note">x = absent &nbsp;·&nbsp; ? = kulang sa 50% ng klase ang nag-scan (i-check ng adviser) &nbsp;·&nbsp; Galing sa scan ng ID sa kiosk. Kopyahin ang mga x sa EASY SF2.</div>
+<div class="sig">Adviser</div>
+<script>window.onload=()=>window.print();<\/script>
+</body></html>`);
+  win.document.close();
+}
+function downloadAttendanceExcel(){
+  if(!attRep||!attRep.res.days.length)return;
+  const r=attRep.res,g=attRows(),days=r.days,st=days.map(attDayState),W=days.length+4;
+  const aoa=[
+    ["SMART ATTENDANCE (gabay sa SF2) - Ilayang Yuni Elementary School"],
+    [attTitle()+(r.section.teacher?"   ·   Adviser: "+r.section.teacher:"")],
+    [],
+    ["No.","Pangalan"].concat(days.map(d=>d.n),["Absent","Remarks"]),
+    ["",""].concat(days.map((d,i)=>st[i]==="holiday"?"HOLIDAY":st[i]==="q"?"?":d.w),["",""])
+  ];
+  let n=0;
+  const add=(list,label,totLabel)=>{
+    aoa.push(["",label+" ("+list.length+")"]);
+    list.forEach(x=>{n++;aoa.push([n,x.l.name].concat(x.cells.map(c=>c==="x"?"x":""),[x.absent,x.remark]));});
+    aoa.push(["",totLabel].concat(attDayTotals(list),["",""]));
+  };
+  add(g.male,"LALAKI","Pumasok (lalaki)");
+  add(g.female,"BABAE","Pumasok (babae)");
+  aoa.push(["","Pumasok (lahat)"].concat(attDayTotals(g.male.concat(g.female)),["",""]));
+  aoa.push([]);
+  aoa.push(["","x = absent · ? = kulang sa 50% ng klase ang nag-scan (i-check ng adviser) · Kopyahin ang mga x sa EASY SF2."]);
+  const ws=XLSX.utils.aoa_to_sheet(aoa);
+  ws["!merges"]=[{s:{r:0,c:0},e:{r:0,c:W-1}},{s:{r:1,c:0},e:{r:1,c:W-1}}];
+  ws["!cols"]=[{wch:4},{wch:34}].concat(days.map(()=>({wch:4})),[{wch:7},{wch:22}]);
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,"Attendance");
+  const name=("SMART_Attendance_"+r.section.tab+"_"+attMonthLabel(r.month)).replace(/[^A-Za-z0-9]+/g,"_")+".xlsx";
+  XLSX.writeFile(wb,name);
+}
+
+/* ============================================================
+   TEACHERS ATTENDANCE (admin): oras ng dating at uwi bawat araw
+============================================================ */
+let tattRep=null;
+function showTeacherAttendance(){
+  closeMenu();
+  const months=attMonths();
+  openGenericModal("🧑‍🏫 Teachers Attendance",`
+    <div class="att-ctl no-print">
+      <div><label>Buwan</label><select id="tattMonth" onchange="loadTeacherAttendance()">${months.map(m=>`<option value="${m}">${attMonthLabel(m)}</option>`).join("")}</select></div>
+      <div class="att-btns"><button type="button" onclick="printTeacherAttendance()">🖨️ Print</button><button type="button" class="sec" onclick="downloadTeacherAttendanceExcel()">⬇ Excel</button></div>
+    </div>
+    <p class="att-legend no-print">Dating / Uwi bawat araw · <b>x</b> = hindi nag-scan · <b>–</b> = hindi nag-scan pauwi. Kasama lang ang araw na may kahit isang teacher na nag-scan.</p>
+    <div id="tattResult"><p class="empty-state">Naglo-load...</p></div>`);
+  attWiden();
+  loadTeacherAttendance();
+}
+function loadTeacherAttendance(){
+  const out=document.getElementById("tattResult");if(!out)return;
+  const month=document.getElementById("tattMonth").value;
+  out.innerHTML='<p class="empty-state">Naglo-load...</p>';
+  callApi({action:"getTeacherAttendanceReport",month}).then(res=>{
+    if(!document.getElementById("tattResult"))return;
+    if(res.error){out.innerHTML=`<p class="empty-state">${escHtml(res.error)}</p>`;return;}
+    tattRep=res;
+    if(!res.days.length){out.innerHTML=`<div class="vl-head"><span>${attMonthLabel(res.month)}</span></div><p class="empty-state">Wala pang nag-scan na teacher sa buwang ito.</p>`;return;}
+    out.innerHTML=`<div class="vl-head"><span>${attMonthLabel(res.month)} · ${res.days.length} araw · ${res.rows.length} teacher at staff</span></div><div class="vtab-wrap">${tattTableHtml()}</div>`;
+  }).catch(e=>{if(e&&e.message==="auth")return;out.innerHTML='<p class="empty-state">Connection error. Subukan ulit.</p>';});
+}
+function tattShort(t){return String(t||"").replace(/\s*[AP]M$/i,"");}
+function tattCellText(v,sep){return v?tattShort(v[0])+sep+(v[1]?tattShort(v[1]):"–"):"x";}
+function tattTableHtml(){
+  const r=tattRep;
+  const head=`<tr><th class="nm" rowspan="2">Pangalan</th><th rowspan="2">Position</th>${r.days.map(d=>`<th>${d.n}</th>`).join("")}<th rowspan="2">Absent</th></tr><tr>${r.days.map(d=>`<th>${d.w}</th>`).join("")}</tr>`;
+  const body=r.rows.map((x,i)=>{
+    const abs=r.days.filter(d=>!x.cells[d.d]).length;
+    return `<tr><td class="nm">${i+1}. ${escHtml(x.name)}</td><td class="rm">${escHtml(x.position)}</td>${r.days.map(d=>{const v=x.cells[d.d];return `<td class="tm${v?"":" x"}">${v?escHtml(tattShort(v[0]))+"<br>"+escHtml(v[1]?tattShort(v[1]):"–"):"x"}</td>`;}).join("")}<td>${abs}</td></tr>`;
+  }).join("");
+  return `<table class="atab"><thead>${head}</thead><tbody>${body}</tbody></table>`;
+}
+function printTeacherAttendance(){
+  if(!tattRep||!tattRep.days.length)return;
+  const win=window.open("","_blank");
+  if(!win){alert("Payagan ang pop-up para makapag-print.");return;}
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>Teachers Attendance ${escHtml(attMonthLabel(tattRep.month))}</title>
+<style>
+body{font-family:'Poppins',Arial,sans-serif;margin:0;color:#000;}
+.hd{display:flex;align-items:center;justify-content:center;gap:12px;}
+.hd img{width:54px;height:54px;object-fit:contain;}
+.hd .s{font-size:12pt;font-weight:700;text-transform:uppercase;}
+.hd .a{font-size:8.5pt;font-style:italic;}
+h2{text-align:center;font-size:12.5pt;margin:6px 0 0;letter-spacing:1px;}
+.r{text-align:center;font-size:9.5pt;margin:2px 0 8px;}
+table{border-collapse:collapse;font-size:7.5pt;width:100%;}
+th,td{border:1px solid #000;padding:1px 2px;text-align:center;white-space:nowrap;}
+th{background:#eee;}
+.nm,.rm{text-align:left;}
+td.tm{line-height:1.15;}
+.note{font-size:8pt;margin-top:6px;}
+.sig{margin-top:28px;width:240px;border-top:1px solid #000;padding-top:3px;text-align:center;font-size:9pt;margin-left:auto;}
+@page{size:A4 landscape;margin:8mm;}
+</style></head><body>
+<div class="hd"><img src="${SCHOOL_LOGO}"/><div><div class="s">Ilayang Yuni Elementary School</div><div class="a">Sa Ilayang Yuni, Lahat RESPONSABLE</div></div></div>
+<h2>TEACHERS ATTENDANCE</h2>
+<div class="r">${escHtml(attMonthLabel(tattRep.month))}</div>
+${tattTableHtml()}
+<div class="note">Dating / Uwi · x = hindi nag-scan · – = hindi nag-scan pauwi · Galing sa scan ng ID sa kiosk.</div>
+<div class="sig">School Head</div>
+<script>window.onload=()=>window.print();<\/script>
+</body></html>`);
+  win.document.close();
+}
+function downloadTeacherAttendanceExcel(){
+  if(!tattRep||!tattRep.days.length)return;
+  const r=tattRep,W=r.days.length+4;
+  const aoa=[["TEACHERS ATTENDANCE - Ilayang Yuni Elementary School"],[attMonthLabel(r.month)+"   ·   Dating / Uwi"],[],
+    ["No.","Pangalan","Position"].concat(r.days.map(d=>d.n),["Absent"]),["","",""].concat(r.days.map(d=>d.w),[""])];
+  r.rows.forEach((x,i)=>aoa.push([i+1,x.name,x.position].concat(r.days.map(d=>tattCellText(x.cells[d.d]," / ")),[r.days.filter(d=>!x.cells[d.d]).length])));
+  aoa.push([]);aoa.push(["","x = hindi nag-scan · – = hindi nag-scan pauwi"]);
+  const ws=XLSX.utils.aoa_to_sheet(aoa);
+  ws["!merges"]=[{s:{r:0,c:0},e:{r:0,c:W-1}},{s:{r:1,c:0},e:{r:1,c:W-1}}];
+  ws["!cols"]=[{wch:4},{wch:32},{wch:22}].concat(r.days.map(()=>({wch:11})),[{wch:7}]);
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,"Teachers");
+  XLSX.writeFile(wb,("SMART_Teachers_Attendance_"+attMonthLabel(r.month)).replace(/[^A-Za-z0-9]+/g,"_")+".xlsx");
+}
+
+/* ============================================================
    PRINTABLE STUDENT LISTS (Excel export)
 ============================================================ */
 const PERIOD_BASED_REPORT_TYPES=["nutritional_status","phil-iri","crla","rma"];
@@ -2078,9 +2638,10 @@ const KIOSK_COUNTDOWN=10;      // segundo bago bumalik sa scan screen
 const KIOSK_DESIGN_WIDTH=480;  // lapad ng disenyo ng portal; pinalalaki para mapuno ang tablet
 let kioskBusy=false,kioskLastActivity=Date.now(),kioskCountdown=0,kioskIdleTimer=null;
 let kioskBuf="",kioskLastKey=0,kioskBufTimer=null,kioskMsgTimer=null;
-let kioskCamStream=null,kioskCamLoop=null;
+let kioskCamStream=null,kioskCamLoop=null,kioskCamLast="",kioskCamLastAt=0;
+let kioskMode="att"; // "att" = attendance (unang screen), "portal" = Student Portal
 let kioskPane="scan",kioskWebOpen=false,kioskLastWidth=0;
-const KIOSK_PANES={scan:"kScanPane",activate:"kActivatePane",admin:"kAdminPane",visitor:"kVisitorPane",thanks:"kThanksPane"};
+const KIOSK_PANES={scan:"kScanPane",activate:"kActivatePane",admin:"kAdminPane",visitor:"kVisitorPane",request:"kRequestPane",thanks:"kThanksPane"};
 const KIOSK_ADMIN_IDLE_SECONDS=180; // mas mahaba kapag admin ang naka-login (pang-demo)
 const KIOSK_WEB_IDLE_SECONDS=120;   // website/PRISM: hindi nakikita ang pindot sa loob, kaya mas mahaba
 const KIOSK_LINKS={
@@ -2110,11 +2671,13 @@ function kioskFitScreen(){
   const zInfo=Math.max(1,land?Math.min(w/1280,h/800,2.4):Math.min(w/360,3));
   document.documentElement.style.zoom=zInfo;
   ["kioskScreen","kioskCamera"].forEach(id=>{const el=document.getElementById(id);if(el)el.style.zoom=zScan/zInfo;});
+  const ka=document.getElementById("kAtt");if(ka)ka.style.zoom=1/zInfo; // gumagamit ng vh/vw ang blue screen
   updateLayout();
 }
 
 function kioskInit(){
   document.body.classList.add("kiosk");
+  document.title="PORTAL - Ilayang Yuni Elementary School";
   // Hindi lumiliit ang page kapag lumabas ang keyboard ng tablet
   const vp=document.querySelector('meta[name="viewport"]');
   if(vp)vp.setAttribute("content",vp.getAttribute("content")+", interactive-widget=resizes-visual");
@@ -2127,10 +2690,12 @@ function kioskInit(){
   inp.addEventListener("blur",()=>setTimeout(kioskFocusInput,150));
   if(!("BarcodeDetector" in window)&&!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia))hide("kCamBtn");
   kvInit();
+  rqBind("kr",RQ_TYPES);
   const frame=document.getElementById("kWebFrame");
   frame.addEventListener("load",kioskWatchFrame);
   window.addEventListener("blur",()=>{if(kioskWebOpen)kioskLastActivity=Date.now();});
   kioskIdleTimer=setInterval(kioskIdleTick,1000);
+  kattInit();
   if(getKioskKey())kioskShowScan();else kioskShowActivate(true);
 }
 
@@ -2144,6 +2709,7 @@ function kioskTickClock(){
   const wd=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(p.weekday);
   document.getElementById("kClock").innerHTML=`${t}<small>PST</small>`;
   document.getElementById("kDate").textContent=`${days[wd]}, ${months[Number(p.month)-1]} ${p.day}, ${p.year}`;
+  if(kioskMode==="att"){const w=document.getElementById("kWelcomeText"),g=kattGreeting()+"!";if(w.textContent!==g)w.textContent=g;}
 }
 
 function kioskOnScanScreen(){return !document.getElementById("kioskScreen").classList.contains("hidden")&&kioskPane==="scan";}
@@ -2159,7 +2725,10 @@ function kioskSetPane(name){
 }
 function kioskFocusInput(){
   if(!KIOSK_MODE)return;
+  // Huwag agawin ang pag-type kapag bukas ang Website, PRISM, SCAN o FEEDBACK
+  if(kioskWebOpen)return;
   const a=document.activeElement;
+  if(a&&a.tagName==="IFRAME")return;
   if(a&&a!==document.body&&a.id!=="kioskScanInput"&&(a.tagName==="INPUT"||a.tagName==="TEXTAREA"))return;
   const inp=document.getElementById("kioskScanInput");
   if(inp)inp.focus({preventScroll:true});
@@ -2167,11 +2736,12 @@ function kioskFocusInput(){
 
 function kioskShowScan(){
   clearInterval(kvThanksTimer);kvThanksTimer=null;
-  kvReset();
+  kvReset();krReset();
   if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
   show("kioskScreen");kioskSetPane("scan");
   hide("appScreen");hide("kioskDoneBtn");hide("kioskIdle");
   kioskSetMsg("");
+  kioskApplyMode();
   setTimeout(kioskFocusInput,50);
 }
 function kioskShowActivate(firstTime){
@@ -2223,8 +2793,10 @@ function kioskOnKey(e){
 }
 
 function kioskSubmitScan(raw){
-  if(kioskBusy)return;
   if(!getKioskKey()){kioskShowActivate(true);return;}
+  // Attendance ang default; Student Portal kapag pinili sa menu o may nakabukas na info
+  if(!currentUser&&kioskMode==="att"){kattScan(raw);return;}
+  if(kioskBusy)return;
   kioskBusy=true;
   kioskCloseMenu();
   const viewing=!!currentUser;
@@ -2265,7 +2837,7 @@ function kioskEndSession(silentSwitch){
   hide("resultWrap");hide("sideActions");hide("searchWrap");hide("staffTools");
   ["searchFirst","searchLast"].forEach(id=>{document.getElementById(id).value="";});
   document.getElementById("searchResultsList").innerHTML="";
-  if(!silentSwitch)kioskShowScan();
+  if(!silentSwitch){kioskMode="att";kioskShowScan();}
 }
 function kioskStillHere(){kioskLastActivity=Date.now();kioskCountdown=0;hide("kioskIdle");}
 
@@ -2276,9 +2848,11 @@ function kioskIdleLimit(){
 }
 function kioskIdleTick(){
   // May gumagamit: bata o admin na naka-login, bisitang nagfi-fill up, admin login, o website
-  const inUse=!!currentUser||kioskWebOpen||kioskPane==="visitor"||kioskPane==="admin";
+  const inUse=!!currentUser||kioskWebOpen||kioskPane==="visitor"||kioskPane==="request"||kioskPane==="admin";
   if(!inUse){
     kioskCountdown=0;hide("kioskIdle");
+    // Student Portal na walang nag-scan: bumalik sa attendance pagkalipas ng 30 segundo
+    if(kioskMode==="portal"&&kioskPane==="scan"&&Date.now()-kioskLastActivity>30000)kioskSetMode("att");
     if(!document.getElementById("kMenu").classList.contains("hidden")&&Date.now()-Math.max(kioskMenuOpenedAt,kioskLastActivity)>30000)kioskCloseMenu();
     kioskFocusInput();return;
   }
@@ -2308,10 +2882,201 @@ function kioskActivate(){
       if(!r.success){err.textContent=r.error||"Hindi na-activate.";show("kActivateErr");return;}
       setKioskKey(r.kioskKey);
       kioskShowScan();
+      kattRefreshRoster(true);
       kioskSetMsg("✓ Naka-activate na ang kiosk.","ok");
       setTimeout(()=>kioskSetMsg(""),3000);
     });
   }).catch(()=>{err.textContent="Connection error. Subukan ulit.";show("kActivateErr");});
+}
+
+/* ============================================================
+   ATTENDANCE (unang screen ng kiosk)
+   Nasa tablet ang listahan ng lahat ng may QR, kaya agad lumalabas ang blue screen.
+   Ang mga scan ay nakapila sa tablet at ipinapasa sa Sheet nang patago (kahit nawalan ng internet).
+============================================================ */
+const KATT_STORE={roster:"smart_att_roster",today:"smart_att_today",queue:"smart_att_queue"};
+const KATT_SHOW_MS=3000;              // tagal ng blue screen
+const KATT_ROSTER_REFRESH=15*60000;   // kunin ulit ang listahan bawat 15 minuto
+let katt={people:null,photos:{},outMin:660,at:0,offset:0,today:{date:"",s:{},t:{}},queue:[],sending:false,loading:false,hideTimer:null,direct:false,photoRun:false,mem:{}};
+
+function kattRead(k,def){try{const v=JSON.parse(localStorage.getItem(KATT_STORE[k])||"null");return v==null?def:v;}catch(e){return def;}}
+function kattWrite(k,v){try{localStorage.setItem(KATT_STORE[k],JSON.stringify(v));}catch(e){}}
+function kattInit(){
+  const r=kattRead("roster",null);
+  if(r&&r.people){katt.people=r.people;katt.photos=r.photos||{};katt.outMin=r.outMin||660;katt.at=r.at||0;katt.offset=r.offset||0;}
+  katt.today=kattRead("today",katt.today);
+  katt.queue=kattRead("queue",[]);
+  setInterval(kattFlush,4000);
+  setInterval(()=>kattRefreshRoster(false),60000);
+  if(getKioskKey())kattRefreshRoster(true);
+}
+// Oras ng server (hindi umaasa sa orasan ng tablet)
+function kattNow(){return Date.now()+(katt.offset||0);}
+function kattParts(ms){
+  const d=new Date(ms+480*60000),min=d.getUTCHours()*60+d.getUTCMinutes(),h=Math.floor(min/60);
+  return{ymd:d.toISOString().slice(0,10),min:min,time:((h+11)%12+1)+":"+String(min%60).padStart(2,"0")+" "+(h<12?"AM":"PM")};
+}
+function kattMin(s){const m=String(s||"").match(/^(\d{1,2}):(\d{2})\s*([AP])/i);if(!m)return -1;return(Number(m[1])%12+(m[3].toUpperCase()==="P"?12:0))*60+Number(m[2]);}
+function kattGreeting(){const h=Math.floor(kattParts(kattNow()).min/60);return h<12?"Magandang umaga":h<18?"Magandang hapon":"Magandang gabi";}
+function kattCode(raw){const s=String(raw||"").toUpperCase().replace(/^SMART:/,"").replace(/[^A-Z0-9]/g,"");return s.length===12?s.slice(0,4)+"-"+s.slice(4,8)+"-"+s.slice(8):"";}
+function kattToday(ymd){if(katt.today.date!==ymd)katt.today={date:ymd,s:{},t:{}};return katt.today;}
+
+function kioskSetMode(m){
+  kioskMode=m;kioskLastActivity=Date.now();
+  kioskApplyMode();
+}
+function kioskApplyMode(){
+  const att=kioskMode==="att";
+  document.getElementById("kWelcomeText").textContent=att?kattGreeting()+"!":"Student Portal";
+  document.getElementById("kCtaText").textContent=att?"Itapat ang ID sa scanner para sa attendance ngayong araw.":"Itapat ang iyong ID para makita ang iyong record.";
+  document.getElementById("kBackAtt").classList.toggle("hidden",att);
+}
+
+function kattRefreshRoster(force){
+  if(katt.loading||!getKioskKey())return;
+  if(!force&&katt.people&&Date.now()-katt.at<KATT_ROSTER_REFRESH)return;
+  katt.loading=true;
+  const sentAt=Date.now();
+  callApi({action:"kioskRoster",kioskKey:getKioskKey(),token:""},{silent:true}).then(res=>{
+    if(!res||!res.success){if(res&&res.error==="kiosk"){setKioskKey("");kioskShowActivate(true);}return;}
+    katt.offset=res.now-Math.round((sentAt+Date.now())/2);
+    katt.people=res.people||{};katt.photos=res.photos||{};katt.outMin=res.outMin||660;katt.at=Date.now();
+    kattWrite("roster",{people:katt.people,photos:katt.photos,outMin:katt.outMin,at:katt.at,offset:katt.offset});
+    // Pagsamahin ang galing sa Sheet at ang mga scan na hindi pa naipapasa
+    const t=kattToday(res.date);
+    Object.assign(t.s,res.today.s);
+    Object.keys(res.today.t).forEach(id=>{
+      const srv=res.today.t[id],loc=t.t[id];
+      t.t[id]=loc&&kattMin(loc[1])>kattMin(srv[1])?[srv[0],loc[1]]:srv;
+    });
+    kattWrite("today",katt.today);
+    kattPreloadPhotos();
+  }).catch(()=>{}).finally(()=>{katt.loading=false;});
+}
+
+// Ipinapasa ang nakapilang scan sa Sheet
+function kattFlush(){
+  if(katt.sending||!katt.queue.length||!getKioskKey())return;
+  katt.sending=true;
+  const batch=katt.queue.slice(0,50);
+  callApi({action:"kioskAttendance",kioskKey:getKioskKey(),scans:JSON.stringify(batch),token:""},{silent:true}).then(res=>{
+    if(!res||!res.success){if(res&&res.error==="kiosk"){setKioskKey("");kioskShowActivate(true);}return;}
+    katt.queue.splice(0,batch.length);kattWrite("queue",katt.queue);
+    (res.results||[]).forEach(kattApply);
+    kattWrite("today",katt.today);
+  }).catch(()=>{}).finally(()=>{katt.sending=false;});
+}
+// Ang sagot ng Sheet ang masusunod (hal. kung may naunang scan sa ibang araw o tablet)
+function kattApply(r){
+  if(!r||!r.ok||r.date!==katt.today.date)return;
+  if(r.person.k==="s")katt.today.s[r.person.id]=r.kind==="again"?r.time:(katt.today.s[r.person.id]||r.time);
+  else katt.today.t[r.person.id]=[r.in||"",r.out||""];
+}
+
+function kattScan(raw){
+  kioskCloseMenu();
+  const code=kattCode(raw);
+  if(!code){kioskSetMsg("Hindi nabasa ang ID. Subukan ulit.","err");kioskScanFlash("bad");return;}
+  const p=katt.people&&katt.people[code];
+  if(!p){kattScanDirect(code);return;}
+  const now=kattNow(),at=kattParts(now),t=kattToday(at.ymd);
+  kioskScanFlash("hit");kioskSetMsg("");
+  if(p.k==="s"){
+    if(t.s[p.id]){kattShow(p,"again",t.s[p.id]);return;}
+    t.s[p.id]=at.time;kattQueue(code,now);kattShow(p,"in",at.time);return;
+  }
+  const rec=t.t[p.id];
+  if(!rec){t.t[p.id]=[at.time,""];kattQueue(code,now);kattShow(p,"in",at.time);return;}
+  if(at.min>=katt.outMin&&at.min>kattMin(rec[0])){
+    if(!rec[1]||at.min>kattMin(rec[1]))rec[1]=at.time;
+    kattQueue(code,now);kattShow(p,"out",rec[1]);return;
+  }
+  kattShow(p,"again",rec[0]);
+}
+function kattQueue(code,ms){
+  katt.queue.push({c:code,t:ms});
+  kattWrite("queue",katt.queue);kattWrite("today",katt.today);
+  setTimeout(kattFlush,300);
+}
+// Wala sa listahan ng tablet (hal. bagong bata): itanong sa Sheet
+function kattScanDirect(code){
+  if(katt.direct)return;
+  katt.direct=true;
+  kioskSetMsg("Sandali lang...","ok");kioskScanFlash("hit");
+  callApi({action:"kioskAttendance",kioskKey:getKioskKey(),scans:JSON.stringify([{c:code,t:kattNow()}]),token:""},{silent:true}).then(res=>{
+    if(!res||!res.success){
+      if(res&&res.error==="kiosk"){setKioskKey("");kioskShowActivate(true);return;}
+      kioskSetMsg((res&&res.message)||"May problema. Subukan ulit.","err");kioskScanFlash("bad");return;
+    }
+    const r=(res.results||[])[0];
+    if(!r||!r.ok){kioskSetMsg((r&&r.message)||"Hindi kilala ang ID na ito.","err");kioskScanFlash("bad");return;}
+    kioskSetMsg("");
+    kattToday(r.date);kattApply(r);kattWrite("today",katt.today);
+    kattShow(r.person,r.kind,r.time);
+    kattRefreshRoster(true);
+  }).catch(()=>{kioskSetMsg("Walang internet o may problema sa koneksyon. Subukan ulit.","err");kioskScanFlash("bad");})
+    .finally(()=>{katt.direct=false;});
+}
+
+function kattGradeText(g,s){
+  const gs=String(g||"").toUpperCase();
+  const lbl=gs.includes("KINDER")||gs==="K"?"Kinder":"Grade "+((gs.match(/\d+/)||[gs])[0]);
+  return lbl+(s?" · "+s:"");
+}
+function kattShow(p,kind,time){
+  const isT=p.k==="t";
+  const full=((p.f||"")+" "+(p.l||"")).replace(/\s+/g," ").trim().toUpperCase();
+  document.getElementById("kaGreet").textContent=(kind==="out"?"Ingat sa pag-uwi":kattGreeting())+",";
+  document.getElementById("kaName").textContent=(isT&&p.ti?p.ti+" ":"")+full+"!";
+  document.getElementById("kaSub").textContent=isT?(p.p||""):kattGradeText(p.g,p.s);
+  document.getElementById("kaMsg").textContent=kind==="out"?"Naitala na ang iyong pag-uwi.":kind==="again"?"Naitala na ang iyong attendance kanina.":"Naitala na ang iyong attendance sa araw na ito.";
+  document.getElementById("kaTime").textContent=(kind==="out"?"Oras ng Pag-uwi: ":"Oras ng Pagdating: ")+time;
+  const ini=document.getElementById("kaIni"),img=document.getElementById("kaImg");
+  ini.textContent=((p.f||"").charAt(0)+(p.l||"").charAt(0)).toUpperCase();
+  img.classList.add("hidden");ini.classList.remove("hidden");img.removeAttribute("src");
+  const fileId=katt.photos[String(p.id).toUpperCase()];
+  const token=Date.now();katt.showToken=token;
+  if(fileId)kattPhoto(fileId).then(url=>{
+    if(!url||katt.showToken!==token)return;
+    img.src=url;img.classList.remove("hidden");ini.classList.add("hidden");
+  });
+  show("kAtt");
+  clearTimeout(katt.hideTimer);
+  katt.hideTimer=setTimeout(kattHide,KATT_SHOW_MS);
+}
+function kattHide(){clearTimeout(katt.hideTimer);hide("kAtt");kioskFocusInput();}
+
+/* Mga picture: naka-save sa tablet (IndexedDB) para agad lumabas */
+let kattDbP=null;
+function kattDb(){
+  if(!kattDbP)kattDbP=new Promise(res=>{
+    try{const rq=indexedDB.open("smart_kiosk",1);
+      rq.onupgradeneeded=()=>rq.result.createObjectStore("photos");
+      rq.onsuccess=()=>res(rq.result);rq.onerror=()=>res(null);
+    }catch(e){res(null);}
+  });
+  return kattDbP;
+}
+function kattDbGet(id){return kattDb().then(db=>db?new Promise(res=>{try{const q=db.transaction("photos").objectStore("photos").get(id);q.onsuccess=()=>res(q.result||"");q.onerror=()=>res("");}catch(e){res("");}}):(katt.mem[id]||""));}
+function kattDbPut(id,url){return kattDb().then(db=>{if(!db){katt.mem[id]=url;return;}try{db.transaction("photos","readwrite").objectStore("photos").put(url,id);}catch(e){}});}
+function kattFetchPhotos(ids){
+  return callApi({action:"kioskPhotos",kioskKey:getKioskKey(),ids:JSON.stringify(ids),token:""},{silent:true}).then(res=>{
+    const out=(res&&res.photos)||{};
+    return Promise.all(Object.keys(out).filter(k=>out[k]).map(k=>kattDbPut(k,out[k]))).then(()=>out);
+  });
+}
+function kattPhoto(fileId){
+  if(katt.mem[fileId])return Promise.resolve(katt.mem[fileId]);
+  return kattDbGet(fileId).then(url=>url||kattFetchPhotos([fileId]).then(o=>o[fileId]||"").catch(()=>""));
+}
+// Kinukuha nang patago ang lahat ng picture na wala pa sa tablet
+async function kattPreloadPhotos(){
+  if(katt.photoRun)return;katt.photoRun=true;
+  try{
+    const ids=[...new Set(Object.values(katt.photos||{}))],need=[];
+    for(const id of ids){if(!(await kattDbGet(id)))need.push(id);}
+    for(let i=0;i<need.length;i+=8)await kattFetchPhotos(need.slice(i,i+8));
+  }catch(e){}finally{katt.photoRun=false;}
 }
 
 /* Menu (☰) sa scan screen */
@@ -2323,7 +3088,9 @@ function kioskToggleMenu(){
 function kioskCloseMenu(){const m=document.getElementById("kMenu");if(m)m.classList.add("hidden");}
 function kioskMenuGo(what){
   kioskCloseMenu();
-  if(what==="visitor")kioskShowVisitor();
+  if(what==="portal"){kioskShowScan();kioskSetMode("portal");}
+  else if(what==="visitor")kioskShowVisitor();
+  else if(what==="request")kioskShowRequest();
   else if(what==="admin")kioskShowAdminLogin();
   else if(what==="camera")kioskOpenCamera();
   else if(what==="settings")kioskShowActivate();
@@ -2431,11 +3198,30 @@ function kioskSubmitVisitor(){
 function kioskShowThanks(r){
   if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
   document.getElementById("ktTitle").textContent="Salamat po, "+r.name+"!";
+  document.getElementById("ktSub").textContent="Naitala na po ang inyong pagbisita.";
+  hide("ktTrack");hide("ktTrackNote");
   const rows=[["Petsa",ymdLabel(r.date,true)],["Oras",r.time+" PST"],["Pangalan",r.name],["Agency",r.agency],["Layunin",r.purpose],["Pupuntahan",r.personToVisit||"-"]];
   document.getElementById("ktRows").innerHTML=rows.map(x=>`<tr><td>${x[0]}</td><td>${escHtml(x[1])}</td></tr>`).join("");
   kvReset();
+  kioskThanksCountdown(10);
+}
+// Salamat pagkatapos ng request: malaki ang tracking number at mas matagal (15 segundo) para maisulat
+function kioskShowRequestThanks(r){
+  if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+  document.getElementById("ktTitle").textContent="Salamat po, "+String(r.requester||"").split(" ")[0]+"!";
+  document.getElementById("ktSub").textContent="Natanggap na po ang inyong request.";
+  document.getElementById("ktTrackNo").textContent=r.tracking;
+  show("ktTrack");show("ktTrackNote");
+  const rows=[["Petsa",ymdLabel(r.date,true)+" · "+r.time],["Request",rqLabel(r.type,r.detail)]];
+  if(r.learner)rows.push(["Para kay",r.learner]);
+  rows.push(["Purpose",r.purpose]);
+  document.getElementById("ktRows").innerHTML=rows.map(x=>`<tr><td>${x[0]}</td><td>${escHtml(x[1])}</td></tr>`).join("");
+  krReset();
+  kioskThanksCountdown(15);
+}
+function kioskThanksCountdown(secs){
   kioskSetPane("thanks");
-  let left=10;
+  let left=secs;
   const cnt=document.getElementById("ktCount");
   cnt.textContent=`Babalik sa simula sa loob ng ${left} segundo...`;
   clearInterval(kvThanksTimer);
@@ -2444,6 +3230,98 @@ function kioskShowThanks(r){
     if(left<=0){kioskShowScan();return;}
     cnt.textContent=`Babalik sa simula sa loob ng ${left} segundo...`;
   },1000);
+}
+
+/* Request Form (kiosk at SMART ng bata). "kr" = kiosk, "sr" = SMART ng bata. */
+const RQ_TYPES=["SF10 / Form 137","SF9 / Report Card","Certification","Paggamit ng Pasilidad","Technical Assistance","Others"];
+const RQ_STUDENT_TYPES=["SF10 / Form 137","SF9 / Report Card","Certification","Others"];
+const RQ_CERTS=["Enrolment","DSWD","Good Moral","Graduation","Completion"];
+const RQ_NO_LEARNER=["Paggamit ng Pasilidad","Technical Assistance"];
+const RQ_CERT_PRINT={"Enrolment":"enrollment","DSWD":"dswd","Good Moral":"goodmoral"}; // may template na sa SMART
+const rqState={kr:{type:"",cert:"",sending:false},sr:{type:"",cert:"",sending:false}};
+
+function rqLabel(type,detail){return detail?type+" ("+detail+")":type;}
+function rqChipsHtml(list,sel){
+  return list.map(t=>`<button type="button" class="kv-chip${t===sel?" on":""}" data-v="${escHtml(t)}">${escHtml(t)}</button>`).join("");
+}
+function rqEl(px,id){return document.getElementById(px+id);}
+// Inilalagay ang mga pagpipilian at ang pindot sa mga ito
+function rqBind(px,types){
+  rqEl(px,"Types").innerHTML=rqChipsHtml(types,"");
+  rqEl(px,"CertChips").innerHTML=rqChipsHtml(RQ_CERTS,"");
+  rqEl(px,"Types").onclick=e=>{const b=e.target.closest(".kv-chip");if(b)rqSelectType(px,b.dataset.v);};
+  rqEl(px,"CertChips").onclick=e=>{
+    const b=e.target.closest(".kv-chip");if(!b)return;
+    rqState[px].cert=b.dataset.v;
+    rqEl(px,"CertChips").querySelectorAll(".kv-chip").forEach(x=>x.classList.toggle("on",x===b));
+    rqEl(px,"Certs").classList.remove("kv-bad");hide(px+"Err");
+  };
+  rqEl(px,"Types").parentNode.parentNode.parentNode.querySelectorAll("input").forEach(inp=>inp.addEventListener("input",()=>{inp.classList.remove("kv-bad");hide(px+"Err");}));
+}
+function rqSelectType(px,type){
+  const st=rqState[px];
+  st.type=type;st.cert="";
+  rqEl(px,"Types").querySelectorAll(".kv-chip").forEach(x=>x.classList.toggle("on",x.dataset.v===type));
+  rqEl(px,"Types").classList.remove("kv-bad");
+  rqEl(px,"CertChips").querySelectorAll(".kv-chip.on").forEach(x=>x.classList.remove("on"));
+  rqEl(px,"Certs").classList.remove("kv-bad");
+  rqEl(px,"Certs").classList.toggle("hidden",type!=="Certification");
+  const other=rqEl(px,"Other");
+  other.classList.toggle("hidden",type!=="Others");other.classList.remove("kv-bad");
+  if(type==="Others")other.focus();
+  const lw=rqEl(px,"LearnerWrap");
+  if(lw)lw.classList.toggle("hidden",RQ_NO_LEARNER.indexOf(type)!==-1);
+  hide(px+"Err");
+}
+// Kinukuha ang laman ng form. Ibinabalik ang {data} o {missing}
+function rqCollect(px){
+  const st=rqState[px],v=id=>{const el=rqEl(px,id);return el?el.value.trim():"";},bad=id=>rqEl(px,id).classList.add("kv-bad");
+  const missing=[];
+  if(v("Requester").length<2){bad("Requester");missing.push("pangalan ng nagre-request");}
+  const needLearner=!!rqEl(px,"LearnerWrap")&&st.type&&RQ_NO_LEARNER.indexOf(st.type)===-1;
+  if(needLearner){
+    const f=!v("First"),l=!v("Last");
+    if(f)bad("First");if(l)bad("Last");
+    if(f||l)missing.push("pangalan at apelyido ng bata");
+  }
+  if(!v("Purpose")){bad("Purpose");missing.push("purpose");}
+  if(!st.type){rqEl(px,"Types").classList.add("kv-bad");missing.push("kung ano ang request");}
+  else if(st.type==="Certification"&&!st.cert){rqEl(px,"Certs").classList.add("kv-bad");missing.push("kung anong certification");}
+  else if(st.type==="Others"&&!v("Other")){bad("Other");missing.push("kung ano ang request");}
+  const data={type:st.type,detail:st.type==="Certification"?st.cert:st.type==="Others"?v("Other"):"",
+    requester:v("Requester"),contact:v("Contact"),purpose:v("Purpose")};
+  if(needLearner)Object.assign(data,{learnerFirst:v("First"),learnerMi:v("Mi"),learnerLast:v("Last")});
+  return {data,missing};
+}
+function rqShowErr(px,msg){const e=rqEl(px,"Err");e.textContent=msg;show(px+"Err");}
+
+function krReset(){
+  const st=rqState.kr;st.type="";st.cert="";st.sending=false;
+  if(!document.getElementById("kRequestPane"))return;
+  ["krRequester","krContact","krFirst","krMi","krLast","krPurpose","krOther"].forEach(id=>{const el=document.getElementById(id);el.value="";el.classList.remove("kv-bad");});
+  document.querySelectorAll("#krTypes .kv-chip.on,#krCertChips .kv-chip.on").forEach(x=>x.classList.remove("on"));
+  ["krTypes","krCerts"].forEach(id=>document.getElementById(id).classList.remove("kv-bad"));
+  hide("krCerts");hide("krOther");hide("krErr");show("krLearnerWrap");
+  const btn=document.getElementById("krSubmit");btn.disabled=false;btn.textContent="✓ Ipasa";
+}
+function kioskShowRequest(){
+  if(!getKioskKey()){kioskShowActivate(true);return;}
+  krReset();
+  kioskSetPane("request");
+  kioskLastActivity=Date.now();
+}
+function kioskSubmitRequest(){
+  const st=rqState.kr;if(st.sending)return;
+  const c=rqCollect("kr");
+  if(c.missing.length){rqShowErr("kr","Pakilagay po ang "+c.missing.join(", ")+".");return;}
+  st.sending=true;
+  const btn=document.getElementById("krSubmit");btn.disabled=true;btn.textContent="Ipinapasa...";
+  callApi(Object.assign({action:"kioskRequest",kioskKey:getKioskKey(),token:""},c.data)).then(res=>{
+    if(res.error==="kiosk"){setKioskKey("");kioskEndSession();kioskShowActivate(true);return;}
+    if(!res.success){rqShowErr("kr",res.message||"Hindi naipasa. Subukan ulit.");return;}
+    kioskShowRequestThanks(res);
+  }).catch(()=>{rqShowErr("kr","Walang internet o may problema sa koneksyon. Subukan ulit.");})
+    .finally(()=>{st.sending=false;btn.disabled=false;btn.textContent="✓ Ipasa";});
 }
 
 /* School Website at PRISM (bukas sa loob ng kiosk, hindi makakalabas sa ibang site) */
@@ -2492,7 +3370,12 @@ function kioskOpenCamera(){
       try{
         canvas.width=v.videoWidth;canvas.height=v.videoHeight;ctx.drawImage(v,0,0);
         const code=await detect(canvas,ctx);
-        if(code){kioskCloseCamera();kioskSubmitScan(code);}
+        if(code){
+          if(!currentUser&&kioskMode==="att"){
+            // Attendance: bukas pa rin ang camera para sa susunod sa pila
+            if(code!==kioskCamLast||Date.now()-kioskCamLastAt>4000){kioskCamLast=code;kioskCamLastAt=Date.now();kioskSubmitScan(code);}
+          }else{kioskCloseCamera();kioskSubmitScan(code);}
+        }
       }catch(e){}
       busy=false;
     },250);

@@ -67,10 +67,10 @@ main{max-width:1000px;margin:0 auto;padding:18px 16px 40px;}
 
   <div id="app" class="hidden">
     <div class="card no-print">
-      <h3>1. Piliin ang mga learner</h3>
+      <h3>1. Piliin ang mga learner o teacher</h3>
       <div class="row">
-        <div><div class="lbl">Grade at Section</div><select id="filter" class="field" onchange="render()"></select></div>
-        <div><div class="lbl">Hanapin (pangalan o LRN)</div><input id="q" class="field" placeholder="Hal. Dela Cruz" oninput="render()"/></div>
+        <div><div class="lbl">Grade at Section (o Teachers at Staff)</div><select id="filter" class="field" onchange="render()"></select></div>
+        <div><div class="lbl">Hanapin (pangalan, LRN o Employee ID)</div><input id="q" class="field" placeholder="Hal. Dela Cruz" oninput="render()"/></div>
       </div>
       <div class="count" id="count"></div>
       <h3 style="margin-top:6px;">2. I-download o i-print</h3>
@@ -101,6 +101,8 @@ let token="",all=[],shown=[];
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function api(params){return fetch(APPS_SCRIPT_URL,{method:"POST",body:JSON.stringify(Object.assign({token},params))}).then(r=>r.json());}
 function gradeLabel(g){const s=String(g||"").toUpperCase();if(s.includes("KINDER")||s==="K")return"Kinder";const m=s.match(/\d+/);return"Grade "+(m?m[0]:s);}
+// Mga teacher ay hiwalay na grupo, nasa dulo ng listahan
+function groupOf(r){return r.kind==="t"?"Teachers at Staff":gradeLabel(r.grade)+" - "+(r.section||"");}
 function fullName(r){return `${r.lastName||""}, ${r.firstName||""} ${r.middleName||""}`.replace(/\s+/g," ").trim();}
 
 function doLogin(){
@@ -110,8 +112,8 @@ function doLogin(){
     token=res.token;
     return api({action:"getQRList"}).then(r=>{
       if(r.error){e.textContent=r.error;e.classList.remove("hidden");return;}
-      all=(r.list||[]).sort((a,b)=>gradeLabel(a.grade).localeCompare(gradeLabel(b.grade),undefined,{numeric:true})||String(a.section).localeCompare(String(b.section))||fullName(a).localeCompare(fullName(b)));
-      const groups=[...new Set(all.map(x=>gradeLabel(x.grade)+" - "+(x.section||"")))];
+      all=(r.list||[]).sort((a,b)=>(a.kind==="t")-(b.kind==="t")||gradeLabel(a.grade).localeCompare(gradeLabel(b.grade),undefined,{numeric:true})||String(a.section||"").localeCompare(String(b.section||""))||fullName(a).localeCompare(fullName(b)));
+      const groups=[...new Set(all.map(groupOf))];
       document.getElementById("filter").innerHTML=`<option value="">Lahat (${all.length})</option>`+groups.map(g=>`<option>${esc(g)}</option>`).join("");
       document.getElementById("loginCard").classList.add("hidden");
       document.getElementById("app").classList.remove("hidden");
@@ -139,13 +141,13 @@ function qrCanvas(text,size){
 
 function render(){
   const f=document.getElementById("filter").value,q=document.getElementById("q").value.trim().toLowerCase();
-  shown=all.filter(r=>(!f||gradeLabel(r.grade)+" - "+(r.section||"")===f)&&(!q||fullName(r).toLowerCase().includes(q)||String(r.lrn).includes(q)));
-  document.getElementById("count").textContent=shown.length+" learner(s)";
+  shown=all.filter(r=>(!f||groupOf(r)===f)&&(!q||fullName(r).toLowerCase().includes(q)||String(r.lrn).includes(q)));
+  document.getElementById("count").textContent=shown.length+" ID(s)";
   document.getElementById("sheet").innerHTML=shown.map(r=>`<div class="sticker">
     <img src="${qrCanvas(r.code,240).toDataURL()}" alt="QR ${esc(r.lrn)}"/>
     <div class="n">${esc(fullName(r))}</div>
-    <div class="g">${esc(gradeLabel(r.grade))} - ${esc(r.section||"")}</div>
-    <div class="l">LRN ${esc(r.lrn)}</div></div>`).join("");
+    <div class="g">${r.kind==="t"?esc(r.position||"Teacher"):esc(gradeLabel(r.grade))+" - "+esc(r.section||"")}</div>
+    <div class="l">${r.kind==="t"?"Employee ID":"LRN"} ${esc(r.lrn)}</div></div>`).join("");
 }
 
 async function downloadZip(){
@@ -158,10 +160,10 @@ async function downloadZip(){
     const rows=[];
     for(const r of shown){
       const blob=await new Promise(res=>qrCanvas(r.code,600).toBlob(res,"image/png"));
-      const file=r.lrn+".png";
+      const file=(r.kind==="t"?"EMP_":"")+String(r.lrn).replace(/[^A-Za-z0-9-]+/g,"_")+".png";
       zip.file(file,blob);
       rows.push({lrn:String(r.lrn),last_name:r.lastName||"",first_name:r.firstName||"",middle_name:r.middleName||"",
-        grade:gradeLabel(r.grade),section:r.section||"",qr_file:file,qr_image_path:folder+file});
+        grade:r.kind==="t"?(r.position||"Teacher"):gradeLabel(r.grade),section:r.kind==="t"?"Teachers at Staff":(r.section||""),qr_file:file,qr_image_path:folder+file});
     }
     const ws=XLSX.utils.json_to_sheet(rows);
     // LRN bilang text para hindi maging 1.09E+11
