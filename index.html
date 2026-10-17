@@ -2895,7 +2895,7 @@ function kioskActivate(){
    Ang mga scan ay nakapila sa tablet at ipinapasa sa Sheet nang patago (kahit nawalan ng internet).
 ============================================================ */
 const KATT_STORE={roster:"smart_att_roster",today:"smart_att_today",queue:"smart_att_queue"};
-const KATT_SHOW_MS=3000;              // tagal ng blue screen
+const KATT_SHOW_MS=12000;              // tagal ng blue screen (napapalitan agad kapag may bagong nag-scan)
 const KATT_ROSTER_REFRESH=15*60000;   // kunin ulit ang listahan bawat 15 minuto
 let katt={people:null,photos:{},outMin:660,at:0,offset:0,today:{date:"",s:{},t:{}},queue:[],sending:false,loading:false,hideTimer:null,direct:false,photoRun:false,mem:{}};
 
