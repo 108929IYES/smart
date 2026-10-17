@@ -117,7 +117,13 @@ function doLogin(){
       document.getElementById("app").classList.remove("hidden");
       render();
     });
-  }).catch(()=>{e.textContent="Connection error. Subukan ulit.";e.classList.remove("hidden");});
+  }).catch(err=>{
+    // Ipakita ang totoong dahilan para madaling ayusin
+    const msg=String(err&&err.message||err);
+    const net=err instanceof TypeError&&/fetch|network|load/i.test(msg);
+    e.textContent=net?"Connection error: hindi maabot ang server. I-check ang internet, tapos subukan ulit.":"May error: "+msg;
+    e.classList.remove("hidden");console.error(err);
+  });
 }
 function logout(){if(token)api({action:"logout"}).catch(()=>{});location.reload();}
 
