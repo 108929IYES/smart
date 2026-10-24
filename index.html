@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://108929iyes.github.io https://docs.google.com"/>
+<meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://108929iyes.github.io https://docs.google.com https://drive.google.com https://www.youtube-nocookie.com"/>
 <title>SMART - Ilayang Yuni Elementary School</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
@@ -216,6 +216,100 @@ body.wide .back-btn{max-width:340px;font-size:15px;padding:12px;margin-top:24px;
 .side-btn.c-room{background:linear-gradient(135deg,#7c3aed,#a855f7);}
 .side-btn.c-adv{background:linear-gradient(135deg,#d97706,#f59e0b);}
 .side-btn.c-acad{background:var(--royal);}
+.side-btn.c-mod{background:linear-gradient(135deg,#1e40af,#3b82f6);}
+/* Learning Resources (mga tile at listahan) */
+.mod-grades{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.mod-chip{border:1px solid #cfd8dc;background:#fff;border-radius:20px;padding:6px 14px;font:600 13px 'Poppins',sans-serif;color:#37474f;cursor:pointer;}
+.mod-chip.on{background:var(--royal);border-color:var(--royal);color:#fff;}
+.mod-subjects{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+.mod-subj{border:none;border-radius:12px;background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;font:700 15px 'Poppins',sans-serif;padding:16px 12px;min-height:70px;cursor:pointer;text-align:center;line-height:1.25;}
+.mod-subj small{display:block;font-weight:500;font-size:12px;opacity:.85;margin-top:4px;}
+.mod-back{border:none;background:none;color:var(--royal);font:600 14px 'Poppins',sans-serif;padding:0 0 10px;cursor:pointer;}
+.mod-subj-title{font:700 16px 'Poppins',sans-serif;color:#263238;margin:0 0 10px;}
+.mod-list{display:flex;flex-direction:column;gap:8px;}
+.mod-item{display:flex;align-items:center;gap:12px;border:1px solid #e0e6ea;border-radius:10px;background:#fff;padding:12px 14px;font:500 14px 'Poppins',sans-serif;color:#263238;text-align:left;cursor:pointer;}
+.mod-item .mi{font-size:22px;flex-shrink:0;}
+.mod-item:active{background:#e3f2fd;}
+body.wide .mod-subj{font-size:18px;min-height:90px;}
+body.wide .mod-item{font-size:16px;padding:14px 18px;}
+#modViewer{position:fixed;inset:0;z-index:3900;background:#263238;display:flex;flex-direction:column;}
+#modViewer.hidden{display:none!important;}
+#modViewer .mv-bar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--royal);color:#fff;}
+#modViewer .mv-bar button{border:none;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;font:700 15px 'Poppins',sans-serif;padding:8px 14px;cursor:pointer;flex-shrink:0;}
+#modViewer .mv-title{flex:1;min-width:0;font:600 15px 'Poppins',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#modViewer .mv-open{color:#fff;font:600 13px 'Poppins',sans-serif;flex-shrink:0;}
+#modViewer iframe{flex:1;width:100%;border:0;background:#fff;}
+/* Learning Resources */
+.lr-add{width:100%;border:2px dashed var(--royal-light);background:#f5f9ff;color:var(--royal);border-radius:12px;padding:10px;font:700 14px 'Poppins',sans-serif;cursor:pointer;margin-bottom:12px;}
+.mod-row{display:flex;gap:8px;align-items:stretch;}
+.mod-row .mod-item{flex:1;min-width:0;}
+.mod-item .mt{min-width:0;overflow-wrap:anywhere;}
+.mod-item .mt small{display:block;font-size:11px;color:#78909c;margin-top:2px;}
+.mod-del{border:1px solid #e0e6ea;background:#fff;border-radius:10px;padding:0 12px;font-size:18px;cursor:pointer;}
+.lr-form label{display:block;font:600 12px 'Poppins',sans-serif;color:#455a64;margin-bottom:4px;}
+.lr-form textarea.field{resize:vertical;}
+.lr-hint{background:#e3f2fd;color:#0d47a1;border-radius:10px;padding:8px 12px;font-size:12px;line-height:1.45;margin:-4px 0 12px;}
+.krs-grades{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+#kResPane .kv-card{max-width:1100px;}
+#kResPane .mod-subj{font-size:20px;min-height:96px;}
+#kResPane .mod-item{font-size:18px;padding:16px 18px;}
+#kResPane .mod-chip{font-size:15px;padding:8px 16px;}
+#kResPane .mod-subj-title{font-size:18px;}
+/* Daily Challenge (SMART) */
+.dc-list{display:flex;flex-direction:column;gap:8px;}
+.dc-row{border:1px solid #dde6f3;border-radius:12px;padding:10px 12px;background:#fff;display:grid;grid-template-columns:200px 1fr auto;gap:10px;align-items:start;font-size:13px;}
+.dc-row.today{border-color:var(--royal-light);background:#f5f9ff;}
+.dc-row.other{color:#78909c;grid-template-columns:200px 1fr;}
+.dc-d{font-weight:700;color:var(--royal);}
+.dc-now{display:inline-block;background:var(--royal);color:#fff;border-radius:10px;font-size:10px;padding:1px 8px;}
+.dc-q{color:#263238;margin-top:2px;overflow-wrap:anywhere;}
+.dc-t small{display:block;color:#78909c;font-size:11px;}
+.dc-act{display:flex;flex-direction:column;gap:4px;}
+.dc-act button{border:1px solid var(--royal-light);background:#fff;color:var(--royal);border-radius:8px;padding:4px 10px;font:600 12px 'Poppins',sans-serif;cursor:pointer;white-space:nowrap;}
+@media(max-width:560px){.dc-row,.dc-row.other{grid-template-columns:1fr;}.dc-act{flex-direction:row;}}
+.dc-type{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.dc-type label{flex:1;min-width:150px;border:1.5px solid var(--royal-light);border-radius:10px;padding:10px;cursor:pointer;font-size:13px!important;color:var(--royal)!important;margin:0!important;}
+.dc-type label:has(input:checked){background:var(--royal);color:#fff!important;}
+.dc-type small{font-weight:500;opacity:.85;}
+.dc-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.dc-warn{background:#fff3f3;color:#c62828;border:1px solid #f5c2c2;border-radius:10px;padding:8px 12px;font-size:13px;font-weight:600;margin:-4px 0 12px;}
+.dc-chk{display:flex!important;align-items:center;gap:8px;margin:0 0 10px!important;font-size:13px!important;cursor:pointer;}
+.dc-ch{display:flex;align-items:center;gap:8px;}
+.dc-ch label{display:flex!important;align-items:center;gap:4px;margin:0 0 12px!important;font-size:14px!important;color:var(--royal)!important;cursor:pointer;flex-shrink:0;}
+.dc-ch .field{flex:1;}
+.dc-pic{display:flex;align-items:center;gap:10px;font-size:12px;color:#607d8b;margin-bottom:6px;}
+.dc-pic img{max-width:160px;max-height:110px;border-radius:8px;border:1px solid #dde6f3;}
+#dcPicFile{margin-bottom:12px;font-size:13px;}
+/* Daily Challenge (kiosk, kanan ng attendance screen) */
+body.kiosk-land.dc-on #kioskScreen .k-top,body.kiosk-land.dc-on #kScanPane{width:65%!important;align-self:flex-start;box-sizing:border-box;}
+body.kiosk-land.dc-on #kScanPane .k-card{max-width:calc(100% - 60px);}
+body.kiosk-land.dc-on #kScanPane .k-cta{white-space:normal;}
+body.kiosk-land.dc-on #kioskScreen .k-top .k-meaning{letter-spacing:.3px;}
+body.dc-on #kAtt{right:34%;--u:min(1.3vh,.56vw);border-radius:0 0 28px 0;}
+body.dc-on .ka-n,body.dc-on .ka-card{max-width:92%;}
+#dcBox{--s:1;position:fixed;right:2.5%;top:calc(50% + 50px);transform:translateY(-50%);width:31%;z-index:3850;background:#fff;color:#1a237e;border-radius:22px;
+  border:3px solid #90caf9;box-shadow:0 10px 26px rgba(0,0,0,.35);overflow:hidden;text-align:left;font-family:'Poppins',sans-serif;}
+#dcBox.hidden{display:none!important;}
+#dcBox .th{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:calc(var(--s)*16px) 24px calc(var(--s)*14px);}
+#dcBox .th b{display:block;font-size:calc(var(--s)*34px);letter-spacing:.3px;line-height:1.1;}
+#dcBox .th i{display:block;font-size:calc(var(--s)*20px);font-weight:500;opacity:.95;margin-top:4px;}
+#dcBox .cat{display:inline-block;margin:calc(var(--s)*18px) 24px 0;background:#e3f2fd;color:#0d47a1;border-radius:20px;padding:5px 16px;font-weight:700;font-size:calc(var(--s)*20px);}
+#dcBox .q{padding:calc(var(--s)*12px) 24px 4px;font-size:calc(var(--s)*32px);font-weight:700;line-height:1.3;color:#0d1b4c;overflow-wrap:anywhere;}
+#dcBox .pic{margin:calc(var(--s)*10px) 24px 0;text-align:center;}
+#dcBox .pic img{max-width:100%;max-height:calc(var(--s)*230px);border-radius:12px;object-fit:contain;}
+#dcBox .ch{margin:calc(var(--s)*10px) 24px 0;display:grid;gap:calc(var(--s)*10px);}
+#dcBox .c{display:flex;align-items:center;gap:14px;border:2px solid #bbdefb;border-radius:12px;padding:calc(var(--s)*9px) 16px;font-size:calc(var(--s)*27px);font-weight:600;color:#1a237e;background:#f5f9ff;line-height:1.25;}
+#dcBox .c span{min-width:0;overflow-wrap:anywhere;}
+#dcBox .c b{display:inline-flex;align-items:center;justify-content:center;width:calc(var(--s)*42px);height:calc(var(--s)*42px);border-radius:50%;background:#1a237e;color:#fff;font-size:calc(var(--s)*22px);flex-shrink:0;}
+#dcBox .c.ok{background:#1d4ed8;border-color:#1d4ed8;color:#fff;}
+#dcBox .c.ok b{background:#fff;color:#1d4ed8;}
+#dcBox .c.ok::after{content:'✔';margin-left:auto;font-size:calc(var(--s)*30px);}
+#dcBox .c.dim{opacity:.4;}
+#dcBox .ans{margin:calc(var(--s)*14px) 24px calc(var(--s)*22px);border-radius:14px;padding:calc(var(--s)*12px) 18px;overflow-wrap:anywhere;}
+#dcBox .ans.wait{background:#e3f2fd;color:#0d47a1;font-size:calc(var(--s)*21px);font-weight:600;border:2px dashed #64b5f6;}
+#dcBox .ans.show{background:#1d4ed8;color:#fff;font-size:calc(var(--s)*26px);font-weight:700;}
+#dcBox .ans.show small{display:block;font-size:calc(var(--s)*18px);font-weight:600;opacity:.9;margin-bottom:2px;}
+#dcBox .pad{height:calc(var(--s)*20px);}
 .side-btn.c-staff{background:#fff;color:var(--royal);border:2px solid var(--royal-light);box-shadow:none;min-height:60px;font-size:16px;}
 /* Search (wide) */
 .staff-tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;}
@@ -630,7 +724,7 @@ table.reqtab small{color:#78909c;}
     <div class="k-school">Ilayang Yuni Elementary School</div>
     <div class="k-tag">Sa Ilayang Yuni, Lahat RESPONSABLE</div>
     <div class="k-title">PORTAL</div>
-    <div class="k-meaning">Pupils' Online Records, Transactions and Attendance Log</div>
+    <div class="k-meaning">Pupils' Online Records, Transactions, Attendance and Learning Resources</div>
   </div>
 
   <!-- Scan -->
@@ -675,6 +769,16 @@ table.reqtab small{color:#78909c;}
     <div id="kLoginErr" class="error-msg hidden"></div>
     <button class="btn-primary" onclick="kioskAdminLogin()">Login</button>
     <button class="btn-secondary" onclick="kioskShowScan()">Bumalik</button>
+  </div>
+
+  <!-- Learning Resources (bisita) -->
+  <div id="kResPane" class="kv-pane hidden">
+    <div class="kv-card">
+      <div class="kv-title">📚 Learning Resources</div>
+      <div class="kv-subt">Mga babasahin at video para sa Kinder hanggang Grade 6</div>
+      <div id="krsBody"></div>
+      <button class="btn-secondary" onclick="kioskShowScan()">← Bumalik</button>
+    </div>
   </div>
 
   <!-- Visitor Log -->
@@ -765,6 +869,7 @@ table.reqtab small{color:#78909c;}
   <div id="kMenu" class="k-menu hidden" onclick="if(event.target===this)kioskCloseMenu()">
     <div class="k-menu-panel">
       <button class="k-mi" onclick="kioskMenuGo('portal')"><span class="mi-i">🎓</span><span><div class="mi-t">SMART</div><div class="mi-s">Student Portal</div></span></button>
+      <button class="k-mi" onclick="kioskMenuGo('resources')"><span class="mi-i">📚</span><span><div class="mi-t">Learning Resources</div><div class="mi-s">Mga babasahin at video bawat grade</div></span></button>
       <button class="k-mi" onclick="kioskMenuGo('visitor')"><span class="mi-i">🙋</span><span><div class="mi-t">Visitors' Log</div><div class="mi-s">Para sa mga bisita ng paaralan</div></span></button>
       <button class="k-mi" onclick="kioskMenuGo('request')"><span class="mi-i">📨</span><span><div class="mi-t">Request Form</div><div class="mi-s">SF10, SF9, Certification at iba pa</div></span></button>
       <button class="k-mi" onclick="kioskMenuGo('website')"><span class="mi-i">🌐</span><span><div class="mi-t">School Website</div><div class="mi-s">Ilayang Yuni Elementary School</div></span></button>
@@ -786,6 +891,7 @@ table.reqtab small{color:#78909c;}
   <div class="kw-name" id="kWelcomeName"></div>
 </div>
 
+<div id="dcBox" class="hidden kiosk-only" aria-live="polite"></div>
 <div id="kAtt" class="hidden kiosk-only" onclick="kattHide()">
   <div class="ka-ph"><img id="kaImg" class="hidden" alt=""/><div id="kaIni" class="ka-ini"></div>
     <div class="ka-ok"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
@@ -831,6 +937,16 @@ table.reqtab small{color:#78909c;}
     </div>
     <div class="menu-list" id="menuListContent"></div>
   </div>
+</div>
+
+<!-- ===== LEARNING MODULE VIEWER ===== -->
+<div id="modViewer" class="hidden">
+  <div class="mv-bar">
+    <button type="button" onclick="closeModuleViewer()">&larr; Bumalik</button>
+    <span class="mv-title" id="mvTitle"></span>
+    <a class="mv-open" id="mvOpen" href="#" target="_blank" rel="noopener">Buksan sa bagong tab</a>
+  </div>
+  <iframe id="mvFrame" title="Learning Module" referrerpolicy="no-referrer" allow="fullscreen"></iframe>
 </div>
 
 <!-- ===== GENERIC MODAL ===== -->
@@ -1209,6 +1325,7 @@ function renderSideActions(){
   const b=[["c-map","🗺️","Map","showMap()"],["c-room","🚪","Room","showRoom()"],["c-adv","👤","Adviser","showTeacher()"]];
   if(gl!=="K")b.push(["c-acad","📊","Grades","showGrades()"]);
   b.push(["c-acad","📅","Attendance","showAttendance()"],["c-acad","📋","Assessment","showAssessment()"]);
+  b.push(["c-mod","📚","Learning Resources","showResources()"]);
   if(currentUser.role==="admin"||currentUser.role==="teacher")b.push(["c-staff","📄","Print Certification","showCertOptions()"]);
   if(currentUser.role==="teacher")b.push(["c-staff","📝","Print SF9","showSF9()"]);
   if(currentUser.role==="student")b.push(["c-staff","📨","Request Form","showStudentRequest()"]);
@@ -1271,10 +1388,13 @@ function openMenu(){
     items.push({icon:"📍",label:"View Room",fn:"showRoom()"});
     items.push({icon:"🗺️",label:"View Map",fn:"showMap()"});
     items.push({icon:"👤",label:"View Teacher",fn:"showTeacher()"});
+    items.push({icon:"📚",label:"Learning Resources",fn:"showResources()"});
     if(isStaff)items.push({icon:"📄",label:"Print Certification",fn:"showCertOptions()"});
     if(currentUser.role==="teacher")items.push({icon:"📝",label:"Print SF9",fn:"showSF9()"});
     if(currentUser.role==="student")items.push({icon:"📨",label:"Request Form",fn:"showStudentRequest()"});
   }
+  if(!currentStudent&&currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher"))items.push({icon:"📚",label:"Learning Resources",fn:"showResources()"});
+  if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher"))items.push({icon:"🎯",label:"Daily Challenge",fn:"showDailyChallenge()"});
   if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher")){items.push({icon:"📊",label:"Generate Reports",fn:"showReports()"});items.push({icon:"📅",label:"Generate Attendance",fn:"showAttendanceReport()"});}
   if(currentUser&&currentUser.role==="admin"){items.push({icon:"🧑‍🏫",label:"Teachers Attendance",fn:"showTeacherAttendance()"});items.push({icon:"🧾",label:"Visitors Log",fn:"showVisitorLog()"});items.push({icon:"📨",label:"Request Log",fn:"showRequestLog()"});}
   items.push({icon:"🚪",label:KIOSK_MODE?"Tapos na":"Logout",fn:"doLogout()",danger:true});
@@ -1293,6 +1413,7 @@ function doLogout(){
 }
 function closeAllOverlays(){
   ["menuOverlay","genericOverlay","changePassOverlay"].forEach(hide);
+  closeModuleViewer();
   ["mapModalOverlay","roomModalOverlay","adviserModalOverlay"].forEach(id=>{
     const el=document.getElementById(id);if(el)el.classList.remove("active");
   });
@@ -1341,6 +1462,367 @@ function openGenericModal(title,bodyHtml,showStudentBar=false){
   show("genericOverlay");
 }
 function closeGenericModal(){hide("genericOverlay");}
+
+/* ============================================================
+   LEARNING RESOURCES (link ng Google Drive o YouTube na inilagay ng teacher)
+   Bata: sariling grade lang. Teacher at admin: pili ng grade at puwedeng magdagdag.
+   Kiosk: bukas sa bisita (walang login), pang-view lang.
+============================================================ */
+let lrData=null,lrWhere="smart",modViewerOpen=false;
+const LR_GRADE_LIST=["K","1","2","3","4","5","6"];
+function modGradeName(g){return g==="K"?"Kinder":"Grade "+g;}
+function lrIsStaff(){return lrWhere==="smart"&&currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher");}
+function lrBody(html){
+  if(lrWhere==="kiosk"){document.getElementById("krsBody").innerHTML=html;return;}
+  const bar=currentStudent&&currentUser&&currentUser.role==="student"?studentInfoBar():"";
+  document.getElementById("genericModalBody").innerHTML=bar+html;
+}
+function lrLoad(grade){
+  lrBody('<p class="empty-state">Kinukuha ang mga learning resource…</p>');
+  const req=lrWhere==="kiosk"?{action:"kioskResources",kioskKey:getKioskKey(),grade:grade,token:""}:{action:"getResources",grade:grade||""};
+  return callApi(req,{silent:lrWhere==="kiosk"}).then(res=>{
+    if(!res||!res.success){lrBody('<p class="empty-state">'+escHtml((res&&res.error)||"Hindi makuha ang mga learning resource.")+'</p>');return;}
+    lrData=res;lrRenderSubjects();
+  }).catch(e=>{if(e&&e.message==="auth")return;lrBody('<p class="empty-state">Hindi makuha ang mga learning resource. Subukan ulit.</p>');});
+}
+function showResources(grade){
+  lrWhere="smart";
+  let g=grade;
+  if(!g&&currentStudent&&currentUser.role!=="student")g=normalizeGrade(currentStudent.classInfo.grade);
+  if(!g&&lrData&&lrData.grade&&currentUser.role!=="student")g=lrData.grade;
+  openGenericModal("📚 Learning Resources","",!!currentStudent&&currentUser.role==="student");
+  lrLoad(g);
+}
+function lrGradeChips(){
+  if(lrWhere==="smart"&&currentUser.role==="student")return"";
+  const fn=lrWhere==="kiosk"?"krsGrade":"showResources";
+  return '<div class="mod-grades">'+LR_GRADE_LIST.map(k=>`<button type="button" class="mod-chip${lrData&&k===lrData.grade?" on":""}" onclick="${fn}('${k}')">${modGradeName(k)}</button>`).join("")+'</div>';
+}
+function lrRenderSubjects(){
+  const d=lrData;let html=lrGradeChips();
+  if(lrIsStaff())html+='<button type="button" class="lr-add" onclick="lrShowAdd()">➕ Magdagdag ng resource</button>';
+  if(!d.subjects.length)html+=`<p class="empty-state">Wala pang learning resource para sa ${modGradeName(d.grade)}.</p>`;
+  else html+=`<p class="mod-subj-title">${modGradeName(d.grade)}: pumili ng subject</p><div class="mod-subjects">`+
+    d.subjects.map((s,i)=>`<button type="button" class="mod-subj" onclick="lrRenderList(${i})">${escHtml(s.name)}<small>${s.items.length} resource${s.items.length>1?"s":""}</small></button>`).join("")+'</div>';
+  lrBody(html);
+}
+function lrRenderList(i){
+  const s=lrData&&lrData.subjects[i];if(!s)return;
+  const staff=lrIsStaff();
+  const html=`<button type="button" class="mod-back" onclick="lrRenderSubjects()">&larr; Mga subject</button>`+
+    `<p class="mod-subj-title">${modGradeName(lrData.grade)} &middot; ${escHtml(s.name)}</p><div class="mod-list">`+
+    s.items.map((m,j)=>`<div class="mod-row"><button type="button" class="mod-item" onclick="openResource(${i},${j})"><span class="mi">${m.type==="YouTube"?"▶️":"📄"}</span><span class="mt">${escHtml(m.title)}${staff&&m.by?`<small>Inilagay ni ${escHtml(m.by)}</small>`:""}</span></button>`+
+      (staff&&m.canDelete?`<button type="button" class="mod-del" title="Burahin" onclick="lrDelete(${i},${j})">🗑</button>`:"")+`</div>`).join("")+'</div>';
+  lrBody(html);
+}
+function lrDelete(i,j){
+  const m=lrData&&lrData.subjects[i]&&lrData.subjects[i].items[j];if(!m)return;
+  if(!confirm('Burahin ang "'+m.title+'"?\nHindi mabubura ang file sa Drive mo; ang link lang sa PORTAL.'))return;
+  callApi({action:"deleteResource",id:m.id}).then(res=>{
+    if(!res.success){alert(res.error||"Hindi nabura.");return;}
+    lrLoad(lrData.grade);
+  }).catch(()=>{});
+}
+function lrShowAdd(){
+  const g=lrData?lrData.grade:"K";
+  const subs=(lrData&&lrData.subjectList)||["Reading","Mathematics"];
+  lrBody(`<button type="button" class="mod-back" onclick="lrRenderSubjects()">&larr; Bumalik</button>
+    <p class="mod-subj-title">➕ Magdagdag ng learning resource</p>
+    <div class="lr-form">
+      <label>Grade</label>
+      <select id="lrGrade" class="field">${LR_GRADE_LIST.map(k=>`<option value="${k}"${k===g?" selected":""}>${modGradeName(k)}</option>`).join("")}</select>
+      <label>Subject</label>
+      <select id="lrSubject" class="field" onchange="document.getElementById('lrSubjectOther').classList.toggle('hidden',this.value!=='__other')">${subs.map(s=>`<option>${escHtml(s)}</option>`).join("")}<option value="__other">Iba pa (i-type)…</option></select>
+      <input id="lrSubjectOther" class="field hidden" type="text" maxlength="40" placeholder="Pangalan ng subject"/>
+      <label>Pamagat</label>
+      <input id="lrTitle" class="field" type="text" maxlength="120" placeholder="Hal. Pagbasa: Week 1 (puwedeng blangko kung YouTube)"/>
+      <label>Link (Google Drive o YouTube)</label>
+      <input id="lrLink" class="field" type="url" placeholder="https://drive.google.com/file/d/..."/>
+      <div class="lr-hint">📌 Sa Google Drive: i-right click ang file → <b>Share</b> → General access: <b>Anyone with the link</b> (Viewer) → <b>Copy link</b>. Nasa Drive mo pa rin ang file.</div>
+      <div id="lrErr" class="error-msg hidden"></div>
+      <button type="button" class="btn-primary" id="lrSave" onclick="lrSubmit()">I-save</button>
+    </div>`);
+}
+function lrSubmit(){
+  const sel=document.getElementById("lrSubject").value;
+  const subject=sel==="__other"?document.getElementById("lrSubjectOther").value.trim():sel;
+  const p={action:"addResource",grade:document.getElementById("lrGrade").value,subject,
+    title:document.getElementById("lrTitle").value.trim(),link:document.getElementById("lrLink").value.trim()};
+  const err=document.getElementById("lrErr");hide("lrErr");
+  if(!p.subject){err.textContent="Mag-type ng subject.";show("lrErr");return;}
+  if(!p.link){err.textContent="Ilagay ang link.";show("lrErr");return;}
+  const btn=document.getElementById("lrSave");btn.disabled=true;
+  callApi(p).then(res=>{
+    if(!document.getElementById("lrErr"))return;
+    if(!res.success){err.textContent=res.error||"Hindi na-save.";show("lrErr");return;}
+    lrLoad(res.grade).then(()=>{
+      const i=lrData&&lrData.subjects.findIndex(s=>s.name===res.subject);
+      if(i>=0)lrRenderList(i);
+    });
+  }).catch(()=>{if(document.getElementById("lrErr")){err.textContent="Connection error. Subukan ulit.";show("lrErr");}})
+    .finally(()=>{const b=document.getElementById("lrSave");if(b)b.disabled=false;});
+}
+function openResource(i,j){
+  const m=lrData&&lrData.subjects[i]&&lrData.subjects[i].items[j];
+  if(!m||!/^[A-Za-z0-9_-]+$/.test(m.fid))return;
+  const yt=m.type==="YouTube";
+  document.getElementById("mvTitle").textContent=m.title;
+  const open=document.getElementById("mvOpen");
+  open.href=yt?"https://www.youtube.com/watch?v="+m.fid:"https://drive.google.com/file/d/"+m.fid+"/view";
+  open.style.display=KIOSK_MODE?"none":"";
+  document.getElementById("mvFrame").src=yt?"https://www.youtube-nocookie.com/embed/"+m.fid+"?rel=0":"https://drive.google.com/file/d/"+m.fid+"/preview";
+  modViewerOpen=true;
+  if(typeof kioskLastActivity!=="undefined")kioskLastActivity=Date.now();
+  show("modViewer");
+}
+function closeModuleViewer(){
+  if(!modViewerOpen)return;
+  modViewerOpen=false;
+  document.getElementById("mvFrame").src="about:blank";
+  hide("modViewer");
+  if(typeof kioskLastActivity!=="undefined")kioskLastActivity=Date.now();
+}
+/* Kiosk: Learning Resources para sa bisita */
+function kioskShowResources(){
+  show("kioskScreen");kioskSetPane("resources");
+  lrWhere="kiosk";lrData=null;
+  kioskLastActivity=Date.now();
+  document.getElementById("krsBody").innerHTML='<p class="empty-state">Kinukuha…</p>';
+  callApi({action:"kioskResources",kioskKey:getKioskKey(),token:""},{silent:true}).then(res=>{
+    if(kioskPane!=="resources")return;
+    const c=(res&&res.counts)||{};
+    document.getElementById("krsBody").innerHTML='<p class="mod-subj-title">Pumili ng grade</p><div class="krs-grades">'+
+      LR_GRADE_LIST.map(k=>`<button type="button" class="mod-subj" onclick="krsGrade('${k}')">${modGradeName(k)}<small>${c[k]?c[k]+" resource"+(c[k]>1?"s":""):"Wala pa"}</small></button>`).join("")+'</div>';
+  }).catch(()=>{document.getElementById("krsBody").innerHTML='<p class="empty-state">Walang internet. Subukan ulit mamaya.</p>';});
+}
+function krsGrade(g){lrWhere="kiosk";kioskLastActivity=Date.now();lrLoad(g);}
+
+/* ============================================================
+   DAILY CHALLENGE / DAILY TRIVIA (ginagawa sa SMART, lumalabas sa kanan ng kiosk)
+   Isa bawat araw. Challenge: may choices o wala; lalabas ang sagot pagpatak ng 11:00 AM.
+============================================================ */
+const DC_ICONS={Reading:"📖",Math:"🔢",Science:"🔬",GMRC:"🤝",General:"💡"};
+let dcList=null,dcEdit=null,dcPic="",dcRemovePic=false;
+function dcPretty(ymd){return ymdLabel(ymd,true);}
+function showDailyChallenge(){
+  closeMenu();
+  openGenericModal("🎯 Daily Challenge",'<p class="empty-state">Naglo-load…</p>');
+  dcLoadList();
+}
+function dcLoadList(){
+  return callApi({action:"listChallenges"}).then(res=>{
+    if(!res.success){dcBody('<p class="empty-state">'+escHtml(res.error||"Hindi makuha.")+'</p>');return;}
+    dcList=res;dcRenderList();
+  }).catch(e=>{if(e&&e.message!=="auth")dcBody('<p class="empty-state">Hindi makuha. Subukan ulit.</p>');});
+}
+function dcBody(html){const b=document.getElementById("genericModalBody");if(b)b.innerHTML=html;}
+function dcRenderList(){
+  const L=dcList,up=L.items.filter(x=>x.date>=L.today),past=L.items.filter(x=>x.date<L.today&&x.mine).reverse();
+  const row=x=>x.mine
+    ?`<div class="dc-row${x.date===L.today?" today":""}"><div class="dc-d">${escHtml(dcPretty(x.date))}${x.date===L.today?' <span class="dc-now">Ngayon</span>':""}</div>
+       <div class="dc-t"><b>${x.type==="Trivia"?"💡 Trivia":"🎯 Challenge"}</b> · ${escHtml(x.category)}${x.hasPic?" · 🖼️":""}<div class="dc-q">${escHtml(x.text)}</div>${x.by&&currentUser.role==="admin"?`<small>Ginawa ni ${escHtml(x.by)}</small>`:""}</div>
+       <div class="dc-act"><button type="button" onclick="dcShowForm('${x.id}')">✏️ Baguhin</button><button type="button" onclick="dcDelete('${x.id}')">🗑 Burahin</button></div></div>`
+    :`<div class="dc-row other"><div class="dc-d">${escHtml(dcPretty(x.date))}</div><div class="dc-t">May Daily ${escHtml(x.type)} na (gawa ng iba)</div></div>`;
+  dcBody(`<button type="button" class="lr-add" onclick="dcShowForm()">➕ Gumawa ng Daily Challenge o Trivia</button>
+    <p class="mod-subj-title">Naka-schedule</p>
+    ${up.length?'<div class="dc-list">'+up.map(row).join("")+'</div>':'<p class="empty-state">Wala pang naka-schedule. Walang lalabas na kahon sa kiosk kapag wala.</p>'}
+    ${past.length?'<p class="mod-subj-title" style="margin-top:16px;">Mga nakaraan (sariling gawa)</p><div class="dc-list">'+past.map(row).join("")+'</div>':""}`);
+}
+function dcTakenBy(date){
+  if(!dcList)return null;
+  return dcList.items.filter(x=>x.date===date&&(!dcEdit||x.id!==dcEdit.id))[0]||null;
+}
+// Unang bakanteng araw mula ngayon (Lunes hanggang Biyernes)
+function dcNextFree(){
+  const d=new Date(dcList.today+"T00:00:00Z");
+  for(let i=0;i<60;i++){
+    const ymd=d.toISOString().slice(0,10),wd=d.getUTCDay();
+    if(wd>0&&wd<6&&!dcTakenBy(ymd))return ymd;
+    d.setUTCDate(d.getUTCDate()+1);
+  }
+  return dcList.today;
+}
+function dcShowForm(id){
+  dcEdit=id?dcList.items.filter(x=>x.id===id)[0]:null;
+  dcPic="";dcRemovePic=false;
+  const e=dcEdit||{type:"Challenge",category:"General",text:"",choices:["","","",""],answer:"",date:dcNextFree()};
+  const hasCh=e.type==="Challenge"&&e.choices.some(x=>x);
+  dcBody(`<button type="button" class="mod-back" onclick="dcRenderList()">&larr; Bumalik</button>
+    <p class="mod-subj-title">${dcEdit?"✏️ Baguhin":"➕ Bago"}</p>
+    <div class="lr-form dc-form">
+      <div class="dc-type"><label><input type="radio" name="dcType" value="Challenge"${e.type!=="Trivia"?" checked":""} onchange="dcSync()"/> 🎯 Daily Challenge <small>(tanong)</small></label>
+        <label><input type="radio" name="dcType" value="Trivia"${e.type==="Trivia"?" checked":""} onchange="dcSync()"/> 💡 Daily Trivia <small>(fact lang)</small></label></div>
+      <div class="dc-2">
+        <div><label>Petsa na lalabas</label><input id="dcDate" class="field" type="date" value="${e.date}"${currentUser.role==="admin"?"":` min="${dcList.today}"`} onchange="dcCheckDate()"/></div>
+        <div><label>Category</label><select id="dcCat" class="field">${dcList.categories.map(c=>`<option${c===e.category?" selected":""}>${c}</option>`).join("")}</select></div>
+      </div>
+      <div id="dcDateWarn" class="dc-warn hidden"></div>
+      <label id="dcTextLbl">Tanong</label>
+      <textarea id="dcText" class="field" rows="3" maxlength="300">${escHtml(e.text)}</textarea>
+      <div id="dcChBox">
+        <label class="dc-chk"><input type="checkbox" id="dcHasCh"${hasCh?" checked":""} onchange="dcSync()"/> May choices (A–D)</label>
+        <div id="dcChoices">${"ABCD".split("").map((l,i)=>`<div class="dc-ch"><label title="Tamang sagot"><input type="radio" name="dcAns" value="${l}"${hasCh&&e.answer===l?" checked":""}/> ${l}</label><input class="field" id="dcCh${l}" maxlength="80" value="${escHtml(e.choices[i]||"")}" placeholder="${i<2?"Choice "+l:"Choice "+l+" (optional)"}"/></div>`).join("")}
+          <div class="lr-hint">Pindutin ang bilog sa tabi ng tamang sagot.</div></div>
+        <div id="dcAnsBox"><label>Sagot</label><input id="dcAnsText" class="field" maxlength="150" value="${hasCh?"":escHtml(e.answer)}"/></div>
+        <div class="lr-hint">⏰ Lalabas ang sagot sa kiosk pagpatak ng 11:00 AM.</div>
+      </div>
+      <label>Picture <i>(optional)</i></label>
+      <div class="dc-pic"><img id="dcPicPrev" class="hidden" alt=""/><span id="dcPicNote">${dcEdit&&dcEdit.hasPic?"May picture na. Pumili ng bago para palitan.":""}</span></div>
+      <input type="file" id="dcPicFile" accept="image/*" onchange="dcPickPic(this)"/>
+      ${dcEdit&&dcEdit.hasPic?'<label class="dc-chk"><input type="checkbox" id="dcRmPic" onchange="dcRemovePic=this.checked"/> Alisin ang picture</label>':""}
+      <div id="dcErr" class="error-msg hidden"></div>
+      <button type="button" class="btn-primary" id="dcSave" onclick="dcSubmit()">I-save</button>
+    </div>`);
+  dcSync();dcCheckDate();
+}
+function dcSync(){
+  const tr=document.querySelector('input[name="dcType"]:checked').value==="Trivia";
+  document.getElementById("dcTextLbl").textContent=tr?"Trivia (fact)":"Tanong";
+  document.getElementById("dcText").placeholder=tr?"Hal. Ang Pilipinas ay may mahigit 7,000 na isla.":"Hal. What is the hottest planet?";
+  document.getElementById("dcChBox").classList.toggle("hidden",tr);
+  const ch=document.getElementById("dcHasCh").checked;
+  document.getElementById("dcChoices").classList.toggle("hidden",!ch);
+  document.getElementById("dcAnsBox").classList.toggle("hidden",ch);
+  dcCheckDate();
+}
+function dcCheckDate(){
+  const d=document.getElementById("dcDate").value,w=document.getElementById("dcDateWarn");
+  const t=d&&dcTakenBy(d);
+  if(t){w.textContent="May Daily "+t.type+" na sa "+dcPretty(d)+". Pumili ng ibang araw.";show("dcDateWarn");}
+  else hide("dcDateWarn");
+  return !t;
+}
+// Pinaliliit ang picture sa tablet/laptop bago i-upload (mga 100 hanggang 300 KB)
+function dcPickPic(inp){
+  const f=inp.files&&inp.files[0];dcPic="";
+  const prev=document.getElementById("dcPicPrev"),note=document.getElementById("dcPicNote");
+  if(!f){prev.classList.add("hidden");return;}
+  if(!/^image\//.test(f.type)){note.textContent="Picture lang ang puwede.";inp.value="";return;}
+  note.textContent="Inihahanda ang picture…";
+  const url=URL.createObjectURL(f),img=new Image();
+  img.onload=()=>{
+    const max=900,s=Math.min(1,max/Math.max(img.width,img.height));
+    const c=document.createElement("canvas");c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);
+    const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);
+    URL.revokeObjectURL(url);
+    let q=.85;dcPic=c.toDataURL("image/jpeg",q);
+    while(dcPic.length>400000&&q>.4){q-=.15;dcPic=c.toDataURL("image/jpeg",q);}
+    prev.src=dcPic;prev.classList.remove("hidden");
+    note.textContent="Mga "+Math.round(dcPic.length*.75/1024)+" KB";
+  };
+  img.onerror=()=>{URL.revokeObjectURL(url);note.textContent="Hindi mabasa ang picture. Pumili ng iba.";inp.value="";};
+  img.src=url;
+}
+function dcSubmit(){
+  const err=document.getElementById("dcErr");hide("dcErr");
+  const type=document.querySelector('input[name="dcType"]:checked').value;
+  const ch=type==="Challenge"&&document.getElementById("dcHasCh").checked;
+  const a=document.querySelector('input[name="dcAns"]:checked');
+  const p={action:"saveChallenge",id:dcEdit?dcEdit.id:"",type,date:document.getElementById("dcDate").value,
+    category:document.getElementById("dcCat").value,text:document.getElementById("dcText").value.trim(),
+    choices:JSON.stringify(ch?"ABCD".split("").map(l=>document.getElementById("dcCh"+l).value.trim()):["","","",""]),
+    answer:type==="Trivia"?"":ch?(a?a.value:""):document.getElementById("dcAnsText").value.trim(),
+    picture:dcPic,removePicture:dcRemovePic&&!dcPic};
+  const fail=m=>{err.textContent=m;show("dcErr");};
+  if(!p.date)return fail("Pumili ng petsa.");
+  if(!dcCheckDate())return fail(document.getElementById("dcDateWarn").textContent);
+  if(!p.text)return fail(type==="Trivia"?"Isulat ang trivia (fact).":"Isulat ang tanong.");
+  if(ch&&!a)return fail("Piliin kung alin ang tamang sagot.");
+  if(type==="Challenge"&&!ch&&!p.answer)return fail("Isulat ang sagot.");
+  const btn=document.getElementById("dcSave");btn.disabled=true;
+  callApi(p).then(res=>{
+    if(!document.getElementById("dcErr"))return;
+    if(!res.success){fail(res.error||"Hindi na-save.");if(res.taken)dcLoadList().then(()=>{});return;}
+    dcLoadList();
+  }).catch(e=>{if(e&&e.message!=="auth"&&document.getElementById("dcErr"))fail("Connection error. Subukan ulit.");})
+    .finally(()=>{const b=document.getElementById("dcSave");if(b)b.disabled=false;});
+}
+function dcDelete(id){
+  const x=dcList.items.filter(i=>i.id===id)[0];if(!x)return;
+  if(!confirm("Burahin ang Daily "+x.type+" sa "+dcPretty(x.date)+"?"))return;
+  callApi({action:"deleteChallenge",id}).then(res=>{
+    if(!res.success){alert(res.error||"Hindi nabura.");return;}
+    dcLoadList();
+  }).catch(()=>{});
+}
+
+/* Kiosk: kahon sa kanan ng attendance screen */
+const DC_STORE="smart_dc_today";
+const DC_REFRESH_MS=5*60000;
+let dcK={item:null,date:"",at:0,loading:false,pic:"",picId:"",fitFor:""};
+function dcKioskInit(){
+  try{const s=JSON.parse(localStorage.getItem(DC_STORE)||"null");if(s){dcK.item=s.item;dcK.date=s.date;}}catch(e){}
+  if(dcK.item&&dcK.item.picId)kattDbGet("dc_"+dcK.item.picId).then(u=>{if(u){dcK.pic=u;dcK.picId=dcK.item.picId;dcRender();}});
+  dcRender();
+  dcKioskFetch();
+  setInterval(dcKioskTick,15000);
+}
+function dcKioskTick(){
+  const now=kattParts(kattNow());
+  if(dcK.date&&dcK.date!==now.ymd){dcK.item=null;dcRender();}  // bagong araw: itago muna ang kahapon
+  const reveal=dcK.item&&dcK.item.type==="Challenge"&&!dcK.item.revealed&&now.min>=660;
+  if(reveal||Date.now()-dcK.at>=DC_REFRESH_MS||dcK.date!==now.ymd)dcKioskFetch();
+}
+function dcKioskFetch(){
+  if(dcK.loading||!getKioskKey())return;
+  dcK.loading=true;dcK.at=Date.now();
+  const have=dcK.picId&&dcK.pic?dcK.picId:"";
+  callApi({action:"kioskChallenge",kioskKey:getKioskKey(),havePic:have,token:""},{silent:true}).then(res=>{
+    if(!res||!res.success)return;
+    dcK.date=res.date;dcK.item=res.item||null;
+    const it=dcK.item;
+    if(it&&it.picId){
+      if(it.picture){dcK.pic=it.picture;dcK.picId=it.picId;kattDbPut("dc_"+it.picId,it.picture);}
+      else if(dcK.picId!==it.picId){dcK.pic="";dcK.picId="";}
+    }else{dcK.pic="";dcK.picId="";}
+    if(it)delete it.picture;
+    try{localStorage.setItem(DC_STORE,JSON.stringify({date:dcK.date,item:dcK.item}));}catch(e){}
+    dcRender();
+  }).catch(()=>{}).finally(()=>{dcK.loading=false;});
+}
+function dcRender(){
+  const box=document.getElementById("dcBox");if(!box)return;
+  const it=dcK.item;
+  if(!it){box.innerHTML="";dcUpdateVisible();return;}
+  const tr=it.type==="Trivia";
+  let html=`<div class="th"><b>${tr?"💡 Daily Trivia":"🎯 Daily Challenge"}</b><i>Bibo ang batang may alam!</i></div>
+    <div class="cat">${DC_ICONS[it.category]||"💡"} ${escHtml(it.category)}</div>
+    <div class="q">${escHtml(it.text)}</div>`;
+  if(it.picId&&dcK.pic&&dcK.picId===it.picId)html+=`<div class="pic"><img src="${dcK.pic}" alt=""/></div>`;
+  if(!tr){
+    const ans=String(it.answer||"");
+    const ch=it.choices||[];
+    if(ch.length)html+='<div class="ch">'+ch.map((t,i)=>{const l="ABCD"[i];return `<div class="c${it.revealed?(l===ans?" ok":" dim"):""}"><b>${l}</b><span>${escHtml(t)}</span></div>`;}).join("")+'</div>';
+    if(it.revealed){
+      const txt=ch.length?ans+". "+(ch["ABCD".indexOf(ans)]||""):ans;
+      html+=`<div class="ans show"><small>✔ SAGOT</small>${escHtml(txt)}</div>`;
+    }else html+='<div class="ans wait">⏳ Lalabas ang sagot mamayang 11:00 AM. Pag-isipan mo muna!</div>';
+  }else html+='<div class="pad"></div>';
+  box.innerHTML=html;
+  dcK.fitFor="";
+  dcUpdateVisible();
+}
+// Nakikita lang sa attendance/scan screen na nakahiga (landscape)
+function dcUpdateVisible(){
+  const box=document.getElementById("dcBox");if(!box)return;
+  const on=KIOSK_MODE&&!!dcK.item&&document.body.classList.contains("kiosk-land")
+    &&!document.getElementById("kioskScreen").classList.contains("hidden")&&kioskPane==="scan"
+    &&document.getElementById("kMenu").classList.contains("hidden")&&!kioskWebOpen&&!modViewerOpen
+    &&document.getElementById("kioskWelcome").classList.contains("hidden")&&document.getElementById("kioskCamera").classList.contains("hidden");
+  box.classList.toggle("hidden",!on);
+  document.body.classList.toggle("dc-on",on);
+  if(on)dcFit();
+}
+// Pinaliliit ang sulat kapag mahaba ang tanong para kasya sa screen
+function dcFit(){
+  const box=document.getElementById("dcBox");
+  const key=box.innerHTML.length+"|"+window.innerWidth+"x"+window.innerHeight;
+  if(dcK.fitFor===key)return;
+  dcK.fitFor=key;
+  let s=1;box.style.setProperty("--s",s);
+  const room=()=>box.getBoundingClientRect().height<=window.innerHeight*.8/(parseFloat(getComputedStyle(document.documentElement).zoom)||1);
+  while(s>.55&&!room()){s-=.05;box.style.setProperty("--s",s.toFixed(2));}
+}
 
 /* ============================================================
    VIEW GRADES
@@ -2665,8 +3147,9 @@ let kioskBuf="",kioskLastKey=0,kioskBufTimer=null,kioskMsgTimer=null;
 let kioskCamStream=null,kioskCamLoop=null,kioskCamLast="",kioskCamLastAt=0;
 let kioskMode="att"; // "att" = attendance (unang screen), "portal" = Student Portal
 let kioskPane="scan",kioskWebOpen=false,kioskLastWidth=0;
-const KIOSK_PANES={scan:"kScanPane",activate:"kActivatePane",admin:"kAdminPane",visitor:"kVisitorPane",request:"kRequestPane",thanks:"kThanksPane"};
+const KIOSK_PANES={scan:"kScanPane",activate:"kActivatePane",admin:"kAdminPane",visitor:"kVisitorPane",request:"kRequestPane",thanks:"kThanksPane",resources:"kResPane"};
 const KIOSK_ADMIN_IDLE_SECONDS=180; // mas mahaba kapag admin ang naka-login (pang-demo)
+const KIOSK_MODULE_IDLE_SECONDS=600; // nagbabasa o nanonood ng learning resource: hindi nakikita ang pindot sa loob ng PDF o video
 const KIOSK_WEB_IDLE_SECONDS=120;   // website/PRISM: hindi nakikita ang pindot sa loob, kaya mas mahaba
 const KIOSK_LINKS={
   website:{title:"🌐 School Website",url:"https://108929iyes.github.io/website/"},
@@ -2697,6 +3180,7 @@ function kioskFitScreen(){
   ["kioskScreen","kioskCamera"].forEach(id=>{const el=document.getElementById(id);if(el)el.style.zoom=zScan/zInfo;});
   const ka=document.getElementById("kAtt");if(ka)ka.style.zoom=1/zInfo; // gumagamit ng vh/vw ang blue screen
   updateLayout();
+  if(typeof dcUpdateVisible==="function")dcUpdateVisible();
 }
 
 function kioskInit(){
@@ -2720,6 +3204,7 @@ function kioskInit(){
   window.addEventListener("blur",()=>{if(kioskWebOpen)kioskLastActivity=Date.now();});
   kioskIdleTimer=setInterval(kioskIdleTick,1000);
   kattInit();
+  dcKioskInit();
   if(getKioskKey())kioskShowScan();else kioskShowActivate(true);
 }
 
@@ -2734,6 +3219,7 @@ function kioskTickClock(){
   document.getElementById("kClock").innerHTML=`${t}<small>PST</small>`;
   document.getElementById("kDate").textContent=`${days[wd]}, ${months[Number(p.month)-1]} ${p.day}, ${p.year}`;
   if(kioskMode==="att"){const w=document.getElementById("kWelcomeText"),g=kattGreeting()+"!";if(w.textContent!==g)w.textContent=g;}
+  dcUpdateVisible();
 }
 
 function kioskOnScanScreen(){return !document.getElementById("kioskScreen").classList.contains("hidden")&&kioskPane==="scan";}
@@ -2746,6 +3232,7 @@ function kioskSetPane(name){
   kioskCloseMenu();
   scr.classList.toggle("kthanks",name==="thanks");
   scr.classList.toggle("k-nofoot",name!=="scan");
+  dcUpdateVisible();
 }
 function kioskFocusInput(){
   if(!KIOSK_MODE)return;
@@ -2835,7 +3322,7 @@ function kioskSubmitScan(raw){
     if(viewing)kioskEndSession(true); // may bagong nag-scan habang bukas pa ang info ng nauna
     currentUser={role:"student",lrn:res.lrn,name:res.name,token:res.token,kiosk:true};
     document.getElementById("kWelcomeName").textContent=(res.firstName||res.name||"")+"!";
-    show("kioskWelcome");
+    show("kioskWelcome");dcUpdateVisible();
     setTimeout(()=>{
       hide("kioskWelcome");
       if(!currentUser||currentUser.token!==res.token)return;
@@ -2868,11 +3355,12 @@ function kioskStillHere(){kioskLastActivity=Date.now();kioskCountdown=0;hide("ki
 function kioskIdleLimit(){
   if(currentUser&&currentUser.role==="admin")return KIOSK_ADMIN_IDLE_SECONDS;
   if(kioskWebOpen)return KIOSK_WEB_IDLE_SECONDS;
+  if(modViewerOpen)return KIOSK_MODULE_IDLE_SECONDS;
   return KIOSK_IDLE_SECONDS;
 }
 function kioskIdleTick(){
   // May gumagamit: bata o admin na naka-login, bisitang nagfi-fill up, admin login, o website
-  const inUse=!!currentUser||kioskWebOpen||kioskPane==="visitor"||kioskPane==="request"||kioskPane==="admin";
+  const inUse=!!currentUser||kioskWebOpen||modViewerOpen||kioskPane==="visitor"||kioskPane==="request"||kioskPane==="admin"||kioskPane==="resources";
   if(!inUse){
     kioskCountdown=0;hide("kioskIdle");
     // Student Portal na walang nag-scan: bumalik sa attendance pagkalipas ng 30 segundo
@@ -2904,7 +3392,7 @@ function kioskActivate(){
     return callApi({action:"activateKiosk",token:res.token}).then(r=>{
       callApi({action:"logout",token:res.token},{silent:true}).catch(()=>{});
       if(!r.success){err.textContent=r.error||"Hindi na-activate.";show("kActivateErr");return;}
-      setKioskKey(r.kioskKey);
+      setKioskKey(r.kioskKey);dcKioskFetch();
       kioskShowScan();
       kattRefreshRoster(true);
       kioskSetMsg("✓ Naka-activate na ang kiosk.","ok");
@@ -3108,11 +3596,13 @@ function kioskToggleMenu(){
   const m=document.getElementById("kMenu");
   if(m.classList.contains("hidden")){m.classList.remove("hidden");kioskMenuOpenedAt=Date.now();}
   else kioskCloseMenu();
+  dcUpdateVisible();
 }
-function kioskCloseMenu(){const m=document.getElementById("kMenu");if(m)m.classList.add("hidden");}
+function kioskCloseMenu(){const m=document.getElementById("kMenu");if(m)m.classList.add("hidden");if(typeof dcUpdateVisible==="function")dcUpdateVisible();}
 function kioskMenuGo(what){
   kioskCloseMenu();
   if(what==="portal"){kioskShowScan();kioskSetMode("portal");}
+  else if(what==="resources")kioskShowResources();
   else if(what==="visitor")kioskShowVisitor();
   else if(what==="request")kioskShowRequest();
   else if(what==="admin")kioskShowAdminLogin();
@@ -3351,7 +3841,7 @@ function kioskSubmitRequest(){
 /* School Website at PRISM (bukas sa loob ng kiosk, hindi makakalabas sa ibang site) */
 function kioskOpenWeb(which){
   const link=KIOSK_LINKS[which];if(!link)return;
-  kioskWebOpen=true;kioskLastActivity=Date.now();
+  kioskWebOpen=true;dcUpdateVisible();kioskLastActivity=Date.now();
   document.getElementById("kWebTitle").textContent=link.title;
   document.getElementById("kWebFrame").src=link.url;
   show("kioskWeb");
@@ -3377,7 +3867,7 @@ function kioskCloseWeb(silent){
 /* Camera (backup kapag walang scanner) */
 function kioskOpenCamera(){
   if(!getKioskKey()){kioskShowActivate(true);return;}
-  show("kioskCamera");
+  show("kioskCamera");dcUpdateVisible();
   const msg=document.getElementById("kCamMsg");msg.textContent="Binubuksan ang camera...";
   navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:false}).then(stream=>{
     kioskCamStream=stream;
