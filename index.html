@@ -547,9 +547,21 @@ body.appmode #dcBox .cat{margin-left:18px;margin-right:18px;}
 body.appmode #dcBox .q,body.appmode #dcBox .pic,body.appmode #dcBox .ch{margin-left:0;margin-right:0;padding-left:18px;padding-right:18px;}
 body.appmode #dcBox .ans{margin-left:18px;margin-right:18px;}
 body.appmode .k-login-sub{display:block;}
-/* Laptop: magkatabi ang menu at ang Daily Challenge */
+/* Laptop: malalaking tile (3 bawat hanay); nasa kanan ang Daily Challenge kapag mayroon */
 @media (min-width:900px){
-  body.appmode .k-apphome{max-width:980px;display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
+  body.appmode .k-top{padding-top:10px;}
+  body.appmode .k-logo{width:76px;height:76px;}
+  body.appmode .k-title{font-size:42px;margin-top:4px;}
+  body.appmode .k-apphome{max-width:1180px;display:flex;gap:24px;align-items:flex-start;justify-content:center;margin-top:20px;}
+  body.appmode .ka-list{flex:0 1 860px;background:transparent;box-shadow:none;padding:0;overflow:visible;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  body.appmode .ka-list .k-mi-sep{display:none;}
+  body.appmode .ka-list .k-mi{flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:8px;background:#fff;border:none;border-radius:16px;padding:18px 14px;min-height:128px;box-shadow:0 6px 16px rgba(0,0,0,.25);transition:transform .12s,box-shadow .12s;}
+  body.appmode .ka-list .k-mi:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.35);}
+  body.appmode .ka-list .k-mi .mi-i{font-size:38px;width:auto;}
+  body.appmode .ka-list .k-mi .mi-t,body.appmode .ka-list .k-mi.staff .mi-t{font-size:17px;font-weight:700;color:var(--royal-dark);}
+  body.appmode .ka-list .k-mi .mi-s{font-size:11.5px;}
+  body.appmode #kAppDc{flex:0 0 360px;}
+  body.appmode #kAppDc:has(#dcBox.hidden){display:none;}
   body.appmode #dcBox{margin-top:0;}
 }
 .k-login-sub{display:none;}
@@ -1449,6 +1461,13 @@ function renderResultCard(d){
 }
 
 const EDIT_DATA_URL="https://docs.google.com/spreadsheets/d/1SKCxv9xt6L5399queFivgFkYPeDtigBuHlaE4fibggA/edit?usp=sharing";
+// Sa app: bumubukas sa loob (may Bumalik); sa browser: bagong tab
+function smartOpenLink(which){
+  closeMenu();
+  const link=KIOSK_LINKS[which];if(!link)return;
+  if(APP_MODE)kioskOpenWeb(which);
+  else window.open(link.url.replace("?embedded=true",""),"_blank","noopener");
+}
 function openEditData(){closeMenu();window.open(EDIT_DATA_URL,"_blank","noopener");}
 // Admin: buong Sheet. Teacher: table ng sariling section sa loob ng SMART.
 function showUpdateData(){
@@ -1582,6 +1601,8 @@ function openMenu(){
   if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher"))items.push({icon:"🎯",label:"Daily Challenge",fn:"showDailyChallenge()"});
   if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher")){items.push({icon:"📊",label:"Generate Reports",fn:"showReports()"});items.push({icon:"📅",label:"Generate Attendance",fn:"showAttendanceReport()"});}
   if(currentUser&&currentUser.role==="admin"){items.push({icon:"🧑‍🏫",label:"Teachers Attendance",fn:"showTeacherAttendance()"});items.push({icon:"🧾",label:"Visitors Log",fn:"showVisitorLog()"});items.push({icon:"📨",label:"Request Log",fn:"showRequestLog()"});}
+  // Ibang system ng school (wala sa kiosk na ginagamit ng lahat; may sariling menu ang kiosk)
+  if(!(KIOSK_MODE&&!APP_MODE)){[["🌐","School Website","website"],["🗂️","PRISM","prism"],["🧭","SCAN","scan"],["📝","FEEDBACK","feedback"]].forEach(([i,l,w])=>items.push({icon:i,label:l,fn:`smartOpenLink('${w}')`}));}
   // Update Data: bubukas ang Google Sheet sa bagong tab (hindi sa kiosk na ginagamit ng lahat)
   if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher")&&!(KIOSK_MODE&&!APP_MODE))items.push({icon:"✏️",label:"Update Data",fn:"showUpdateData()"});
   items.push({icon:"🚪",label:KIOSK_MODE&&!APP_MODE?"Tapos na":"Logout",fn:"doLogout()",danger:true});
@@ -4084,7 +4105,7 @@ function kioskCloseWeb(silent){
   try{frame.contentWindow.sessionStorage.clear();}catch(e){}
   frame.src="about:blank";
   hide("kioskWeb");
-  if(!silent)kioskShowScan();
+  if(!silent&&!currentUser)kioskShowScan(); // sa app: kung naka-login, bumalik lang sa SMART
 }
 
 /* Camera (backup kapag walang scanner) */
