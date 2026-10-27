@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://108929iyes.github.io https://docs.google.com https://drive.google.com https://www.youtube-nocookie.com"/>
 <title>SMART - Ilayang Yuni Elementary School</title>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#1a237e"/>
+<link rel="icon" type="image/png" href="icons/favicon-32.png"/>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="PORTAL"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -492,6 +498,61 @@ body.kiosk-land #kioskScreen:not(.k-full) #kScanPane{margin-bottom:auto;padding-
 .k-mi-sep{height:6px;background:#eceff1;}
 .k-noid{color:#9fa8da;font-size:10.5px;margin-top:8px;}
 #kioskScreen.k-full .k-top{display:none;}
+/* ===== UPDATE DATA (teacher): parang Sheet, sariling section lang ===== */
+#udOverlay{position:fixed;inset:0;z-index:1500;background:#fff;display:flex;flex-direction:column;}
+#udOverlay.hidden{display:none!important;}
+.ud-bar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(180deg,var(--royal) 0%,var(--royal-dark) 100%);color:#fff;flex-wrap:wrap;}
+.ud-bar button{font-family:'Poppins',sans-serif;border-radius:10px;cursor:pointer;font-weight:600;font-size:13px;padding:8px 12px;}
+.ud-back{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.35);}
+.ud-title{flex:1;min-width:150px;font-weight:700;font-size:16px;line-height:1.2;}
+.ud-title small{display:block;font-size:11px;font-weight:500;color:var(--royal-light);}
+.ud-save{background:#2e7d32;color:#fff;border:none;}
+.ud-save:disabled{background:#90a4ae;cursor:default;}
+.ud-count{font-size:12px;color:#fff59d;font-weight:600;}
+.ud-tabs{display:flex;gap:6px;padding:8px 12px 0;flex-wrap:wrap;}
+.ud-tabs button{border:1px solid var(--border);background:#fff;border-radius:16px;padding:4px 12px;font-family:'Poppins',sans-serif;font-size:12px;cursor:pointer;}
+.ud-tabs button.on{background:var(--royal);color:#fff;border-color:var(--royal);}
+.ud-msg{padding:8px 12px;font-size:12.5px;font-weight:600;}
+.ud-msg.ok{color:var(--success-text);} .ud-msg.err{color:#c62828;}
+.ud-msg:empty{display:none;}
+body:has(#udOverlay:not(.hidden)) #kioskDoneBtn{display:none!important;}
+@media (max-width:600px){table.udt .ud-nm{min-width:110px;max-width:130px;}}
+.ud-wrap{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;border-top:1px solid var(--border);}
+table.udt{border-collapse:separate;border-spacing:0;font-size:12.5px;}
+table.udt th,table.udt td{border-right:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;padding:0;white-space:nowrap;}
+table.udt thead th{position:sticky;background:#e8eaf6;color:var(--royal-dark);font-weight:700;padding:4px 8px;z-index:2;}
+table.udt thead tr:first-child th{top:0;height:26px;background:#c5cae9;}
+table.udt thead tr:nth-child(2) th{top:26px;}
+table.udt .ud-nm{position:sticky;left:0;z-index:1;background:#f5f5f5;font-weight:600;color:#263238;padding:4px 8px;min-width:150px;max-width:190px;overflow:hidden;text-overflow:ellipsis;}
+table.udt thead .ud-nm{z-index:3;background:#c5cae9;}
+table.udt input{border:none;background:transparent;font:inherit;padding:5px 7px;width:100%;min-width:64px;outline:none;color:#0d1b4c;}
+table.udt input:focus{background:#e3f2fd;box-shadow:inset 0 0 0 2px #1e88e5;}
+table.udt input[readonly]{background:#f5f5f5;color:#78909c;}
+table.udt td.chg input{background:#fff59d;}
+table.udt td.bad input{background:#ffcdd2;}
+.ud-note{padding:6px 12px 10px;font-size:11px;color:#607d8b;border-top:1px solid var(--border);}
+/* ===== PORTAL APP (index.html?app): naka-install sa phone o laptop; walang attendance ===== */
+.k-apphome{display:none;}
+body.appmode .k-apphome{display:block;width:calc(100% - 32px);max-width:480px;margin:18px auto 0;text-align:left;}
+body.appmode #kScanPane .k-card,body.appmode .k-arrow,body.appmode .k-hint,body.appmode .k-menu-btn{display:none!important;}
+body.appmode #kioskScreen{overflow-y:auto;-webkit-overflow-scrolling:touch;}
+body.appmode #kioskScreen:not(.k-full) #kScanPane{padding-bottom:24px;}
+body.appmode .k-top{padding-top:16px;}
+body.appmode .k-logo{width:92px;height:92px;}
+body.appmode .k-title{font-size:48px;margin-top:8px;}
+body.appmode .ka-list{background:#fff;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,.3);padding:6px 0;overflow:hidden;}
+body.appmode #dcBox{--s:.62;position:static;transform:none;width:auto;margin:14px 0 0;box-shadow:0 8px 20px rgba(0,0,0,.3);}
+body.appmode #dcBox .th{padding:12px 18px 10px;}
+body.appmode #dcBox .cat{margin-left:18px;margin-right:18px;}
+body.appmode #dcBox .q,body.appmode #dcBox .pic,body.appmode #dcBox .ch{margin-left:0;margin-right:0;padding-left:18px;padding-right:18px;}
+body.appmode #dcBox .ans{margin-left:18px;margin-right:18px;}
+body.appmode .k-login-sub{display:block;}
+/* Laptop: magkatabi ang menu at ang Daily Challenge */
+@media (min-width:900px){
+  body.appmode .k-apphome{max-width:980px;display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
+  body.appmode #dcBox{margin-top:0;}
+}
+.k-login-sub{display:none;}
 #kioskScreen .kv-pane,#kioskScreen .kt-pane{flex:1;}
 #kioskScreen.k-full .k-activate{margin:auto 0;}
 /* Visitor form */
@@ -713,6 +774,20 @@ table.reqtab small{color:#78909c;}
   </div>
 </div>
 
+<!-- ===== UPDATE DATA (teacher) ===== -->
+<div id="udOverlay" class="hidden">
+  <div class="ud-bar">
+    <button class="ud-back" onclick="udClose()">← Bumalik</button>
+    <div class="ud-title">✏️ Update Data<small id="udSub"></small></div>
+    <span class="ud-count" id="udCount"></span>
+    <button class="ud-save" id="udSave" onclick="udSave()" disabled>💾 Save</button>
+  </div>
+  <div class="ud-tabs" id="udTabs"></div>
+  <div class="ud-msg" id="udMsg"></div>
+  <div class="ud-wrap" id="udWrap"></div>
+  <div class="ud-note">Dilaw = binago pa lang, hindi pa naka-save. Kulay abo = hindi mababago (LRN, teacher at may formula). Puwedeng mag-paste mula sa Excel o Google Sheets.</div>
+</div>
+
 <!-- ===== KIOSK MODE (bukas lang kapag may ?kiosk sa link) ===== -->
 <div id="kioskScreen" class="hidden kiosk-only">
   <div class="k-bar">
@@ -746,6 +821,7 @@ table.reqtab small{color:#78909c;}
     </div>
     <div class="k-arrow">&#11015;</div>
     <div class="k-hint">Nasa ibaba ang scanner</div>
+    <div id="kAppHome" class="k-apphome"><div class="ka-list" id="kAppList"></div><div id="kAppDc"></div></div>
     <div class="k-credit">Developed by <b>ALI V. TELADA</b> &middot; Principal I &middot; October 2026</div>
   </div>
 
@@ -762,8 +838,8 @@ table.reqtab small{color:#78909c;}
 
   <!-- Administrator (parehong account ng admin sa portal) -->
   <div id="kAdminPane" class="k-activate hidden">
-    <h3>🔒 Administrator</h3>
-    <p>Mag-login gamit ang <b>admin</b> account ng portal.</p>
+    <h3 id="kLoginTitle">🔒 Administrator</h3>
+    <p id="kLoginNote">Mag-login gamit ang <b>admin</b> account ng portal.</p>
     <input id="kLoginUser" class="field" type="text" placeholder="Admin username" autocomplete="off"/>
     <input id="kLoginPass" class="field" type="password" placeholder="Admin password" onkeydown="if(event.key==='Enter')kioskAdminLogin()"/>
     <div id="kLoginErr" class="error-msg hidden"></div>
@@ -1091,7 +1167,7 @@ function show(id){document.getElementById(id).classList.remove("hidden");}
 function escHtml(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 // Landscape (malapad) na itsura: kiosk na nakahiga, at admin/teacher sa laptop. Portrait pa rin sa cellphone at sa bata.
 function isWideLayout(){
-  if(KIOSK_MODE)return document.body.classList.contains("kiosk-land");
+  if(KIOSK_MODE&&!APP_MODE)return document.body.classList.contains("kiosk-land");
   return !!(currentUser&&currentUser.role!=="student"&&window.innerWidth>=700);
 }
 function updateLayout(){
@@ -1372,6 +1448,115 @@ function renderResultCard(d){
     ${currentUser&&currentUser.role!=="student"?'<button class="back-btn" onclick="backToSearch()">&larr; Search another</button>':""}`;
 }
 
+const EDIT_DATA_URL="https://docs.google.com/spreadsheets/d/1SKCxv9xt6L5399queFivgFkYPeDtigBuHlaE4fibggA/edit?usp=sharing";
+function openEditData(){closeMenu();window.open(EDIT_DATA_URL,"_blank","noopener");}
+// Admin: buong Sheet. Teacher: table ng sariling section sa loob ng SMART.
+function showUpdateData(){
+  closeMenu();
+  if(currentUser.role==="admin"){openEditData();return;}
+  ud={tabs:[],cur:0};
+  document.getElementById("udWrap").innerHTML='<p class="empty-state">Kinukuha…</p>';
+  document.getElementById("udTabs").innerHTML="";udMsg("");
+  document.getElementById("udSub").textContent=currentUser.name||"";
+  show("udOverlay");udCountUpdate();
+  callApi({action:"getClassData"}).then(res=>{
+    if(!res||!res.success){document.getElementById("udWrap").innerHTML='<p class="empty-state">'+escHtml((res&&(res.error||res.message))||"Hindi makuha ang data.")+'</p>';return;}
+    ud.tabs=res.tabs||[];
+    if(!ud.tabs.length){document.getElementById("udWrap").innerHTML='<p class="empty-state">Walang nakitang bata na naka-assign sa inyo.</p>';return;}
+    udRender();
+  }).catch(()=>{document.getElementById("udWrap").innerHTML='<p class="empty-state">Walang internet. Subukan ulit.</p>';});
+}
+let ud={tabs:[],cur:0};
+function udMsg(t,kind){const m=document.getElementById("udMsg");m.textContent=t||"";m.className="ud-msg"+(kind?" "+kind:"");}
+function udVisibleCols(T){return T.cols.map((c,i)=>Object.assign({i},c)).filter(c=>!c.hidden);}
+function udRender(){
+  const T=ud.tabs[ud.cur];
+  document.getElementById("udTabs").innerHTML=ud.tabs.length>1?ud.tabs.map((t,i)=>`<button type="button" class="${i===ud.cur?"on":""}" onclick="udPickTab(${i})">${escHtml(t.tab)}</button>`).join(""):"";
+  const cols=udVisibleCols(T);
+  const ix=n=>T.cols.findIndex(c=>c.name.toLowerCase()===n);
+  const fi=ix("first_name"),li=ix("last_name");
+  // Unang header row: grupo (hal. GRADES: Math), pinagsasama ang magkakasunod na pareho
+  let g1='<th class="ud-nm" rowspan="2">Pangalan</th>',k=0;
+  while(k<cols.length){let n=1;while(k+n<cols.length&&cols[k+n].group===cols[k].group)n++;g1+=`<th colspan="${n}">${escHtml(cols[k].group||"")}</th>`;k+=n;}
+  const g2=cols.map(c=>`<th>${escHtml(c.name)}</th>`).join("");
+  const body=T.rows.map((row,ri)=>{
+    const nm=[li>=0?row.v[li]:"",fi>=0?row.v[fi]:""].filter(Boolean).join(", ");
+    return `<tr><td class="ud-nm" title="${escHtml(nm)}">${escHtml(nm)}</td>`+cols.map(c=>{
+      const ro=c.locked||row.f[c.i];
+      const cur=row.n&&c.i in row.n?row.n[c.i]:row.v[c.i];
+      const chg=row.n&&c.i in row.n;
+      return `<td class="${chg?"chg":""}"><input data-r="${ri}" data-c="${c.i}" value="${escHtml(cur)}"${ro?" readonly":""} size="${Math.max(4,Math.min(28,Math.max(String(cur).length,c.name.length)+1))}"/></td>`;}).join("")+"</tr>";
+  }).join("");
+  document.getElementById("udWrap").innerHTML=`<table class="udt"><thead><tr>${g1}</tr><tr>${g2}</tr></thead><tbody>${body}</tbody></table>`;
+  const wrap=document.getElementById("udWrap");
+  wrap.oninput=e=>{const t=e.target;if(t.tagName==="INPUT")udSet(+t.dataset.r,+t.dataset.c,t.value,t);};
+  wrap.onkeydown=udKey;wrap.onpaste=udPaste;
+  udCountUpdate();
+}
+function udPickTab(i){if(udChanges().length&&!confirm("May hindi pa naka-save. Lumipat pa rin?"))return;ud.tabs.forEach(t=>t.rows.forEach(r=>delete r.n));ud.cur=i;udMsg("");udRender();}
+function udSet(ri,c,val,inp){
+  const row=ud.tabs[ud.cur].rows[ri];row.n=row.n||{};
+  if(val===row.v[c])delete row.n[c];else row.n[c]=val;
+  if(inp){inp.parentElement.classList.toggle("chg",c in row.n);inp.parentElement.classList.remove("bad");}
+  udCountUpdate();
+}
+function udChanges(){
+  const T=ud.tabs[ud.cur];if(!T)return [];
+  const out=[];T.rows.forEach(row=>{if(row.n)Object.keys(row.n).forEach(c=>out.push({r:row.r,c:+c,old:row.v[c],v:row.n[c]}));});
+  return out;
+}
+function udCountUpdate(){
+  const n=udChanges().length;
+  document.getElementById("udCount").textContent=n?n+" binago":"";
+  document.getElementById("udSave").disabled=!n;
+}
+function udInput(ri,c){return document.querySelector(`#udWrap input[data-r="${ri}"][data-c="${c}"]`);}
+function udKey(e){
+  const t=e.target;if(t.tagName!=="INPUT")return;
+  const ri=+t.dataset.r,c=+t.dataset.c;
+  let nx=null;
+  if(e.key==="Enter"||e.key==="ArrowDown")nx=udInput(ri+1,c);
+  else if(e.key==="ArrowUp")nx=udInput(ri-1,c);
+  if(nx){e.preventDefault();nx.focus();nx.select();}
+}
+// Pag-paste ng maraming cell (galing Excel o Sheets): pababa at pakanan mula sa cell na pinili
+function udPaste(e){
+  const t=e.target;if(t.tagName!=="INPUT")return;
+  const txt=(e.clipboardData||window.clipboardData).getData("text");
+  if(!/[\t\n]/.test(txt.replace(/\r?\n$/,"")))return;
+  e.preventDefault();
+  const T=ud.tabs[ud.cur],cols=udVisibleCols(T).map(c=>c.i);
+  const lines=txt.replace(/\r/g,"").replace(/\n$/,"").split("\n");
+  const r0=+t.dataset.r,ci0=cols.indexOf(+t.dataset.c);
+  let n=0;
+  lines.forEach((ln,dr)=>{ln.split("\t").forEach((v,dc)=>{
+    const ri=r0+dr,ci=cols[ci0+dc];if(ri>=T.rows.length||ci===undefined)return;
+    const inp=udInput(ri,ci);if(!inp||inp.readOnly)return;
+    inp.value=v;udSet(ri,ci,v,inp);n++;
+  });});
+  udMsg(n+" cell ang na-paste. Pindutin ang Save para ma-save.","ok");
+}
+function udSave(){
+  const ch=udChanges();if(!ch.length)return;
+  const T=ud.tabs[ud.cur];
+  document.getElementById("udSave").disabled=true;
+  callApi({action:"saveClassData",tab:T.tab,changes:JSON.stringify(ch)}).then(res=>{
+    if(!res||!res.success){udMsg((res&&(res.message||res.error))||"Hindi na-save.","err");udCountUpdate();return;}
+    const bad={};(res.conflicts||[]).forEach(x=>{bad[x.r+"|"+x.c]=x.now;});
+    T.rows.forEach(row=>{if(!row.n)return;Object.keys(row.n).forEach(c=>{const k=row.r+"|"+c;
+      row.v[c]=k in bad?bad[k]:row.n[c];delete row.n[c];});});
+    udRender();
+    Object.keys(bad).forEach(k=>{const[r,c]=k.split("|");const ri=T.rows.findIndex(x=>x.r===+r);const inp=udInput(ri,+c);if(inp)inp.parentElement.classList.add("bad");});
+    const nb=Object.keys(bad).length;
+    udMsg("✓ Na-save ang "+res.saved+" cell."+(nb?" "+nb+" cell ang hindi na-save dahil may ibang nagbago nito sa Sheet (pula). Tingnan at i-type ulit kung kailangan.":""),nb?"err":"ok");
+    // Kunin ulit ang bagong itsura ng Sheet (hal. naka-format na numero o petsa)
+    if(!nb)callApi({action:"getClassData"},{silent:true}).then(r=>{if(r&&r.success&&!udChanges().length){ud.tabs=r.tabs||[];ud.cur=Math.min(ud.cur,ud.tabs.length-1);if(ud.tabs.length)udRender();}}).catch(()=>{});
+  }).catch(()=>{udMsg("Walang internet. Hindi pa na-save; subukan ulit.","err");udCountUpdate();});
+}
+function udClose(){
+  if(udChanges().length&&!confirm("May binago na hindi pa naka-save. Isara pa rin?"))return;
+  hide("udOverlay");
+}
 function backToSearch(){hide("resultWrap");hide("sideActions");show("searchWrap");}
 
 /* ============================================================
@@ -1397,7 +1582,9 @@ function openMenu(){
   if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher"))items.push({icon:"🎯",label:"Daily Challenge",fn:"showDailyChallenge()"});
   if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher")){items.push({icon:"📊",label:"Generate Reports",fn:"showReports()"});items.push({icon:"📅",label:"Generate Attendance",fn:"showAttendanceReport()"});}
   if(currentUser&&currentUser.role==="admin"){items.push({icon:"🧑‍🏫",label:"Teachers Attendance",fn:"showTeacherAttendance()"});items.push({icon:"🧾",label:"Visitors Log",fn:"showVisitorLog()"});items.push({icon:"📨",label:"Request Log",fn:"showRequestLog()"});}
-  items.push({icon:"🚪",label:KIOSK_MODE?"Tapos na":"Logout",fn:"doLogout()",danger:true});
+  // Update Data: bubukas ang Google Sheet sa bagong tab (hindi sa kiosk na ginagamit ng lahat)
+  if(currentUser&&(currentUser.role==="admin"||currentUser.role==="teacher")&&!(KIOSK_MODE&&!APP_MODE))items.push({icon:"✏️",label:"Update Data",fn:"showUpdateData()"});
+  items.push({icon:"🚪",label:KIOSK_MODE&&!APP_MODE?"Tapos na":"Logout",fn:"doLogout()",danger:true});
   document.getElementById("menuListContent").innerHTML=items.map(it=>
     `<div class="menu-item${it.danger?" menu-item-danger":""}" onclick="${it.fn}"><span class="micon">${it.icon}</span><span>${it.label}</span></div>`
   ).join("");
@@ -1412,7 +1599,7 @@ function doLogout(){
   resetToLogin();
 }
 function closeAllOverlays(){
-  ["menuOverlay","genericOverlay","changePassOverlay"].forEach(hide);
+  ["menuOverlay","genericOverlay","changePassOverlay","udOverlay"].forEach(hide);
   closeModuleViewer();
   ["mapModalOverlay","roomModalOverlay","adviserModalOverlay"].forEach(id=>{
     const el=document.getElementById(id);if(el)el.classList.remove("active");
@@ -1569,7 +1756,7 @@ function openResource(i,j){
   document.getElementById("mvTitle").textContent=m.title;
   const open=document.getElementById("mvOpen");
   open.href=yt?"https://www.youtube.com/watch?v="+m.fid:"https://drive.google.com/file/d/"+m.fid+"/view";
-  open.style.display=KIOSK_MODE?"none":"";
+  open.style.display=KIOSK_MODE&&!APP_MODE?"none":"";
   document.getElementById("mvFrame").src=yt?"https://www.youtube-nocookie.com/embed/"+m.fid+"?rel=0":"https://drive.google.com/file/d/"+m.fid+"/preview";
   modViewerOpen=true;
   if(typeof kioskLastActivity!=="undefined")kioskLastActivity=Date.now();
@@ -1805,6 +1992,7 @@ function dcRender(){
 // Nakikita lang sa attendance/scan screen na nakahiga (landscape)
 function dcUpdateVisible(){
   const box=document.getElementById("dcBox");if(!box)return;
+  if(APP_MODE){box.classList.toggle("hidden",!dcK.item);return;} // sa app: nasa itaas ng menu
   const on=KIOSK_MODE&&!!dcK.item&&document.body.classList.contains("kiosk-land")
     &&!document.getElementById("kioskScreen").classList.contains("hidden")&&kioskPane==="scan"
     &&document.getElementById("kMenu").classList.contains("hidden")&&!kioskWebOpen&&!modViewerOpen
@@ -3137,7 +3325,9 @@ function generateExcelList(nameList,title){
    KIOSK MODE (tablet sa gate) - bukas lang kapag may ?kiosk sa link
    Hal: https://.../index.html?kiosk   o   kiosk.html (nagre-redirect dito)
 ============================================================ */
-const KIOSK_MODE=new URLSearchParams(location.search).has("kiosk");
+// ?app = PORTAL app sa phone o laptop: parehong menu ng kiosk pero walang attendance at hindi kailangang i-activate
+const APP_MODE=new URLSearchParams(location.search).has("app");
+const KIOSK_MODE=APP_MODE||new URLSearchParams(location.search).has("kiosk");
 const KIOSK_KEY_STORE="smart_kiosk_key";
 const KIOSK_IDLE_SECONDS=60;   // walang galaw bago lumabas ang countdown
 const KIOSK_COUNTDOWN=10;      // segundo bago bumalik sa scan screen
@@ -3160,10 +3350,11 @@ const KIOSK_LINKS={
 };
 let kioskMenuOpenedAt=0;
 
-function getKioskKey(){try{return localStorage.getItem(KIOSK_KEY_STORE)||"";}catch(e){return "";}}
-function setKioskKey(k){try{if(k)localStorage.setItem(KIOSK_KEY_STORE,k);else localStorage.removeItem(KIOSK_KEY_STORE);}catch(e){}}
+function getKioskKey(){if(APP_MODE)return "APP";try{return localStorage.getItem(KIOSK_KEY_STORE)||"";}catch(e){return "";}}
+function setKioskKey(k){if(APP_MODE)return;try{if(k)localStorage.setItem(KIOSK_KEY_STORE,k);else localStorage.removeItem(KIOSK_KEY_STORE);}catch(e){}}
 
 function kioskFitScreen(){
+  if(APP_MODE){updateLayout();return;} // sa app: karaniwang laki, parang SMART sa phone at laptop
   const w=window.innerWidth,h=window.innerHeight;
   // Kapag lumabas ang keyboard ng tablet (nagta-type), lumiliit ang taas: huwag baguhin ang laki
   const a=document.activeElement;
@@ -3186,6 +3377,7 @@ function kioskFitScreen(){
 function kioskInit(){
   document.body.classList.add("kiosk");
   document.title="PORTAL - Ilayang Yuni Elementary School";
+  if(APP_MODE){appInit();return;}
   // Hindi lumiliit ang page kapag lumabas ang keyboard ng tablet
   const vp=document.querySelector('meta[name="viewport"]');
   if(vp)vp.setAttribute("content",vp.getAttribute("content")+", interactive-widget=resizes-visual");
@@ -3222,6 +3414,25 @@ function kioskTickClock(){
   dcUpdateVisible();
 }
 
+/* PORTAL app: ang unang screen ay ang menu (walang scanner, camera at kiosk settings) */
+function appInit(){
+  document.body.classList.add("appmode");
+  window.addEventListener("resize",kioskFitScreen);
+  kioskTickClock();setInterval(kioskTickClock,1000);
+  const list=document.getElementById("kAppList");
+  document.querySelectorAll("#kMenu .k-menu-panel > *").forEach(el=>{
+    if(el.id==="kCamBtn"||/'settings'/.test(el.getAttribute("onclick")||""))return;
+    list.appendChild(el.cloneNode(true));
+  });
+  document.getElementById("kAppDc").appendChild(document.getElementById("dcBox"));
+  document.getElementById("kioskDoneBtn").textContent="🚪 Logout";
+  kvInit();
+  rqBind("kr",RQ_TYPES);
+  const frame=document.getElementById("kWebFrame");
+  frame.addEventListener("load",kioskWatchFrame);
+  dcKioskInit();
+  kioskShowScan();
+}
 function kioskOnScanScreen(){return !document.getElementById("kioskScreen").classList.contains("hidden")&&kioskPane==="scan";}
 // Isang pane lang ang nakikita sa kiosk screen: scan, activate, admin, visitor, o thanks
 function kioskSetPane(name){
@@ -3235,7 +3446,7 @@ function kioskSetPane(name){
   dcUpdateVisible();
 }
 function kioskFocusInput(){
-  if(!KIOSK_MODE)return;
+  if(!KIOSK_MODE||APP_MODE)return;
   // Huwag agawin ang pag-type kapag bukas ang Website, PRISM, SCAN o FEEDBACK
   if(kioskWebOpen)return;
   const a=document.activeElement;
@@ -3256,6 +3467,7 @@ function kioskShowScan(){
   setTimeout(kioskFocusInput,50);
 }
 function kioskShowActivate(firstTime){
+  if(APP_MODE){kioskShowScan();return;} // walang activation sa app
   show("kioskScreen");kioskSetPane("activate");
   document.getElementById("kActivateCancel").classList.toggle("hidden",!!firstTime||!getKioskKey());
   document.getElementById("kAdminUser").value="";
@@ -3280,7 +3492,7 @@ function kioskSetMsg(text,kind){
 
 // Ang USB/Bluetooth scanner ay parang keyboard: mabilis na nagta-type ng code tapos Enter
 function kioskOnKey(e){
-  if(!KIOSK_MODE)return;
+  if(!KIOSK_MODE||APP_MODE)return;
   const t=e.target;
   if(t&&t.id!=="kioskScanInput"&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"))return; // nagta-type sa admin form
   if(!document.getElementById("kActivatePane").classList.contains("hidden"))return;
@@ -3601,7 +3813,8 @@ function kioskToggleMenu(){
 function kioskCloseMenu(){const m=document.getElementById("kMenu");if(m)m.classList.add("hidden");if(typeof dcUpdateVisible==="function")dcUpdateVisible();}
 function kioskMenuGo(what){
   kioskCloseMenu();
-  if(what==="portal"){kioskShowScan();kioskSetMode("portal");}
+  if(what==="portal"&&APP_MODE)kioskShowAdminLogin("smart"); // sa app: typed na login ng bata at teacher
+  else if(what==="portal"){kioskShowScan();kioskSetMode("portal");}
   else if(what==="resources")kioskShowResources();
   else if(what==="visitor")kioskShowVisitor();
   else if(what==="request")kioskShowRequest();
@@ -3612,7 +3825,14 @@ function kioskMenuGo(what){
 }
 
 /* Administrator sa kiosk (parehong admin account ng portal) */
-function kioskShowAdminLogin(){
+let kioskLoginKind="admin"; // "admin" o "smart" (bata at teacher, sa app lang)
+function kioskShowAdminLogin(kind){
+  kioskLoginKind=kind==="smart"?"smart":"admin";
+  const sm=kioskLoginKind==="smart";
+  document.getElementById("kLoginTitle").textContent=sm?"🎓 SMART":"🔒 Administrator";
+  document.getElementById("kLoginNote").innerHTML=sm?"Mag-login gamit ang account ng <b>bata</b> o ng <b>teacher</b>.":"Mag-login gamit ang <b>admin</b> account ng portal.";
+  document.getElementById("kLoginUser").placeholder=sm?"Username":"Admin username";
+  document.getElementById("kLoginPass").placeholder=sm?"Password":"Admin password";
   show("kioskScreen");kioskSetPane("admin");
   document.getElementById("kLoginUser").value="";
   document.getElementById("kLoginPass").value="";
@@ -3626,8 +3846,10 @@ function kioskAdminLogin(){
   const err=document.getElementById("kLoginErr");hide("kLoginErr");
   if(!u||!p){err.textContent="Pakipunan ang username at password.";show("kLoginErr");return;}
   callApi({action:"login",username:u,password:p,token:""}).then(res=>{
-    if(!res.success||res.role!=="admin"){
-      err.textContent=res.success?"Admin account lang ang puwede dito.":(res.error||"Mali ang username o password.");show("kLoginErr");
+    const sm=kioskLoginKind==="smart";
+    const okRole=sm?(res.role==="student"||res.role==="teacher"):res.role==="admin";
+    if(!res.success||!okRole){
+      err.textContent=res.success?(sm?"Para sa bata at teacher ang SMART. Gamitin ang Administrator sa menu.":"Admin account lang ang puwede dito."):(res.error||"Mali ang username o password.");show("kLoginErr");
       if(res.success)callApi({action:"logout",token:res.token},{silent:true}).catch(()=>{});
       return;
     }
@@ -3636,7 +3858,8 @@ function kioskAdminLogin(){
     currentUser=Object.assign({},res,{kiosk:true});
     kioskSetPane("scan");
     hide("kioskScreen");show("kioskDoneBtn");
-    enterApp();
+    if(APP_MODE&&res.needsPasswordChange){show("changePassOverlay");}
+    else enterApp();
     kioskLastActivity=Date.now();
   }).catch(()=>{err.textContent="Connection error. Subukan ulit.";show("kLoginErr");});
 }
@@ -3926,6 +4149,9 @@ window.addEventListener("load",()=>{
   if(saved&&saved.token){currentUser=saved;enterApp();}
   else sessionStorage.removeItem("smart_user");
 });
+
+// PORTAL app (installable sa phone at laptop)
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
 </body>
 </html>
